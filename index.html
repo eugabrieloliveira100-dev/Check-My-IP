@@ -245,9 +245,9 @@
         <header class="header">
             <div class="title-group">
                 <h1>Check my IP</h1>
-                <p id="diagnostic-subtitle">Diagnostic Tool</p>
+                <p id="diagnostic-subtitle">Ferramenta de Diagnóstico</p>
             </div>
-            <button class="refresh-btn" id="refresh-btn" title="Detectar meu IP">
+            <button class="refresh-btn" id="refresh-btn" title="Detectar o meu IP">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M23 4v6h-6"></path>
                     <path d="M1 20v-6h6"></path>
@@ -256,47 +256,44 @@
             </button>
         </header>
 
-        <!-- Dynamic IP Block (Analyzed or Personal) -->
+        <!-- Bloco de IP Principal -->
         <section class="info-section" id="ip-main-section">
-            <div class="info-label" id="ip-main-label">PUBLIC IP ADDRESS</div>
+            <div class="info-label" id="ip-main-label">ENDEREÇO IP PÚBLICO</div>
             <div class="info-row">
-                <span class="ip-value" id="ip-main-display">Aguardando...</span>
+                <span class="ip-value" id="ip-main-display">A aguardar...</span>
                 <button class="copy-btn" onclick="copyText('ip-main-display', this)">Copiar</button>
             </div>
         </section>
 
-        <!-- Secondary IPv6 Block (Only shown for personal IP) -->
+        <!-- Bloco Secundário IPv6 -->
         <section class="info-section" id="ipv6-section">
-            <div class="info-label">PUBLIC IPv6 ADDRESS</div>
+            <div class="info-label">ENDEREÇO IPv6 PÚBLICO</div>
             <div class="info-row">
-                <span class="ip-value" id="ipv6-display">Detectando...</span>
+                <span class="ip-value" id="ipv6-display">A detetar...</span>
                 <button class="copy-btn" onclick="copyText('ipv6-display', this)">Copiar</button>
             </div>
         </section>
 
-        <!-- ISP and Location -->
+        <!-- ISP e Localização -->
         <section class="info-section">
-            <div class="info-label">ISP & LOCATION</div>
+            <div class="info-label">ISP & LOCALIZAÇÃO</div>
             <div class="geo-info">
                 <div class="isp-text" id="isp-display">---</div>
                 <div class="location-text" id="location-display">---</div>
             </div>
         </section>
 
-        <!-- Manual Search -->
+        <!-- Pesquisa Manual -->
         <section class="search-container">
             <div class="search-wrapper">
                 <input type="text" id="search-input" placeholder="Analisar outro IP (v4 ou v6)..." autocomplete="off">
-                <button class="search-btn" id="search-btn">Analyze</button>
+                <button class="search-btn" id="search-btn">Analisar</button>
             </div>
-            <p class="error-message" id="error-text">Ocorreu um erro ao buscar dados detalhados.</p>
+            <p class="error-message" id="error-text">Ocorreu um erro ao procurar dados detalhados.</p>
         </section>
     </main>
 
     <script>
-        /**
-         * Seletores de Elementos
-         */
         const card = document.getElementById('main-card');
         const refreshBtn = document.getElementById('refresh-btn');
         const ipMainEl = document.getElementById('ip-main-display');
@@ -310,9 +307,6 @@
         const searchBtn = document.getElementById('search-btn');
         const errorText = document.getElementById('error-text');
 
-        /**
-         * Função de Cópia Segura
-         */
         function copyText(elementId, btn) {
             const text = document.getElementById(elementId).innerText;
             if (!text || text.includes('...') || text.includes('---') || text.includes('Aguardando')) return;
@@ -341,9 +335,6 @@
             document.body.removeChild(textArea);
         }
 
-        /**
-         * Fetch Robusto com Retry e Configurações Anti-Cloudflare
-         */
         async function fetchWithRetry(url, options = {}, retries = 2, backoff = 500) {
             const defaultOptions = {
                 credentials: 'same-origin',
@@ -364,18 +355,15 @@
             }
         }
 
-        /**
-         * Busca o IP do usuário
-         */
-        async function getClientIp() {
-            const endpoints = [
-                'https://api.ipify.org?format=json',
-                'https://checkip.amazonaws.com'
-            ];
+        // Tenta obter IPv4 ou IPv6 especificamente
+        async function getFastIP(v6 = false) {
+            const endpoints = v6 
+                ? ['https://v6.ident.me', 'https://api64.ipify.org?format=json']
+                : ['https://api.ipify.org?format=json', 'https://checkip.amazonaws.com'];
 
             for (const url of endpoints) {
                 try {
-                    const res = await fetchWithRetry(url);
+                    const res = await fetchWithRetry(url, { timeout: 3000 });
                     const contentType = res.headers.get("content-type");
                     if (contentType && contentType.includes("application/json")) {
                         const data = await res.json();
@@ -384,16 +372,11 @@
                         const text = await res.text();
                         return text.trim();
                     }
-                } catch (e) {
-                    continue;
-                }
+                } catch (e) { continue; }
             }
-            throw new Error("Impossível detectar IP.");
+            return null;
         }
 
-        /**
-         * Busca dados Geográficos
-         */
         async function getGeoData(ip) {
             const services = [
                 `https://ipapi.co/${ip}/json/`,
@@ -405,90 +388,77 @@
                 try {
                     const res = await fetchWithRetry(url);
                     const data = await res.json();
-                    
                     if (!data.error && (data.org || data.connection || data.asn || data.company)) {
                         return {
                             isp: data.org || (data.connection ? data.connection.isp : '') || data.asn || (data.company ? data.company.name : '') || 'ISP Desconhecido',
                             location: `${data.city || 'Cidade N/A'}, ${data.country_name || data.country || ''}`
                         };
                     }
-                } catch (e) {
-                    continue;
-                }
+                } catch (e) { continue; }
             }
             return null;
         }
 
-        /**
-         * Orquestrador Principal
-         */
         async function loadIpData(specificIp = null) {
-            // Reset de UI
             card.classList.add('loading');
             refreshBtn.classList.add('spinning');
             errorText.style.display = 'none';
 
-            // Ajuste de labels baseados no contexto (Busca ou IP Pessoal)
             if (specificIp) {
-                ipMainLabel.innerText = 'ANALYZED IP ADDRESS';
-                subtitleEl.innerText = 'IP Analysis Mode';
-                ipv6Section.style.display = 'none'; // Esconde IPv6 se for pesquisa
+                ipMainLabel.innerText = 'IP ANALISADO';
+                subtitleEl.innerText = 'Modo de Análise';
+                ipv6Section.style.display = 'none';
             } else {
-                ipMainLabel.innerText = 'PUBLIC IP ADDRESS';
-                subtitleEl.innerText = 'Diagnostic Tool';
-                ipMainEl.innerText = 'Detectando...';
+                ipMainLabel.innerText = 'ENDEREÇO IP PÚBLICO';
+                subtitleEl.innerText = 'Ferramenta de Diagnóstico';
+                ipMainEl.innerText = 'A detetar...';
                 ispEl.innerText = '---';
                 locEl.innerText = '---';
-                ipv6Section.style.display = 'none'; // Esconde até detectar
+                ipv6Section.style.display = 'none';
             }
 
             try {
-                const ip = specificIp || await getClientIp();
+                // Se for busca manual, usa o IP inserido. Se não, tenta detetar o principal.
+                const ip = specificIp || await getFastIP(false);
+                if (!ip) throw new Error("Falha ao obter IP");
+                
                 ipMainEl.innerText = ip;
 
-                const geo = await getGeoData(ip);
-                if (geo) {
-                    ispEl.innerText = geo.isp;
-                    locEl.innerText = geo.location;
-                } else {
-                    ispEl.innerText = 'Dados indisponíveis';
-                    locEl.innerText = 'Geolocalização bloqueada';
-                    errorText.style.display = 'block';
-                }
+                // Geodata corre em paralelo para não travar a UI
+                getGeoData(ip).then(geo => {
+                    if (geo) {
+                        ispEl.innerText = geo.isp;
+                        locEl.innerText = geo.location;
+                    } else {
+                        ispEl.innerText = 'Dados indisponíveis';
+                        locEl.innerText = 'Localização bloqueada';
+                    }
+                });
 
-                // Se NÃO for uma busca específica, tenta detectar IPv6 pessoal em background
+                // Se NÃO for busca manual, tenta detetar o IPv6 real do utilizador
                 if (!specificIp) {
-                    try {
-                        const v6Res = await fetch('https://api64.ipify.org?format=json');
-                        const v6Data = await v6Res.json();
-                        if (v6Data.ip && v6Data.ip.includes(':')) {
-                            ipv6El.innerText = v6Data.ip;
+                    getFastIP(true).then(v6 => {
+                        if (v6 && v6.includes(':')) {
+                            ipv6El.innerText = v6;
                             ipv6Section.style.display = 'block';
                         }
-                    } catch (e) {}
+                    });
                 }
 
             } catch (err) {
                 ipMainEl.innerText = 'Erro na detecção';
-                ispEl.innerText = 'Verifique sua conexão';
+                ispEl.innerText = 'Verifique a ligação';
                 errorText.style.display = 'block';
-                errorText.innerText = "Falha crítica ao obter dados.";
             } finally {
                 card.classList.remove('loading');
                 refreshBtn.classList.remove('spinning');
             }
         }
 
-        /**
-         * Inicialização Segura
-         */
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                loadIpData();
-            }, 400); 
+            setTimeout(() => { loadIpData(); }, 500); 
         });
 
-        // Event Listeners
         refreshBtn.addEventListener('click', () => {
             searchInput.value = '';
             loadIpData();
