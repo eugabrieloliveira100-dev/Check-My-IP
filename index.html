@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -222,7 +222,11 @@
             background: var(--accent-hover);
         }
 
-        /* Error/Hidden States */
+        /* States */
+        #ipv4-section {
+            display: block;
+        }
+
         #ipv6-section {
             display: none;
         }
@@ -251,9 +255,9 @@
         <header class="header">
             <div class="title-group">
                 <h1>Check my IP</h1>
-                <p>Real-time network monitoring</p>
+                <p>Diagnostic Tool</p>
             </div>
-            <button class="refresh-btn" id="refresh-btn" title="Atualizar informações">
+            <button class="refresh-btn" id="refresh-btn" title="Detect my IP">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M23 4v6h-6"></path>
                     <path d="M1 20v-6h6"></path>
@@ -263,26 +267,26 @@
         </header>
 
         <!-- IPv4 Block -->
-        <section class="info-section">
-            <div class="info-label">PUBLIC IPV4 ADDRESS</div>
+        <section class="info-section" id="ipv4-section">
+            <div class="info-label" id="ipv4-label">PUBLIC IPv4 ADDRESS</div>
             <div class="info-row">
                 <span class="ip-value" id="ipv4-display">Loading...</span>
                 <button class="copy-btn" onclick="copyText('ipv4-display', this)">Copy</button>
             </div>
         </section>
 
-        <!-- IPv6 Block (Conditional) -->
+        <!-- IPv6 Block -->
         <section class="info-section" id="ipv6-section">
-            <div class="info-label">PUBLIC IPV6 ADDRESS</div>
+            <div class="info-label" id="ipv6-label">PUBLIC IPv6 ADDRESS</div>
             <div class="info-row">
                 <span class="ip-value" id="ipv6-display">Detecting...</span>
                 <button class="copy-btn" onclick="copyText('ipv6-display', this)">Copy</button>
             </div>
         </section>
 
-        <!-- Provider & Location -->
+        <!-- ISP and Location -->
         <section class="info-section">
-            <div class="info-label">PROVIDER & LOCATION</div>
+            <div class="info-label">ISP & LOCATION</div>
             <div class="geo-info">
                 <div class="isp-text" id="isp-display">---</div>
                 <div class="location-text" id="location-display">---</div>
@@ -292,19 +296,22 @@
         <!-- Manual Search -->
         <section class="search-container">
             <div class="search-wrapper">
-                <input type="text" id="search-input" placeholder="Analyze another IP..." autocomplete="off">
+                <input type="text" id="search-input" placeholder="Analyze another IP (v4 or v6)..." autocomplete="off">
                 <button class="search-btn" id="search-btn">Analyze</button>
             </div>
-            <p class="error-message" id="error-text">Please enter a valid IP address.</p>
+            <p class="error-message" id="error-text">Error fetching detailed data. Displaying IP only.</p>
         </section>
     </main>
 
     <script>
         const card = document.getElementById('main-card');
         const refreshBtn = document.getElementById('refresh-btn');
+        const ipv4Section = document.getElementById('ipv4-section');
+        const ipv6Section = document.getElementById('ipv6-section');
         const ipv4El = document.getElementById('ipv4-display');
         const ipv6El = document.getElementById('ipv6-display');
-        const ipv6Section = document.getElementById('ipv6-section');
+        const ipv4Label = document.getElementById('ipv4-label');
+        const ipv6Label = document.getElementById('ipv6-label');
         const ispEl = document.getElementById('isp-display');
         const locEl = document.getElementById('location-display');
         const searchInput = document.getElementById('search-input');
@@ -312,95 +319,172 @@
         const errorText = document.getElementById('error-text');
 
         /**
-         * Copy text to clipboard with feedback
+         * Secure Copy Function
          */
-        async function copyText(elementId, btn) {
+        function copyText(elementId, btn) {
             const text = document.getElementById(elementId).innerText;
-            if (!text || text === 'Loading...' || text === '---') return;
+            if (!text || text.includes('...') || text === '---' || text.includes('Error')) return;
+
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
 
             try {
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    await navigator.clipboard.writeText(text);
-                } else {
-                    // Fallback para navegadores antigos
-                    const textArea = document.createElement("textarea");
-                    textArea.value = text;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
+                if (document.execCommand('copy')) {
+                    const originalText = btn.innerText;
+                    btn.innerText = 'Copied!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.classList.remove('copied');
+                    }, 2000);
                 }
-                
-                const originalText = btn.innerText;
-                btn.innerText = 'Copied!';
-                btn.classList.add('copied');
-                
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove('copied');
-                }, 2000);
             } catch (err) {
-                console.error('Failed to copy: ', err);
+                console.error('Error copying text', err);
             }
+            document.body.removeChild(textArea);
+        }
+
+        function isIPv6(ip) {
+            return ip.includes(':');
         }
 
         /**
-         * Fetch all data
+         * Fetches user's IP address
+         */
+        async function getMyIp() {
+            const providers = [
+                'https://api.ipify.org?format=json',
+                'https://checkip.amazonaws.com'
+            ];
+
+            for (const url of providers) {
+                try {
+                    const res = await fetch(url);
+                    if (!res.ok) continue;
+                    
+                    const contentType = res.headers.get("content-type");
+                    if (contentType && contentType.includes("application/json")) {
+                        const data = await res.json();
+                        return data.ip;
+                    } else {
+                        const text = await res.text();
+                        return text.trim();
+                    }
+                } catch (e) {
+                    continue;
+                }
+            }
+            throw new Error("Failed to detect IP.");
+        }
+
+        /**
+         * Fetches geographic data with multiple fallbacks
+         */
+        async function getGeoData(ip) {
+            // Fallback 1: ipapi.co
+            try {
+                const res = await fetch(`https://ipapi.co/${ip}/json/`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (!data.error) return {
+                        ip: data.ip,
+                        org: data.org,
+                        city: data.city,
+                        country: data.country_name
+                    };
+                }
+            } catch (e) {}
+
+            // Fallback 2: ipwho.is
+            try {
+                const res = await fetch(`https://ipwho.is/${ip}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.success) return {
+                        ip: data.ip,
+                        org: data.connection.isp,
+                        city: data.city,
+                        country: data.country
+                    };
+                }
+            } catch (e) {}
+
+            // Fallback 3: ipinfo.io
+            try {
+                const res = await fetch(`https://ipinfo.io/${ip}/json`);
+                if (res.ok) {
+                    const data = await res.json();
+                    return {
+                        ip: data.ip,
+                        org: data.org,
+                        city: data.city,
+                        country: data.country
+                    };
+                }
+            } catch (e) {}
+
+            return null; // All geo services failed
+        }
+
+        /**
+         * Orchestrates the data fetching process
          */
         async function fetchIpData(specificIp = null) {
-            // UI State: Loading
             card.classList.add('loading');
             refreshBtn.classList.add('spinning');
             errorText.style.display = 'none';
 
             try {
-                // Determine source for primary IP
-                let primaryIp;
-                if (specificIp) {
-                    primaryIp = specificIp;
+                let primaryIp = specificIp || await getMyIp();
+
+                // Visibility logic for sections
+                if (isIPv6(primaryIp)) {
+                    ipv6Section.style.display = 'block';
+                    ipv4Section.style.display = 'none';
+                    ipv6El.innerText = primaryIp;
+                    ipv6Label.innerText = specificIp ? 'ANALYZED IPv6' : 'PUBLIC IPv6 ADDRESS';
                 } else {
-                    const res = await fetch('https://api.ipify.org?format=json');
-                    const data = await res.json();
-                    primaryIp = data.ip;
+                    ipv4Section.style.display = 'block';
+                    ipv6Section.style.display = 'none';
+                    ipv4El.innerText = primaryIp;
+                    ipv4Label.innerText = specificIp ? 'ANALYZED IPv4' : 'PUBLIC IPv4 ADDRESS';
                 }
 
-                // Get Detailed Geo Data
-                const geoRes = await fetch(`https://ipapi.co/${primaryIp}/json/`);
-                const geoData = await geoRes.json();
+                // Attempt to get geographic data
+                const geoData = await getGeoData(primaryIp);
 
-                if (geoData.error) throw new Error('Invalid IP');
+                if (geoData) {
+                    ispEl.innerText = geoData.org || 'Unknown Provider';
+                    locEl.innerText = `${geoData.city || 'City N/A'}, ${geoData.country || 'Country N/A'}`;
+                } else {
+                    ispEl.innerText = 'Geographic Data Unavailable';
+                    locEl.innerText = 'N/A';
+                    errorText.style.display = 'block';
+                }
 
-                // Update UI
-                ipv4El.innerText = geoData.ip;
-                ispEl.innerText = geoData.org || 'Unknown Provider';
-                locEl.innerText = `${geoData.city || 'Unknown City'}, ${geoData.country_name || 'Unknown Country'}`;
-
-                // IPv6 Check (Only if detecting own IP)
-                if (!specificIp) {
+                // Secondary IPv6 detection (only in "My IP" mode)
+                if (!specificIp && !isIPv6(primaryIp)) {
                     try {
-                        const v6Res = await fetch('https://api6.ipify.org?format=json');
+                        const v6Res = await fetch('https://api64.ipify.org?format=json');
                         const v6Data = await v6Res.json();
-                        if (v6Data.ip && v6Data.ip !== primaryIp) {
+                        if (v6Data.ip && isIPv6(v6Data.ip)) {
                             ipv6El.innerText = v6Data.ip;
                             ipv6Section.style.display = 'block';
-                        } else {
-                            ipv6Section.style.display = 'none';
+                            ipv6Label.innerText = 'PUBLIC IPv6 ADDRESS';
                         }
-                    } catch (e) {
-                        ipv6Section.style.display = 'none';
-                    }
-                } else {
-                    ipv6Section.style.display = 'none';
+                    } catch (e) {}
                 }
 
             } catch (error) {
-                console.error(error);
+                console.error("Error:", error);
                 errorText.style.display = 'block';
-                if (!specificIp) {
-                    ipv4El.innerText = 'Error fetching data';
-                }
+                ispEl.innerText = 'Detection Error';
             } finally {
-                // UI State: Done
                 card.classList.remove('loading');
                 refreshBtn.classList.remove('spinning');
             }
@@ -424,7 +508,6 @@
             }
         });
 
-        // Initial Load
         window.addEventListener('DOMContentLoaded', () => fetchIpData());
     </script>
 </body>
