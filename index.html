@@ -4,17 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check my IP | Real-time Network Monitoring</title>
-   
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y7GFLQ17GE"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-   gtag('config', 'G-Y7GFLQ17GE');
-   </script>
-    
     <style>
         /* CSS Variables - GitHub Dark / Tech Theme */
         :root {
@@ -189,9 +178,51 @@
             color: var(--text-secondary);
         }
 
+        /* Affiliate/Privacy Tip Section */
+        .privacy-tip {
+            background: rgba(88, 166, 255, 0.08);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 8px;
+            margin-bottom: 24px;
+        }
+
+        .privacy-tip h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff; /* Brancos mais nítidos */
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .privacy-tip p {
+            font-size: 15px; /* Aumentado */
+            color: #ffffff; /* Texto agora é branco */
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 15px; /* Aumentado */
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .cta-link:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
         /* Search Input */
         .search-container {
-            margin-top: 32px;
+            margin-top: 8px;
             padding-top: 24px;
             border-top: 1px solid var(--border-color);
         }
@@ -247,6 +278,7 @@
 
         @media (max-width: 480px) {
             .card { padding: 24px; }
+            .privacy-tip { padding: 16px; }
         }
     </style>
 </head>
@@ -293,6 +325,16 @@
                 <div class="location-text" id="location-display">---</div>
             </div>
         </section>
+
+        <!-- Privacy Tip Section (Affiliate Placement) -->
+        <div class="privacy-tip">
+            <h3>🔐 Privacy Tip</h3>
+            <p>
+                Your public IP reveals your approximate location and network provider. 
+                Using a VPN helps mask your real IP and adds an extra layer of privacy.
+            </p>
+            <a href="#" target="_blank" class="cta-link">👉 Learn how to protect your connection</a>
+        </div>
 
         <!-- Manual Search -->
         <section class="search-container">
