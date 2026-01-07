@@ -292,7 +292,8 @@
         <div class="lang-switcher">
             <a href="info.html">🇺🇸 EN</a> | 
             <a href="info-es.html" class="active-lang">🇪🇸 ES</a> |
-            <a href="info-fr.html">🇫🇷 FR</a>
+            <a href="info-fr.html">🇫🇷 FR</a> |
+            <a href="info-de.html">🇩🇪 DE</a>
         </div>
     </nav>
 
@@ -358,7 +359,7 @@
     <script>
         function copyMiniIP(btn) {
             const ipText = document.getElementById('mini-ip-display').innerText;
-            if (ipText === 'Detecting...' || ipText === 'Error de detección') return;
+            if (ipText === 'Detectando...' || ipText === 'Error de detección') return;
 
             const textArea = document.createElement("textarea");
             textArea.value = ipText;
