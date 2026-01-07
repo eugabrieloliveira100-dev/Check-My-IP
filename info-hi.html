@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP गाइड और नेटवर्क सुरक्षा | Check my IP</title>
+
+     <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y7GFLQ17GE"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y7GFLQ17GE');
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-hover: #1f6feb;
+            --success-green: #3fb950;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .nav-menu {
+            display: flex;
+            width: 100%;
+            max-width: 800px;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 2px;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+            font-size: 13px;
+            align-items: center;
+        }
+
+        .lang-switcher a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            padding: 2px 4px;
+        }
+
+        .lang-switcher .active-lang {
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .content-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 800px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .ip-badge-top {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .ip-badge-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ip-badge-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .ip-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ip-badge-value {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .ip-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-copy-mini {
+            background: var(--border-color);
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: var(--text-primary);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-copy-mini.copied {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .btn-check-full {
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent-blue);
+            border: 1px solid rgba(88, 166, 255, 0.4);
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        h1 { font-size: 2.2rem; margin-bottom: 10px; color: #fff; line-height: 1.2; }
+        .subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 30px; }
+        h2 { font-size: 1.5rem; color: var(--accent-blue); margin-top: 35px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+        p { margin-bottom: 15px; font-size: 1.05rem; }
+        ul { margin-bottom: 20px; padding-left: 25px; }
+        li { margin-bottom: 12px; }
+        
+        .highlight { font-weight: bold; color: #fff; }
+        
+        .security-tip {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #f85149;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .footer-action { margin-top: 40px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 30px; }
+        
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: opacity 0.2s;
+        }
+
+        @media (max-width: 600px) {
+            .content-card { padding: 25px; }
+            h1 { font-size: 1.8rem; }
+            .ip-badge-top { flex-direction: column; align-items: flex-start; }
+            .ip-actions { width: 100%; justify-content: space-between; }
+            .nav-menu { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-menu">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="info-hi.html" class="active">IP Guide</a>
+        </div>
+        <div class="lang-switcher">
+            <a href="info.html">🇺🇸 EN</a> | 
+            <a href="info-es.html">🇪🇸 ES</a> |
+            <a href="info-fr.html">🇫🇷 FR</a> |
+            <a href="info-de.html">🇩🇪 DE</a> |
+            <a href="info-zh.html">🇨🇳 ZH</a> |
+            <a href="info-hi.html" class="active-lang">हिन्दी</a>
+        </div>
+    </nav>
+
+    <main class="content-card">
+        <div class="ip-badge-top">
+            <div class="ip-badge-info">
+                <span class="ip-badge-label">आपका वर्तमान IP</span>
+                <div class="ip-badge-row">
+                    <span class="ip-badge-value" id="mini-ip-display">खोज रहा है...</span>
+                </div>
+            </div>
+            <div class="ip-actions">
+                <button class="btn-copy-mini" id="btn-copy-ip" onclick="copyMiniIP(this)">IP कॉपी करें</button>
+                <a href="index.html" class="btn-check-full">पूर्ण विवरण देखें</a>
+            </div>
+        </div>
+
+        <div id="lang-hi" class="lang-section active">
+            <h1>IP एड्रेस: यह क्या है और क्यों महत्वपूर्ण है?</h1>
+            <p class="subtitle">नेटवर्क पहचान और ऑनलाइन गोपनीयता पर एक संपूर्ण मार्गदर्शिका।</p>
+
+            <h2>IP एड्रेस क्या है?</h2>
+            <p>एक IP (इंटरनेट प्रोटोकॉल) एड्रेस एक विशिष्ट संख्यात्मक लेबल है जो कंप्यूटर नेटवर्क से जुड़े प्रत्येक उपकरण को सौंपा जाता है। यह इंटरनेट पर आपके घर के पते की तरह कार्य करता है, जिससे डेटा को पता चलता है कि उसे वास्तव में कहाँ भेजा जाना चाहिए।</p>
+
+            <h2>IPv4 और IPv6 के बीच अंतर</h2>
+            <p>आज मुख्य रूप से दो प्रकार के IP एड्रेस उपयोग में हैं:</p>
+            <ul>
+                <li><span class="highlight">IPv4 (इंटरनेट प्रोटोकॉल संस्करण 4):</span> सबसे आम प्रारूप, जिसमें डॉट्स द्वारा अलग किए गए चार नंबर होते हैं (उदा. 192.168.1.1)। यह लगभग 4.3 बिलियन एड्रेस तक सीमित है।</li>
+                <li><span class="highlight">IPv6 (इंटरनेट प्रोटोकॉल संस्करण 6):</span> IPv4 की कमी को दूर करने के लिए बनाया गया, यह बहुत लंबे हेक्साडेसिमल प्रारूप का उपयोग करता है, जिससे खरबों नए एड्रेस और बेहतर सुरक्षा संभव होती है।</li>
+            </ul>
+
+            <div class="security-tip">
+                <p><span class="highlight" style="color: #f85149;">सुरक्षा टिप:</span> आपका सार्वजनिक IP एड्रेस आपके इंटरनेट सेवा प्रदाता (ISP) और आपके अनुमानित भौगोलिक स्थान (शहर और देश) के बारे में जानकारी प्रकट करता है।</p>
+            </div>
+
+            <h2>अपना IP क्यों ट्रैक करें?</h2>
+            <p>विभिन्न तकनीकी और सुरक्षा कार्यों के लिए अपना IP एड्रेस जानना आवश्यक है:</p>
+            <ul>
+                <li><span class="highlight">VPN सत्यापन:</span> यह पुष्टि करना कि VPN से कनेक्ट होने के बाद आपका IP एड्रेस सही ढंग से बदल गया है या नहीं।</li>
+                <li><span class="highlight">नेटवर्क कॉन्फ़िगरेशन:</span> सर्वर, ऑनलाइन गेम या रिमोट एक्सेस सेट करना।</li>
+                <li><span class="highlight">धोखाधड़ी की रोकथाम:</span> अपने नेटवर्क पर संदिग्ध पहुँच के प्रयासों की पहचान करना।</li>
+            </ul>
+
+            <h2>अपनी ऑनलाइन गोपनीयता की रक्षा कैसे करें</h2>
+            <p>चूंकि आपका IP आपकी डिजिटल पहचान है, इसलिए कई उपयोगकर्ता विज्ञापन ट्रैकिंग या सेंसरशिप से बचने के लिए इसे छिपाना चुनते हैं। VPN (Virtual Private Network) का उपयोग आपके ट्रैफ़िक को एन्क्रिप्ट करने और आपके वास्तविक IP को सुरक्षित सर्वर IP से बदलने का सबसे प्रभावी तरीका है।</p>
+
+            <div class="footer-action">
+                <p>क्या आपको वास्तविक समय में अपना वर्तमान IP एड्रेस जांचना है?</p>
+                <a href="index.html" class="btn-primary">डायग्नोस्टिक टूल पर वापस जाएं</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function copyMiniIP(btn) {
+            const ipText = document.getElementById('mini-ip-display').innerText;
+            if (ipText === 'खोज रहा है...' || ipText === 'त्रुटि') return;
+
+            const textArea = document.createElement("textarea");
+            textArea.value = ipText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                const originalText = btn.innerText;
+                btn.innerText = 'कॉपी किया गया!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        async function getMiniIP() {
+            const display = document.getElementById('mini-ip-display');
+            const endpoints = ['https://api.ipify.org?format=json', 'https://v6.ident.me'];
+            
+            for (const url of endpoints) {
+                try {
+                    const res = await fetch(url, { cache: 'no-store' });
+                    if (url.includes('json')) {
+                        const data = await res.json();
+                        display.innerText = data.ip;
+                    } else {
+                        const text = await res.text();
+                        display.innerText = text.trim();
+                    }
+                    return;
+                } catch (e) {
+                    continue;
+                }
+            }
+            display.innerText = 'त्रुटि';
+        }
+
+        window.addEventListener('load', getMiniIP);
+    </script>
+</body>
+</html>
