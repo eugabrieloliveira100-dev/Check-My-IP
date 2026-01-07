@@ -11,6 +11,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+
     gtag('config', 'G-Y7GFLQ17GE');
     </script>
 
@@ -24,7 +25,7 @@
             --accent-blue: #58a6ff;
             --accent-hover: #1f6feb;
             --success-green: #3fb950;
-            --font-main: "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+            --font-main: system-ui, -apple-system, "Microsoft YaHei", sans-serif;
             --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
         }
 
@@ -110,7 +111,10 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
+            white-space: nowrap;
         }
+
+        .btn-copy-mini.copied { background: var(--success-green); color: white; }
 
         .btn-check-full {
             background: rgba(88, 166, 255, 0.1);
@@ -129,6 +133,8 @@
         .subtitle { color: var(--text-secondary); font-size: 16px; }
         h2 { font-size: 22px; color: var(--accent-blue); margin: 32px 0 16px; }
         p { margin-bottom: 16px; font-size: 16px; color: var(--text-primary); }
+        ul { margin-bottom: 24px; padding-left: 20px; }
+        li { margin-bottom: 12px; color: var(--text-primary); }
 
         .highlight-box {
             background: rgba(88, 166, 255, 0.05);
@@ -181,32 +187,46 @@
             <div class="ip-badge-info">
                 <span class="ip-badge-label">您当前的 IP</span>
                 <div class="ip-badge-row">
-                    <span class="ip-badge-value" id="mini-ip-display">检测中...</span>
+                    <span class="ip-badge-value" id="mini-ip-display">正在检测...</span>
                 </div>
             </div>
             <div class="ip-actions">
-                <button class="btn-copy-mini" onclick="copyMiniIP(this)">复制 IP</button>
-                <a href="index.html" class="btn-check-full">查看完整 IP 详情</a>
+                <button class="btn-copy-mini" id="btn-copy-ip" onclick="copyMiniIP(this)">复制 IP</button>
+                <a href="index.html" class="btn-check-full">查看完整详情</a>
             </div>
         </div>
 
         <header>
             <h1>IP 地址：它是什么以及为什么重要？</h1>
-            <p class="subtitle">网络标识与在线隐私的完整指南。</p>
+            <p class="subtitle">关于网络识别和在线隐私的完整指南。</p>
         </header>
 
         <section>
             <h2>什么是 IP 地址？</h2>
-            <p>IP（互联网协议）地址是分配给连接到计算机网络的每个设备的唯一数字标签。它就像您在互联网上的家庭住址。</p>
+            <p>IP（互联网协议）地址是分配给连接到计算机网络的每个设备的唯一数字标签。它就像您在互联网上的家庭地址，让数据知道应该发送到哪里。</p>
+        </section>
+
+        <section>
+            <h2>IPv4 与 IPv6 的区别</h2>
+            <p>目前主要使用的 IP 地址有两种类型：</p>
+            <ul>
+                <li><strong>IPv4 (互联网协议第 4 版):</strong> 最常见的格式，由四个点分隔的数字组成（例如：192.168.1.1）。它被限制在约 43 亿个地址。</li>
+                <li><strong>IPv6 (互联网协议第 6 版):</strong> 为了解决 IPv4 地址短缺而创建，它使用更长的十六进制格式，允许数万亿个新地址并增强了原生安全性。</li>
+            </ul>
         </section>
 
         <div class="highlight-box">
-            <p><strong>安全提示：</strong> 您的公共 IP 地址会泄露有关您的互联网服务提供商 (ISP) 和大概地理位置的信息。</p>
+            <p><strong>安全提示：</strong> 您的公网 IP 地址会泄露有关您的互联网服务提供商 (ISP) 和大致地理位置（城市和国家）的信息。</p>
         </div>
 
         <section>
             <h2>为什么要监控您的 IP？</h2>
-            <p>了解您的 IP 地址对于多项技术和安全任务至关重要，例如 VPN 验证和网络配置。</p>
+            <p>了解您的 IP 地址对于多项技术和安全任务至关重要：</p>
+            <ul>
+                <li><strong>VPN 验证：</strong> 确认连接到 VPN 后您的 IP 地址是否已成功更改。</li>
+                <li><strong>网络配置：</strong> 设置服务器、在线游戏或远程访问。</li>
+                <li><strong>预防欺诈：</strong> 识别对您网络的可疑访问尝试。</li>
+            </ul>
         </section>
 
         <footer class="footer-action">
@@ -218,28 +238,39 @@
     <script>
         function copyMiniIP(btn) {
             const ipText = document.getElementById('mini-ip-display').innerText;
-            if (ipText.includes('...')) return;
+            if (ipText.includes('正在检测') || ipText.includes('错误')) return;
+
             const textArea = document.createElement("textarea");
             textArea.value = ipText;
             document.body.appendChild(textArea);
             textArea.select();
-            document.execCommand('copy');
+            
+            try {
+                document.execCommand('copy');
+                const originalText = btn.innerText;
+                btn.innerText = '已复制!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('复制失败', err);
+            }
             document.body.removeChild(textArea);
-            const old = btn.innerText;
-            btn.innerText = '已复制！';
-            setTimeout(() => btn.innerText = old, 2000);
         }
 
         async function getMiniIP() {
             const display = document.getElementById('mini-ip-display');
             try {
-                const res = await fetch('https://api.ipify.org?format=json');
+                const res = await fetch('https://api.ipify.org?format=json', { cache: 'no-store' });
                 const data = await res.json();
                 display.innerText = data.ip;
             } catch (e) {
-                display.innerText = '错误';
+                display.innerText = '检测错误';
             }
         }
+
         window.addEventListener('load', getMiniIP);
     </script>
 </body>
