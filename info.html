@@ -25,6 +25,7 @@
             --text-secondary: #8b949e;
             --accent-blue: #58a6ff;
             --font-main: system-ui, -apple-system, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
         }
 
         * {
@@ -82,6 +83,57 @@
             max-width: 800px;
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Mini IP Badge Style */
+        .ip-badge-top {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .ip-badge-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ip-badge-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .ip-badge-value {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .btn-check-full {
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent-blue);
+            border: 1px solid rgba(88, 166, 255, 0.4);
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-check-full:hover {
+            background: var(--accent-blue);
+            color: #ffffff;
         }
 
         header {
@@ -157,6 +209,8 @@
         @media (max-width: 600px) {
             .content-card { padding: 24px; }
             h1 { font-size: 24px; }
+            .ip-badge-top { flex-direction: column; align-items: flex-start; }
+            .btn-check-full { width: 100%; text-align: center; }
         }
     </style>
 </head>
@@ -168,6 +222,15 @@
     </nav>
 
     <article class="content-card">
+        <!-- New Mini IP Badge at the top -->
+        <div class="ip-badge-top">
+            <div class="ip-badge-info">
+                <span class="ip-badge-label">Your current IP</span>
+                <span class="ip-badge-value" id="mini-ip-display">Detecting...</span>
+            </div>
+            <a href="index.html" class="btn-check-full">Check full IP details</a>
+        </div>
+
         <header>
             <h1>IP Address: What is it and why does it matter?</h1>
             <p class="subtitle">A complete guide to Network Identification and Online Privacy.</p>
@@ -212,5 +275,31 @@
         </footer>
     </article>
 
+    <script>
+        // Simple script to fetch IP for the mini badge
+        async function getMiniIP() {
+            const display = document.getElementById('mini-ip-display');
+            const endpoints = ['https://api.ipify.org?format=json', 'https://v6.ident.me'];
+            
+            for (const url of endpoints) {
+                try {
+                    const res = await fetch(url, { cache: 'no-store' });
+                    if (url.includes('json')) {
+                        const data = await res.json();
+                        display.innerText = data.ip;
+                    } else {
+                        const text = await res.text();
+                        display.innerText = text.trim();
+                    }
+                    return;
+                } catch (e) {
+                    continue;
+                }
+            }
+            display.innerText = 'Detection error';
+        }
+
+        window.addEventListener('load', getMiniIP);
+    </script>
 </body>
 </html>
