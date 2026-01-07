@@ -89,8 +89,19 @@
         }
 
         .lang-switcher a {
-            padding: 2px 6px;
-            border-radius: 4px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            padding: 2px 4px;
+            transition: color 0.2s;
+        }
+
+        .lang-switcher a:hover {
+            color: var(--accent-blue);
+        }
+
+        .lang-switcher .active-lang {
+            color: var(--text-primary);
+            font-weight: bold;
         }
 
         /* Content Card */
@@ -279,8 +290,9 @@
             <a href="info-es.html" class="active">Guía de IP</a>
         </div>
         <div class="lang-switcher">
-            <a href="info.html">🇺🇸 English</a> | 
-            <a href="info-es.html" style="color: var(--text-primary); font-weight: bold;">🇪🇸 Español</a>
+            <a href="info.html">🇺🇸 EN</a> | 
+            <a href="info-es.html" class="active-lang">🇪🇸 ES</a> |
+            <a href="info-fr.html">🇫🇷 FR</a>
         </div>
     </nav>
 
@@ -346,7 +358,7 @@
     <script>
         function copyMiniIP(btn) {
             const ipText = document.getElementById('mini-ip-display').innerText;
-            if (ipText === 'Detectando...' || ipText === 'Error de detección') return;
+            if (ipText === 'Detecting...' || ipText === 'Error de detección') return;
 
             const textArea = document.createElement("textarea");
             textArea.value = ipText;
