@@ -24,6 +24,8 @@
             --text-primary: #c9d1d9;
             --text-secondary: #8b949e;
             --accent-blue: #58a6ff;
+            --accent-hover: #1f6feb;
+            --success-green: #3fb950;
             --font-main: system-ui, -apple-system, sans-serif;
             --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
         }
@@ -112,11 +114,47 @@
             letter-spacing: 0.5px;
         }
 
+        .ip-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .ip-badge-value {
             font-family: var(--font-mono);
             font-size: 18px;
             color: #ffffff;
             font-weight: 500;
+        }
+
+        /* Action Buttons Group */
+        .ip-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-copy-mini {
+            background: var(--border-color);
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: var(--text-primary);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-copy-mini:hover {
+            background: #444c56;
+            color: #ffffff;
+        }
+
+        .btn-copy-mini.copied {
+            background: var(--success-green);
+            color: white;
         }
 
         .btn-check-full {
@@ -210,7 +248,8 @@
             .content-card { padding: 24px; }
             h1 { font-size: 24px; }
             .ip-badge-top { flex-direction: column; align-items: flex-start; }
-            .btn-check-full { width: 100%; text-align: center; }
+            .ip-actions { width: 100%; justify-content: space-between; }
+            .btn-check-full { flex-grow: 1; text-align: center; }
         }
     </style>
 </head>
@@ -222,13 +261,18 @@
     </nav>
 
     <article class="content-card">
-        <!-- New Mini IP Badge at the top -->
+        <!-- IP Badge with Copy and Check buttons -->
         <div class="ip-badge-top">
             <div class="ip-badge-info">
                 <span class="ip-badge-label">Your current IP</span>
-                <span class="ip-badge-value" id="mini-ip-display">Detecting...</span>
+                <div class="ip-badge-row">
+                    <span class="ip-badge-value" id="mini-ip-display">Detecting...</span>
+                </div>
             </div>
-            <a href="index.html" class="btn-check-full">Check full IP details</a>
+            <div class="ip-actions">
+                <button class="btn-copy-mini" id="btn-copy-ip" onclick="copyMiniIP(this)">Copy IP</button>
+                <a href="index.html" class="btn-check-full">Check full IP details</a>
+            </div>
         </div>
 
         <header>
@@ -276,6 +320,31 @@
     </article>
 
     <script>
+        // Copy function for the mini badge
+        function copyMiniIP(btn) {
+            const ipText = document.getElementById('mini-ip-display').innerText;
+            if (ipText === 'Detecting...' || ipText === 'Detection error') return;
+
+            const textArea = document.createElement("textarea");
+            textArea.value = ipText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
         // Simple script to fetch IP for the mini badge
         async function getMiniIP() {
             const display = document.getElementById('mini-ip-display');
