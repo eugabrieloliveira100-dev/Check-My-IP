@@ -11,12 +11,10 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-Y7GFLQ17GE');
     </script>
 
     <style>
-        /* CSS Variables - Consistent with Index.html */
         :root {
             --bg-color: #0d1117;
             --card-bg: #161b22;
@@ -30,11 +28,7 @@
             --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-color);
@@ -48,7 +42,6 @@
             line-height: 1.6;
         }
 
-        /* Nav Menu */
         .nav-menu {
             display: flex;
             gap: 20px;
@@ -59,10 +52,7 @@
             align-items: center;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
+        .nav-links { display: flex; gap: 20px; }
 
         .nav-menu a {
             color: var(--text-secondary);
@@ -72,39 +62,14 @@
             transition: color 0.2s;
         }
 
-        .nav-menu a:hover {
-            color: var(--accent-blue);
-        }
+        .nav-menu a:hover { color: var(--accent-blue); }
+        .nav-menu a.active { color: var(--text-primary); border-bottom: 2px solid var(--accent-blue); padding-bottom: 2px; }
 
-        .nav-menu a.active {
-            color: var(--text-primary);
-            border-bottom: 2px solid var(--accent-blue);
-            padding-bottom: 2px;
-        }
+        .lang-switcher { font-size: 13px; color: var(--text-secondary); }
+        .lang-switcher a { text-decoration: none; color: var(--text-secondary); padding: 2px 4px; transition: color 0.2s; }
+        .lang-switcher a:hover { color: var(--accent-blue); }
+        .lang-switcher .active-lang { color: var(--text-primary); font-weight: bold; }
 
-        /* Language Switcher */
-        .lang-switcher {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .lang-switcher a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            padding: 2px 4px;
-            transition: color 0.2s;
-        }
-
-        .lang-switcher a:hover {
-            color: var(--accent-blue);
-        }
-
-        .lang-switcher .active-lang {
-            color: var(--text-primary);
-            font-weight: bold;
-        }
-
-        /* Content Card */
         .content-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -115,7 +80,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        /* Mini IP Badge Style */
         .ip-badge-top {
             background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border-color);
@@ -129,38 +93,12 @@
             gap: 15px;
         }
 
-        .ip-badge-info {
-            display: flex;
-            flex-direction: column;
-        }
+        .ip-badge-info { display: flex; flex-direction: column; }
+        .ip-badge-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+        .ip-badge-row { display: flex; align-items: center; gap: 10px; }
+        .ip-badge-value { font-family: var(--font-mono); font-size: 18px; color: #ffffff; font-weight: 500; }
 
-        .ip-badge-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .ip-badge-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .ip-badge-value {
-            font-family: var(--font-mono);
-            font-size: 18px;
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        /* Action Buttons Group */
-        .ip-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .ip-actions { display: flex; align-items: center; gap: 10px; }
 
         .btn-copy-mini {
             background: var(--border-color);
@@ -172,17 +110,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .btn-copy-mini:hover {
-            background: #444c56;
-            color: #ffffff;
-        }
-
-        .btn-copy-mini.copied {
-            background: var(--success-green);
-            color: white;
         }
 
         .btn-check-full {
@@ -197,50 +124,13 @@
             transition: all 0.2s;
         }
 
-        .btn-check-full:hover {
-            background: var(--accent-blue);
-            color: #ffffff;
-        }
-
-        header {
-            margin-bottom: 32px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .subtitle {
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
-
-        h2 {
-            font-size: 22px;
-            color: var(--accent-blue);
-            margin: 32px 0 16px;
-        }
-
-        p {
-            margin-bottom: 16px;
-            font-size: 16px;
-            color: var(--text-primary);
-        }
-
-        ul {
-            margin-bottom: 24px;
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
+        header { margin-bottom: 32px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
+        h1 { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+        .subtitle { color: var(--text-secondary); font-size: 16px; }
+        h2 { font-size: 22px; color: var(--accent-blue); margin: 32px 0 16px; }
+        p { margin-bottom: 16px; font-size: 16px; color: var(--text-primary); }
+        ul { margin-bottom: 24px; padding-left: 20px; }
+        li { margin-bottom: 12px; color: var(--text-primary); }
 
         .highlight-box {
             background: rgba(88, 166, 255, 0.05);
@@ -250,12 +140,7 @@
             border-radius: 4px;
         }
 
-        .footer-action {
-            margin-top: 40px;
-            text-align: center;
-            padding-top: 24px;
-            border-top: 1px solid var(--border-color);
-        }
+        .footer-action { margin-top: 40px; text-align: center; padding-top: 24px; border-top: 1px solid var(--border-color); }
 
         .btn-primary {
             display: inline-block;
@@ -268,16 +153,11 @@
             transition: opacity 0.2s;
         }
 
-        .btn-primary:hover {
-            opacity: 0.9;
-        }
-
         @media (max-width: 600px) {
             .content-card { padding: 24px; }
             h1 { font-size: 24px; }
             .ip-badge-top { flex-direction: column; align-items: flex-start; }
             .ip-actions { width: 100%; justify-content: space-between; }
-            .btn-check-full { flex-grow: 1; text-align: center; }
             .nav-menu { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
     </style>
@@ -286,7 +166,8 @@
 
     <nav class="nav-menu">
         <div class="nav-links">
-            <a href="index.html">Home</a>
+            <!-- Forçando o link para a raiz exata do domínio -->
+            <a href="./">Home</a>
             <a href="info.html" class="active">IP Guide</a>
         </div>
         <div class="lang-switcher">
@@ -298,7 +179,6 @@
     </nav>
 
     <article class="content-card">
-        <!-- IP Badge with Copy and Check buttons -->
         <div class="ip-badge-top">
             <div class="ip-badge-info">
                 <span class="ip-badge-label">Your current IP</span>
@@ -307,8 +187,9 @@
                 </div>
             </div>
             <div class="ip-actions">
-                <button class="btn-copy-mini" id="btn-copy-ip" onclick="copyMiniIP(this)">Copy IP</button>
-                <a href="index.html" class="btn-check-full">Check full IP details</a>
+                <button class="btn-copy-mini" onclick="copyMiniIP(this)">Copy IP</button>
+                <!-- Forçando o link para a raiz -->
+                <a href="./" class="btn-check-full">Check full IP details</a>
             </div>
         </div>
 
@@ -319,90 +200,50 @@
 
         <section>
             <h2>What is an IP Address?</h2>
-            <p>An IP (Internet Protocol) address is a unique numerical label assigned to each device connected to a computer network. It acts like your home address on the internet, allowing data to know exactly where it needs to be sent.</p>
-        </section>
-
-        <section>
-            <h2>Difference between IPv4 and IPv6</h2>
-            <p>There are two main types of IP addresses in use today:</p>
-            <ul>
-                <li><strong>IPv4 (Internet Protocol version 4):</strong> The most common format, consisting of four numbers separated by dots (e.g., 192.168.1.1). It is limited to approximately 4.3 billion addresses.</li>
-                <li><strong>IPv6 (Internet Protocol version 6):</strong> Created to solve the IPv4 address shortage, it uses a much longer hexadecimal format, allowing for trillions of new addresses and enhanced native security.</li>
-            </ul>
+            <p>An IP (Internet Protocol) address is a unique numerical label assigned to each device connected to a computer network. It acts like your home address on the internet.</p>
         </section>
 
         <div class="highlight-box">
-            <p><strong>Security Tip:</strong> Your public IP address reveals information about your Internet Service Provider (ISP) and your approximate geographic location (city and country).</p>
+            <p><strong>Security Tip:</strong> Your public IP address reveals information about your Internet Service Provider (ISP) and your approximate geographic location.</p>
         </div>
 
         <section>
             <h2>Why monitor your IP?</h2>
-            <p>Knowing your IP address is essential for several technical and security tasks:</p>
-            <ul>
-                <li><strong>VPN Verification:</strong> Confirming if your IP address has successfully changed after connecting to a VPN.</li>
-                <li><strong>Network Configuration:</strong> Setting up servers, online gaming, or remote access.</li>
-                <li><strong>Fraud Prevention:</strong> Identifying suspicious access attempts to your network.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>How to protect your online privacy</h2>
-            <p>Since your IP is a digital identity, many users choose to hide it to avoid advertising tracking or geographic censorship. Using a VPN (Virtual Private Network) is the most effective way to encrypt your traffic and replace your real IP with a secure server's IP.</p>
+            <p>Knowing your IP address is essential for several technical and security tasks like VPN verification and network configuration.</p>
         </section>
 
         <footer class="footer-action">
             <p>Need to check your current IP address in real-time?</p>
-            <a href="index.html" class="btn-primary">Back to Diagnostic Tool</a>
+            <!-- Forçando o link para a raiz -->
+            <a href="./" class="btn-primary">Back to Diagnostic Tool</a>
         </footer>
     </article>
 
     <script>
         function copyMiniIP(btn) {
             const ipText = document.getElementById('mini-ip-display').innerText;
-            if (ipText === 'Detecting...' || ipText === 'Detection error') return;
-
+            if (ipText.includes('...')) return;
             const textArea = document.createElement("textarea");
             textArea.value = ipText;
             document.body.appendChild(textArea);
             textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                const originalText = btn.innerText;
-                btn.innerText = 'Copied!';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove('copied');
-                }, 2000);
-            } catch (err) {
-                console.error('Copy failed', err);
-            }
+            document.execCommand('copy');
             document.body.removeChild(textArea);
+            const old = btn.innerText;
+            btn.innerText = 'Copied!';
+            setTimeout(() => btn.innerText = old, 2000);
         }
 
         async function getMiniIP() {
             const display = document.getElementById('mini-ip-display');
-            const endpoints = ['https://api.ipify.org?format=json', 'https://v6.ident.me'];
-            
-            for (const url of endpoints) {
-                try {
-                    const res = await fetch(url, { cache: 'no-store' });
-                    if (url.includes('json')) {
-                        const data = await res.json();
-                        display.innerText = data.ip;
-                    } else {
-                        const text = await res.text();
-                        display.innerText = text.trim();
-                    }
-                    return;
-                } catch (e) {
-                    continue;
-                }
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                display.innerText = data.ip;
+            } catch (e) {
+                display.innerText = 'Error';
             }
-            display.innerText = 'Detection error';
         }
-
         window.addEventListener('load', getMiniIP);
     </script>
 </body>
