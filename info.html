@@ -49,135 +49,135 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: var(--font-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        /* Enhanced Navigation Menu */
-        .main-nav {
-            background-color: rgba(22, 27, 34, 0.95);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px 32px;
-            width: 100%;
-            max-width: 1000px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 20px;
-            z-index: 100;
+        /* Main Layout Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Premium Navigation Menu */
+        .main-navigation {
+            background-color: #0d1117;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            padding: 24px 0;
+            margin-bottom: 40px;
         }
 
         .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            padding: 0 24px;
         }
 
-        .nav-links {
+        /* Left Navigation Links */
+        .nav-primary {
             display: flex;
-            gap: 32px;
+            gap: 40px;
             align-items: center;
         }
 
-        .nav-links a {
+        .nav-link {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 18px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            padding: 8px 0;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            transition: color 0.2s ease;
             position: relative;
+            padding: 4px 0;
         }
 
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .nav-links a.active {
+        .nav-link:hover {
             color: var(--text-primary);
-            font-weight: 600;
         }
 
-        .nav-links a.active::after {
+        .nav-link.active {
+            color: var(--text-primary);
+        }
+
+        .nav-link.active::after {
             content: '';
             position: absolute;
             bottom: -2px;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 1.5px;
             background-color: var(--accent-blue);
-            border-radius: 2px;
+            border-radius: 1px;
         }
 
-        /* Enhanced Language Switcher */
-        .lang-switcher {
+        /* Right Language Selector */
+        .language-selector {
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(48, 54, 61, 0.5);
-            border-radius: 8px;
-            padding: 6px 12px;
-            border: 1px solid var(--border-color);
+            gap: 12px;
         }
 
-        .lang-switcher a {
-            text-decoration: none;
+        .lang-item {
             color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 500;
-            padding: 4px 8px;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
             display: flex;
             align-items: center;
             gap: 6px;
+            padding: 2px 4px;
+            border-radius: 3px;
+            transition: all 0.2s ease;
         }
 
-        .lang-switcher a:hover {
-            background: rgba(88, 166, 255, 0.1);
-            color: var(--accent-blue);
+        .lang-item:hover {
+            color: var(--text-primary);
         }
 
-        .lang-switcher .active-lang {
-            background: rgba(88, 166, 255, 0.15);
-            color: var(--accent-blue);
-            font-weight: 700;
+        .lang-item.active {
+            color: var(--text-primary);
+            font-weight: 500;
         }
 
         .lang-separator {
             color: var(--border-color);
             font-size: 12px;
+            opacity: 0.6;
+        }
+
+        /* Content Area */
+        .content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* Content Card */
         .content-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            width: 100%;
-            max-width: 800px;
+            border-radius: 12px;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
         /* Mini IP Badge Style */
         .ip-badge-top {
             background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin-bottom: 30px;
+            border-radius: 10px;
+            padding: 16px 24px;
+            margin-bottom: 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 16px;
         }
 
         .ip-badge-info {
@@ -191,6 +191,7 @@
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 0.5px;
+            margin-bottom: 4px;
         }
 
         .ip-badge-row {
@@ -210,17 +211,17 @@
         .ip-actions {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .btn-copy-mini {
             background: var(--border-color);
             border: none;
             border-radius: 6px;
-            padding: 6px 12px;
+            padding: 8px 16px;
             color: var(--text-primary);
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
             white-space: nowrap;
@@ -239,20 +240,21 @@
         .btn-check-full {
             background: rgba(88, 166, 255, 0.1);
             color: var(--accent-blue);
-            border: 1px solid rgba(88, 166, 255, 0.4);
-            padding: 8px 16px;
-            border-radius: 8px;
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 6px;
             text-decoration: none;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.2s;
         }
 
         .btn-check-full:hover {
-            background: var(--accent-blue);
-            color: #ffffff;
+            background: rgba(88, 166, 255, 0.2);
+            border-color: var(--accent-blue);
         }
 
+        /* Content Styles */
         header {
             margin-bottom: 32px;
             border-bottom: 1px solid var(--border-color);
@@ -261,50 +263,55 @@
 
         h1 {
             font-size: 32px;
-            font-weight: 700;
+            font-weight: 600;
             color: #ffffff;
             margin-bottom: 8px;
+            letter-spacing: -0.3px;
         }
 
         .subtitle {
             color: var(--text-secondary);
             font-size: 16px;
+            font-weight: 400;
         }
 
         h2 {
             font-size: 22px;
             color: var(--accent-blue);
             margin: 32px 0 16px;
+            font-weight: 500;
         }
 
         p {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             font-size: 16px;
             color: var(--text-primary);
+            line-height: 1.7;
         }
 
         ul {
-            margin-bottom: 24px;
-            padding-left: 20px;
+            margin-bottom: 28px;
+            padding-left: 22px;
         }
 
         li {
             margin-bottom: 12px;
             color: var(--text-primary);
+            line-height: 1.6;
         }
 
         .highlight-box {
             background: rgba(88, 166, 255, 0.05);
-            border-left: 4px solid var(--accent-blue);
+            border-left: 3px solid var(--accent-blue);
             padding: 20px;
-            margin: 24px 0;
+            margin: 28px 0;
             border-radius: 4px;
         }
 
         .footer-action {
-            margin-top: 40px;
+            margin-top: 48px;
             text-align: center;
-            padding-top: 24px;
+            padding-top: 28px;
             border-top: 1px solid var(--border-color);
         }
 
@@ -313,49 +320,39 @@
             background: var(--accent-blue);
             color: #ffffff;
             text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: opacity 0.2s;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: background-color 0.2s;
         }
 
         .btn-primary:hover {
-            opacity: 0.9;
+            background-color: var(--accent-hover);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .main-nav {
-                padding: 16px 20px;
-            }
-            
             .nav-container {
                 flex-direction: column;
-                align-items: stretch;
-                gap: 16px;
-            }
-            
-            .nav-links {
-                justify-content: center;
                 gap: 20px;
+                padding: 0 20px;
             }
             
-            .nav-links a {
-                font-size: 16px;
+            .nav-primary {
+                gap: 30px;
             }
             
-            .lang-switcher {
-                justify-content: center;
-                flex-wrap: wrap;
-                padding: 8px;
+            .language-selector {
+                gap: 10px;
             }
             
             .content-card {
-                padding: 24px;
+                padding: 32px 24px;
             }
             
             h1 {
-                font-size: 24px;
+                font-size: 26px;
             }
             
             .ip-badge-top {
@@ -365,129 +362,172 @@
             
             .ip-actions {
                 width: 100%;
-                justify-content: space-between;
-            }
-            
-            .btn-check-full {
-                flex-grow: 1;
-                text-align: center;
+                justify-content: flex-start;
             }
         }
 
-        @media (max-width: 480px) {
-            .nav-links {
-                flex-direction: column;
-                gap: 12px;
-                align-items: center;
+        @media (max-width: 576px) {
+            .main-navigation {
+                padding: 20px 0;
+                margin-bottom: 32px;
             }
             
-            .lang-switcher {
+            .nav-primary {
+                gap: 24px;
+            }
+            
+            .nav-link {
+                font-size: 13px;
+            }
+            
+            .language-selector {
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 8px;
             }
             
-            .lang-switcher a {
+            .lang-item {
                 font-size: 12px;
-                padding: 3px 6px;
             }
             
-            .main-nav {
-                position: static;
-                margin-top: 0;
+            .content-card {
+                padding: 24px 20px;
+                border-radius: 10px;
             }
             
-            body {
-                padding: 15px;
+            h1 {
+                font-size: 22px;
+            }
+            
+            h2 {
+                font-size: 19px;
+            }
+            
+            .ip-badge-value {
+                font-size: 16px;
+            }
+            
+            .btn-copy-mini,
+            .btn-check-full {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .nav-primary {
+                gap: 20px;
+            }
+            
+            .language-selector {
+                gap: 6px;
+            }
+            
+            .lang-item {
+                font-size: 11px;
+            }
+            
+            .lang-separator {
+                font-size: 10px;
+            }
+            
+            .content-wrapper {
+                padding: 0 16px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Enhanced Navigation Menu -->
-    <nav class="main-nav">
+    <!-- Premium Navigation Menu -->
+    <nav class="main-navigation">
         <div class="nav-container">
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="info.html" class="active">IP Guide</a>
+            <!-- Left Navigation -->
+            <div class="nav-primary">
+                <a href="/" class="nav-link">Home</a>
+                <a href="info.html" class="nav-link active">IP Guide</a>
             </div>
             
-            <div class="lang-switcher">
-                <a href="info.html" class="active-lang">🇺🇸 EN</a>
+            <!-- Right Language Selector -->
+            <div class="language-selector">
+                <a href="info.html" class="lang-item active">🇺🇸 EN</a>
                 <span class="lang-separator">|</span>
-                <a href="info-es.html">🇪🇸 ES</a>
+                <a href="info-es.html" class="lang-item">🇪🇸 ES</a>
                 <span class="lang-separator">|</span>
-                <a href="info-fr.html">🇫🇷 FR</a>
+                <a href="info-fr.html" class="lang-item">🇫🇷 FR</a>
                 <span class="lang-separator">|</span>
-                <a href="info-de.html">🇩🇪 DE</a>
+                <a href="info-de.html" class="lang-item">🇩🇪 DE</a>
                 <span class="lang-separator">|</span>
-                <a href="info-zh.html">🇨🇳 ZH</a>
+                <a href="info-zh.html" class="lang-item">🇨🇳 ZH</a>
                 <span class="lang-separator">|</span>
-                <a href="info-hi.html">🇮🇳 HI</a>
+                <a href="info-hi.html" class="lang-item">🇮🇳 HI</a>
                 <span class="lang-separator">|</span>
-                <a href="info-ru.html">🇷🇺 RU</a>
+                <a href="info-ru.html" class="lang-item">🇷🇺 RU</a>
             </div>
         </div>
     </nav>
 
-    <article class="content-card">
-        <!-- IP Badge with Copy and Check buttons -->
-        <div class="ip-badge-top">
-            <div class="ip-badge-info">
-                <span class="ip-badge-label">Your current IP</span>
-                <div class="ip-badge-row">
-                    <span class="ip-badge-value" id="mini-ip-display">Detecting...</span>
+    <!-- Main Content -->
+    <main class="content-wrapper">
+        <article class="content-card">
+            <!-- IP Badge with Copy and Check buttons -->
+            <div class="ip-badge-top">
+                <div class="ip-badge-info">
+                    <span class="ip-badge-label">Your current IP</span>
+                    <div class="ip-badge-row">
+                        <span class="ip-badge-value" id="mini-ip-display">Detecting...</span>
+                    </div>
+                </div>
+                <div class="ip-actions">
+                    <button class="btn-copy-mini" id="btn-copy-ip" onclick="copyMiniIP(this)">Copy IP</button>
+                    <a href="index.html" class="btn-check-full">Check full IP details</a>
                 </div>
             </div>
-            <div class="ip-actions">
-                <button class="btn-copy-mini" id="btn-copy-ip" onclick="copyMiniIP(this)">Copy IP</button>
-                <a href="index.html" class="btn-check-full">Check full IP details</a>
+
+            <header>
+                <h1>IP Address: What is it and why does it matter?</h1>
+                <p class="subtitle">A complete guide to Network Identification and Online Privacy.</p>
+            </header>
+
+            <section>
+                <h2>What is an IP Address?</h2>
+                <p>An IP (Internet Protocol) address is a unique numerical label assigned to each device connected to a computer network. It acts like your home address on the internet, allowing data to know exactly where it needs to be sent.</p>
+            </section>
+
+            <section>
+                <h2>Difference between IPv4 and IPv6</h2>
+                <p>There are two main types of IP addresses in use today:</p>
+                <ul>
+                    <li><strong>IPv4 (Internet Protocol version 4):</strong> The most common format, consisting of four numbers separated by dots (e.g., 192.168.1.1). It is limited to approximately 4.3 billion addresses.</li>
+                    <li><strong>IPv6 (Internet Protocol version 6):</strong> Created to solve the IPv4 address shortage, it uses a much longer hexadecimal format, allowing for trillions of new addresses and enhanced native security.</li>
+                </ul>
+            </section>
+
+            <div class="highlight-box">
+                <p><strong>Security Tip:</strong> Your public IP address reveals information about your Internet Service Provider (ISP) and your approximate geographic location (city and country).</p>
             </div>
-        </div>
 
-        <header>
-            <h1>IP Address: What is it and why does it matter?</h1>
-            <p class="subtitle">A complete guide to Network Identification and Online Privacy.</p>
-        </header>
+            <section>
+                <h2>Why monitor your IP?</h2>
+                <p>Knowing your IP address is essential for several technical and security tasks:</p>
+                <ul>
+                    <li><strong>VPN Verification:</strong> Confirming if your IP address has successfully changed after connecting to a VPN.</li>
+                    <li><strong>Network Configuration:</strong> Setting up servers, online gaming, or remote access.</li>
+                    <li><strong>Fraud Prevention:</strong> Identifying suspicious access attempts to your network.</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>What is an IP Address?</h2>
-            <p>An IP (Internet Protocol) address is a unique numerical label assigned to each device connected to a computer network. It acts like your home address on the internet, allowing data to know exactly where it needs to be sent.</p>
-        </section>
+            <section>
+                <h2>How to protect your online privacy</h2>
+                <p>Since your IP is a digital identity, many users choose to hide it to avoid advertising tracking or geographic censorship. Using a VPN (Virtual Private Network) is the most effective way to encrypt your traffic and replace your real IP with a secure server's IP.</p>
+            </section>
 
-        <section>
-            <h2>Difference between IPv4 and IPv6</h2>
-            <p>There are two main types of IP addresses in use today:</p>
-            <ul>
-                <li><strong>IPv4 (Internet Protocol version 4):</strong> The most common format, consisting of four numbers separated by dots (e.g., 192.168.1.1). It is limited to approximately 4.3 billion addresses.</li>
-                <li><strong>IPv6 (Internet Protocol version 6):</strong> Created to solve the IPv4 address shortage, it uses a much longer hexadecimal format, allowing for trillions of new addresses and enhanced native security.</li>
-            </ul>
-        </section>
-
-        <div class="highlight-box">
-            <p><strong>Security Tip:</strong> Your public IP address reveals information about your Internet Service Provider (ISP) and your approximate geographic location (city and country).</p>
-        </div>
-
-        <section>
-            <h2>Why monitor your IP?</h2>
-            <p>Knowing your IP address is essential for several technical and security tasks:</p>
-            <ul>
-                <li><strong>VPN Verification:</strong> Confirming if your IP address has successfully changed after connecting to a VPN.</li>
-                <li><strong>Network Configuration:</strong> Setting up servers, online gaming, or remote access.</li>
-                <li><strong>Fraud Prevention:</strong> Identifying suspicious access attempts to your network.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>How to protect your online privacy</h2>
-            <p>Since your IP is a digital identity, many users choose to hide it to avoid advertising tracking or geographic censorship. Using a VPN (Virtual Private Network) is the most effective way to encrypt your traffic and replace your real IP with a secure server's IP.</p>
-        </section>
-
-        <footer class="footer-action">
-            <p>Need to check your current IP address in real-time?</p>
-            <a href="index.html" class="btn-primary">Back to Diagnostic Tool</a>
-        </footer>
-    </article>
+            <footer class="footer-action">
+                <p>Need to check your current IP address in real-time?</p>
+                <a href="index.html" class="btn-primary">Back to Diagnostic Tool</a>
+            </footer>
+        </article>
+    </main>
 
     <script>
         function copyMiniIP(btn) {
