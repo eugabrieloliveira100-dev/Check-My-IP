@@ -5,27 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IP Guide & Network Security | Check my IP</title>
 
-     <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y7GFLQ17GE"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-Y7GFLQ17GE');
     </script>
 
-     <link rel="alternate" hreflang="x-default" href="[https://checkmyip.today/info.html](https://checkmyip.today/info.html)" />
-<link rel="alternate" hreflang="en" href="[https://checkmyip.today/info.html](https://checkmyip.today/info.html)" />
-<link rel="alternate" hreflang="pt" href="[https://checkmyip.today/info-pt.html](https://checkmyip.today/info-pt.html)" />
-<link rel="alternate" hreflang="es" href="[https://checkmyip.today/info-es.html](https://checkmyip.today/info-es.html)" />
-<link rel="alternate" hreflang="fr" href="[https://checkmyip.today/info-fr.html](https://checkmyip.today/info-fr.html)" />
-<link rel="alternate" hreflang="de" href="[https://checkmyip.today/info-de.html](https://checkmyip.today/info-de.html)" />
-<link rel="alternate" hreflang="hi" href="[https://checkmyip.today/info-hi.html](https://checkmyip.today/info-hi.html)" />
-<link rel="alternate" hreflang="zh" href="[https://checkmyip.today/info-zh.html](https://checkmyip.today/info-zh.html)" />
-<link rel="alternate" hreflang="ru" href="[https://checkmyip.today/info-ru.html](https://checkmyip.today/info-ru.html)" />
+    <link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info.html" />
+    <link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html" />
+    <link rel="alternate" hreflang="pt" href="https://checkmyip.today/info-pt.html" />
+    <link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
+    <link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
+    <link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
+    <link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
+    <link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
+    <link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
 
-    
     <style>
         /* CSS Variables - Consistent with Index.html */
         :root {
@@ -59,60 +57,102 @@
             line-height: 1.6;
         }
 
-        /* Nav Menu */
-        .nav-menu {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
+        /* Enhanced Navigation Menu */
+        .main-nav {
+            background-color: rgba(22, 27, 34, 0.95);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px 32px;
             width: 100%;
-            max-width: 800px;
+            max-width: 1000px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 32px;
+            align-items: center;
         }
 
-        .nav-menu a {
+        .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 500;
-            transition: color 0.2s;
+            transition: all 0.2s ease;
+            padding: 8px 0;
+            position: relative;
         }
 
-        .nav-menu a:hover {
+        .nav-links a:hover {
             color: var(--accent-blue);
         }
 
-        .nav-menu a.active {
+        .nav-links a.active {
             color: var(--text-primary);
-            border-bottom: 2px solid var(--accent-blue);
-            padding-bottom: 2px;
+            font-weight: 600;
         }
 
-        /* Language Switcher */
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        /* Enhanced Language Switcher */
         .lang-switcher {
-            font-size: 13px;
-            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(48, 54, 61, 0.5);
+            border-radius: 8px;
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
         }
 
         .lang-switcher a {
             text-decoration: none;
             color: var(--text-secondary);
-            padding: 2px 4px;
-            transition: color 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .lang-switcher a:hover {
+            background: rgba(88, 166, 255, 0.1);
             color: var(--accent-blue);
         }
 
         .lang-switcher .active-lang {
-            color: var(--text-primary);
-            font-weight: bold;
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        .lang-separator {
+            color: var(--border-color);
+            font-size: 12px;
         }
 
         /* Content Card */
@@ -283,34 +323,110 @@
             opacity: 0.9;
         }
 
-        @media (max-width: 600px) {
-            .content-card { padding: 24px; }
-            h1 { font-size: 24px; }
-            .ip-badge-top { flex-direction: column; align-items: flex-start; }
-            .ip-actions { width: 100%; justify-content: space-between; }
-            .btn-check-full { flex-grow: 1; text-align: center; }
-            .nav-menu { flex-direction: column; align-items: flex-start; gap: 10px; }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-nav {
+                padding: 16px 20px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+            }
+            
+            .nav-links {
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .nav-links a {
+                font-size: 16px;
+            }
+            
+            .lang-switcher {
+                justify-content: center;
+                flex-wrap: wrap;
+                padding: 8px;
+            }
+            
+            .content-card {
+                padding: 24px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .ip-badge-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .ip-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .btn-check-full {
+                flex-grow: 1;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+            }
+            
+            .lang-switcher {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .lang-switcher a {
+                font-size: 12px;
+                padding: 3px 6px;
+            }
+            
+            .main-nav {
+                position: static;
+                margin-top: 0;
+            }
+            
+            body {
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
 
-       <nav class="nav-menu">
-    <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="info.html" class="active">IP Guide</a>
-    </div>
-  </nav>
-    
-        <div class="lang-switcher">
-            <a href="info.html" class="active-lang">🇺🇸 EN</a> | 
-            <a href="info-es.html">🇪🇸 ES</a> |
-            <a href="info-fr.html">🇫🇷 FR</a> |
-            <a href="info-de.html">🇩🇪 DE</a>
-            <a href="info-zh.html">🇨🇳 ZH</a>
-            <a href="info-hi.html">🇮🇳 HI</a> |
-            <a href="info-ru.html">🇷🇺 RU</a> |
+    <!-- Enhanced Navigation Menu -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="info.html" class="active">IP Guide</a>
+            </div>
             
+            <div class="lang-switcher">
+                <a href="info.html" class="active-lang">🇺🇸 EN</a>
+                <span class="lang-separator">|</span>
+                <a href="info-es.html">🇪🇸 ES</a>
+                <span class="lang-separator">|</span>
+                <a href="info-fr.html">🇫🇷 FR</a>
+                <span class="lang-separator">|</span>
+                <a href="info-de.html">🇩🇪 DE</a>
+                <span class="lang-separator">|</span>
+                <a href="info-zh.html">🇨🇳 ZH</a>
+                <span class="lang-separator">|</span>
+                <a href="info-hi.html">🇮🇳 HI</a>
+                <span class="lang-separator">|</span>
+                <a href="info-ru.html">🇷🇺 RU</a>
+            </div>
         </div>
     </nav>
 
