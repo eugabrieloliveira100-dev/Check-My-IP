@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IP 指南与网络安全 | Check my IP</title>
+    <title>IP 地址终极指南：网络身份、基础设施与隐私保护 | Check my IP</title>
 
-     <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y7GFLQ17GE"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -15,19 +15,16 @@
     gtag('config', 'G-Y7GFLQ17GE');
     </script>
 
+    <link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info.html" />
+    <link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html" />
+    <link rel="alternate" hreflang="pt" href="https://checkmyip.today/info-pt.html" />
+    <link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
+    <link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
+    <link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
+    <link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
+    <link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
+    <link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
 
-    <link rel="alternate" hreflang="x-default" href="[https://checkmyip.today/info.html](https://checkmyip.today/info.html)" />
-<link rel="alternate" hreflang="en" href="[https://checkmyip.today/info.html](https://checkmyip.today/info.html)" />
-<link rel="alternate" hreflang="pt" href="[https://checkmyip.today/info-pt.html](https://checkmyip.today/info-pt.html)" />
-<link rel="alternate" hreflang="es" href="[https://checkmyip.today/info-es.html](https://checkmyip.today/info-es.html)" />
-<link rel="alternate" hreflang="fr" href="[https://checkmyip.today/info-fr.html](https://checkmyip.today/info-fr.html)" />
-<link rel="alternate" hreflang="de" href="[https://checkmyip.today/info-de.html](https://checkmyip.today/info-de.html)" />
-<link rel="alternate" hreflang="hi" href="[https://checkmyip.today/info-hi.html](https://checkmyip.today/info-hi.html)" />
-<link rel="alternate" hreflang="zh" href="[https://checkmyip.today/info-zh.html](https://checkmyip.today/info-zh.html)" />
-<link rel="alternate" hreflang="ru" href="[https://checkmyip.today/info-ru.html](https://checkmyip.today/info-ru.html)" />
-
-
-    
     <style>
         :root {
             --bg-color: #0d1117;
@@ -38,7 +35,7 @@
             --accent-blue: #58a6ff;
             --accent-hover: #1f6feb;
             --success-green: #3fb950;
-            --font-main: system-ui, -apple-system, "Microsoft YaHei", sans-serif;
+            --font-main: system-ui, -apple-system, "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
             --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
         }
 
@@ -127,6 +124,11 @@
             white-space: nowrap;
         }
 
+        .btn-copy-mini:hover {
+            background: #444c56;
+            color: #ffffff;
+        }
+
         .btn-copy-mini.copied { background: var(--success-green); color: white; }
 
         .btn-check-full {
@@ -141,10 +143,16 @@
             transition: all 0.2s;
         }
 
+        .btn-check-full:hover {
+            background: var(--accent-blue);
+            color: #ffffff;
+        }
+
         header { margin-bottom: 32px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
         h1 { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
         .subtitle { color: var(--text-secondary); font-size: 16px; }
         h2 { font-size: 22px; color: var(--accent-blue); margin: 32px 0 16px; }
+        h3 { font-size: 18px; color: var(--text-primary); margin: 24px 0 12px; }
         p { margin-bottom: 16px; font-size: 16px; color: var(--text-primary); }
         ul { margin-bottom: 24px; padding-left: 20px; }
         li { margin-bottom: 12px; color: var(--text-primary); }
@@ -155,6 +163,35 @@
             padding: 20px;
             margin: 24px 0;
             border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+        }
+
+        tr:hover {
+            background-color: rgba(88, 166, 255, 0.05);
+        }
+
+        .comparison-table {
+            overflow-x: auto;
         }
 
         .footer-action { margin-top: 40px; text-align: center; padding-top: 24px; border-top: 1px solid var(--border-color); }
@@ -170,12 +207,23 @@
             transition: opacity 0.2s;
         }
 
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
         @media (max-width: 600px) {
             .content-card { padding: 24px; }
             h1 { font-size: 24px; }
             .ip-badge-top { flex-direction: column; align-items: flex-start; }
             .ip-actions { width: 100%; justify-content: space-between; }
             .nav-menu { flex-direction: column; align-items: flex-start; gap: 10px; }
+            table { font-size: 14px; }
+            td, th { padding: 8px; }
         }
     </style>
 </head>
@@ -191,9 +239,9 @@
             <a href="info-es.html">🇪🇸 ES</a> |
             <a href="info-fr.html">🇫🇷 FR</a> |
             <a href="info-de.html">🇩🇪 DE</a> |
-            <a href="info-zh.html" class="active-lang">🇨🇳 ZH</a>
+            <a href="info-zh.html" class="active-lang">🇨🇳 ZH</a> |
             <a href="info-hi.html">🇮🇳 HI</a> |
-            <a href="info-ru.html">🇷🇺 RU</a> |
+            <a href="info-ru.html">🇷🇺 RU</a>
         </div>
     </nav>
 
@@ -212,37 +260,339 @@
         </div>
 
         <header>
-            <h1>IP 地址：它是什么以及为什么重要？</h1>
-            <p class="subtitle">关于网络识别和在线隐私的完整指南。</p>
+            <h1>IP 地址终极指南：网络身份、基础设施与隐私保护</h1>
+            <p class="subtitle">十多年前，当我开始从事网络工作时，IP 地址还是只有系统管理员或技术发烧友才会讨论的话题。</p>
         </header>
 
         <section>
-            <h2>什么是 IP 地址？</h2>
-            <p>IP（互联网协议）地址是分配给连接到计算机网络的每个设备的唯一数字标签。它就像您在互联网上的家庭地址，让数据知道应该发送到哪里。</p>
+            <p>但今天，情况完全不同了。我们生活在一个连冰箱和手表都有"数字身份"的时代。作为一名花过无数时间配置路由器、排查断网故障并防御网络攻击的专业人士，我决定写下这篇指南。这不仅仅是一本技术手册，更是一场关于互联网"引擎盖"下真实运作方式的对话。网络基础设施听起来可能像一堆乱码，但只要从实践经验的角度来看，它的核心概念其实非常直观。</p>
         </section>
 
         <section>
-            <h2>IPv4 与 IPv6 的区别</h2>
-            <p>目前主要使用的 IP 地址有两种类型：</p>
+            <h2>什么是 IP 地址？数字身份的概念</h2>
+            <p>要理解什么是 IP（互联网协议）地址，请先暂时忘记电脑，想想邮政系统。如果你想给朋友寄信，你需要一个地址。如果没有地址，邮递员就不知道把信送到哪里。在互联网上，每个设备——无论是智能手机、笔记本电脑还是游戏服务器——都需要一个类似的地址，以便数据知道该往哪走。<sup>1</sup> IP 地址正是如此：它是分配给连接到使用互联网协议进行通信的网络中每个设备的数字标签。</p>
+            
+            <p>不过，这里有一个经常让人困惑的细节：你是"谁"和你在"哪"的区别。从技术上讲，IP 地址有两个主要功能。首先，它识别主机（即设备）。其次，它提供该主机在网络中的逻辑位置，以便路由器能找到交付数据包的最佳路径。<sup>3</sup> 我常把 IP 称为"连接身份"。如果你把笔记本电脑从家带到咖啡馆，你的物理身份没变，但你的数字连接身份变了，因为你现在处于全球网络的一个新入口点。<sup>4</sup></p>
+            
+            <p>互联网不是一片虚无缥缈的云，它是千千万万电缆、卫星和路由器组成的庞大物理设施。IP 协议就是管理数据如何在这些设施中寻址和路由的规则集。每当你加载一个网页，你的设备实际上都在喊："嘿，我是 IP X，我想要 IP Y 的数据！"网站则通过发送被称为"数据包"的小信息块来响应，这些信息块将你的 IP 地址作为目的地。<sup>1</sup> 如果没有这个结构，数字通信将彻底瘫痪。</p>
+        </section>
+
+        <section>
+            <h2>公网 IP vs. 私网 IP</h2>
+            <p>我在解释网络原理时遇到的第一个难点，通常是公网地址和私网地址的区别。大多数人惊讶地发现，他们的设备实际上有两个不同的地址。为了理解这一点，可以想象一栋办公楼。办公楼有一个唯一的街道地址，邮局能识别它——这就是"公网地址"。然而，在办公楼内部，每个房间都有一个编号（如 101 室、202 室），这些房间号仅在楼内有效——这就是"私网地址"。<sup>6</sup></p>
+            
+            <h3>网络的边界</h3>
+            <p>你的家用路由器就像这栋楼的"前台"。你的互联网服务提供商 (ISP) 为你的路由器分配一个唯一的公网 IP 地址。这个地址在全球范围内是唯一的，此时此刻世界上没有其他人拥有和你一样的公网 IP。<sup>6</sup> 而你家里的所有设备（手机、平板、智能电视）都由路由器分配私网 IP 地址。这些内部地址通常以熟悉的数字开头，如 192.168.x.x 或 10.x.x.x。<sup>6</sup></p>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IP 类型</th>
+                            <th>通信范围</th>
+                            <th>可见性</th>
+                            <th>分配来源</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>公网 IP</strong></td>
+                            <td>全球（互联网）</td>
+                            <td>对所有网站和服务器可见</td>
+                            <td>运营商 (ISP)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>私网 IP</strong></td>
+                            <td>本地（家庭/办公室）</td>
+                            <td>对外部世界不可见</td>
+                            <td>你的路由器 (通过 DHCP)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p>这种结构不仅是为了方便组织，更是安全和资源保护的重要工具。由于私网 IP 在互联网上不可见，外部黑客无法仅凭私网 IP 直接连接到你的打印机，他们必须先通过你的路由器，而路由器起到了防火墙的作用。<sup>9</sup> 此外，由于全球有几十亿人口，如果每个智能灯泡都需要一个全球唯一的 ID，IPv4 地址早就耗尽了。私网 IP 的使用让数以亿计的设备能够仅靠一小部分公网地址共存。<sup>9</sup></p>
+        </section>
+
+        <section>
+            <h2>IPv4 与 IPv6：大迁徙</h2>
+            <p>如果你查看过电脑的网络设置，可能会注意到两种地址：一种是由四组数字组成的短地址 (IPv4)，另一种是包含字母和数字的长地址 (IPv6)。这是互联网历史上最大的基础设施升级留下的视觉印记。</p>
+            
+            <h3>IPv4 地址枯竭</h3>
+            <p>IPv4（互联网协议第 4 版）是构建我们熟知的互联网的标准。它使用 32 位地址，总共只能提供约 43 亿个唯一地址。<sup>11</sup> 在 20 世纪 80 年代，40 亿似乎是个天文数字，没人预见到每个人最终会拥有多台联网设备。2011 年左右，全球 IPv4 地址池正式耗尽。<sup>11</sup> 这引发了一场静悄悄的危机，网络工程师们不得不使用各种技术"补丁"，同时推动世界向 IPv6 迁移。</p>
+            
+            <h3>浩瀚的 IPv6</h3>
+            <p>IPv6 被设计为终极继任者。它使用 128 位地址，允许的组合数量多到人类难以想象：340 涧（340 后面加 36 个零）。<sup>11</sup> 为了让你对这个规模有个直观感受：我们可以给地球表面上的每一颗沙子分配一个 IP 地址，剩下的地址还够再分给好几个星球。<sup>11</sup></p>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>特性</th>
+                            <th>IPv4</th>
+                            <th>IPv6</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>地址长度</strong></td>
+                            <td>32 位</td>
+                            <td>128 位</td>
+                        </tr>
+                        <tr>
+                            <td><strong>格式</strong></td>
+                            <td>点分十进制 (如 192.168.1.1)</td>
+                            <td>冒号十六进制 (如 2001:db8::1)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>安全性</strong></td>
+                            <td>依赖外部扩展 (IPsec)</td>
+                            <td>原生内置 IPsec 支持</td>
+                        </tr>
+                        <tr>
+                            <td><strong>配置方式</strong></td>
+                            <td>通常需要 DHCP 或手动设置</td>
+                            <td>支持无状态自动配置 (SLAAC)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>效率</strong></td>
+                            <td>头部长度可变（处理稍慢）</td>
+                            <td>固定且简化的头部（处理更快）</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p>除了海量的空间，IPv6 还带来了路由效率和安全性方面的重大改进。在 IPv4 中，安全性是"额外添加"的；而在 IPv6 中，它从协议设计之初就是核心组成部分。<sup>11</sup> 虽然因为需要更换旧设备，这场转型持续了数十年，但 IPv6 才是真正实现物联网 (IoT) 指数级增长的基石。<sup>11</sup></p>
+        </section>
+
+        <section>
+            <h2>静态 IP vs. 动态 IP</h2>
+            <p>另一个经常引起困惑的概念是地址的稳定性。为什么你的 IP 地址偶尔会变？这涉及到静态 IP 和动态 IP 的区别。</p>
+            
+            <p>大多数家庭用户使用的是动态 IP 地址。这意味着你的运营商会在一定时间内把地址"租"给你。当租约到期或路由器重启时，运营商可能会从其地址池中给你分配一个不同的地址。<sup>1</sup> 对运营商来说，这非常高效，因为并不是所有客户都同时在线，这样可以循环利用地址。<sup>7</sup> 对于普通上网来说，这几乎没有任何影响。</p>
+            
+            <p>而静态 IP 地址就像你的固定电话号码——它永远不变。企业、网站服务器和邮件服务需要静态 IP，以便其他电脑始终能找到它们。<sup>1</sup> 如果 Google 的 IP 每五分钟变一次，域名系统 (DNS) 就很难跟上步调。静态 IP 通常更贵且需要手动配置，但对于需要托管服务或超稳定远程访问的人来说，它是必不可少的。<sup>1</sup></p>
+        </section>
+
+        <section>
+            <h2>IP 地址的解剖</h2>
+            <p>让我们剖析一下这些数字代表什么。当你看到像 172.16.254.1 这样的地址时，你看到的是二进制数据的十进制表示。这四个部分中的每一部分都被称为"八位字节"(Octet)，因为它代表 8 位信息。<sup>2</sup></p>
+            
+            <h3>子网划分逻辑</h3>
+            <p>IP 地址不是随机生成的，它分为两个主要部分：网络前缀和主机标识符。可以把它想象成电话号码的区号和个人号码。为了确定网络在哪里结束、设备在哪里开始，我们使用子网掩码。<sup>16</sup> 在专业领域，我们常用 CIDR 表示法，比如 /24。这告诉路由器前 24 位定义网络，剩下的位用于该网络中的具体设备。<sup>16</sup></p>
+            
+            <h3>IPv6 的格式</h3>
+            <p>在 IPv6 中，解剖结构有所不同。由于地址非常长，我们使用十六进制（0-9 和 A-F）。地址分为八组，每组 16 位。我经常分享的一个小技巧是：如果你在 IPv6 地址中间看到 ::，那只是连串零的简写，为了让地址更易读。</p>
+        </section>
+
+        <section>
+            <h2>NAT 与"共享 IP"的世界</h2>
+            <p>如果你曾纳闷运营商如何只用几个 IPv4 地址就连接了成千上万的人，答案就是 NAT（网络地址转换）。我认为 NAT 是计算机历史上最天才、但也最让人抓狂的"补丁"之一。</p>
+            
+            <h3>NAT 的运作原理</h3>
+            <p>NAT 就像一个翻译服务。当你的电脑向 Google 发送请求时，路由器会将你的私网 IP 替换为家庭的公网 IP。它会在内部表中记下一笔："设备 A 在 X 端口请求了某内容"。当响应传回时，路由器查表并将数据交付给正确的设备。<sup>8</sup></p>
+            
+            <h3>CGNAT：大规模共享</h3>
+            <p>由于 IPv4 地址极度稀缺，现在许多运营商（尤其是移动网络和光纤宽带）使用 CGNAT（运营商级 NAT）。在这里，地址转换发生在运营商端。成百上千个家庭可能共享同一个公网 IP 地址。<sup>18</sup> 虽然这为运营商节省了地址，但会给用户带来麻烦：</p>
+            
             <ul>
-                <li><strong>IPv4 (互联网协议第 4 版):</strong> 最常见的格式，由四个点分隔的数字组成（例如：192.168.1.1）。它被限制在约 43 亿个地址。</li>
-                <li><strong>IPv6 (互联网协议第 6 版):</strong> 为了解决 IPv4 地址短缺而创建，它使用更长的十六进制格式，几乎无限数量的地址并增强了内置的安全机制。</li>
+                <li><strong>游戏体验受阻：</strong> 需要点对点 (P2P) 连接的游戏经常连接失败或高延迟。<sup>20</sup></li>
+                <li><strong>无辜躺枪：</strong> 如果与你共享公网 IP 的某人因违规被论坛封禁，你可能也会被屏蔽。<sup>20</sup></li>
+                <li><strong>远程访问困难：</strong> 你无法轻松地从外部访问家里的监控摄像头，因为你没有属于自己的公网 IP。<sup>20</sup></li>
             </ul>
+        </section>
+
+        <section>
+            <h2>别人能通过你的 IP 了解到什么？</h2>
+            <p>很多人担心 IP 地址像 GPS 追踪器一样直接指向自家的客厅。作为一名处理过地理位置数据的人，我可以告诉你：现实没那么戏剧化，但依然值得关注。</p>
+            
+            <h3>地理定位与估算</h3>
+            <p>公网 IP 可以揭示你的粗略位置：国家、省份，通常还有城市或地区。<sup>22</sup> 然而，街道级的精度非常低。你的 IP 往往指向运营商的数据中心，那里可能离你家好几公里远。<sup>22</sup> 国家级的定位准确度接近 95%，但城市级则下降到 50% 到 80% 之间。<sup>22</sup></p>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>泄露的数据</th>
+                            <th>准确度</th>
+                            <th>描述</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>国家/洲</td>
+                            <td>极高</td>
+                            <td>识别流量的来源国。</td>
+                        </tr>
+                        <tr>
+                            <td>城市/地区</td>
+                            <td>中等</td>
+                            <td>通常指向最近的运营商网络节点。</td>
+                        </tr>
+                        <tr>
+                            <td>运营商 (ISP)</td>
+                            <td>精确</td>
+                            <td>揭示你用的是哪家公司的宽带（如中国电信、中国联通）。</td>
+                        </tr>
+                        <tr>
+                            <td>连接类型</td>
+                            <td>高</td>
+                            <td>显示你是用移动流量、家用宽带还是企业专线。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p>大家经常忽略的一点是：虽然普通网站无法通过 IP 查到你的姓名和家庭住址，但执法部门可以。通过法律程序，运营商有义务提供在特定时间使用该 IP 的订户信息。<sup>22</sup></p>
+            
+            <h3>IP 声誉与黑名单</h3>
+            <p>把你的 IP 地址看作是数字世界的"信用分"。你与互联网的每一次互动都会留下痕迹。大型安全公司会监控这些轨迹，构建我们所谓的<strong>IP 声誉</strong>。<sup>24</sup></p>
+            
+            <p><strong>什么会毁掉你的声誉？</strong></p>
+            <p>如果你的电脑感染了恶意软件并开始发送成千上万封垃圾邮件，或者参与了针对某个网站的分布式拒绝服务 (DDoS) 攻击，你的 IP 就会被贴上"恶意"标签。<sup>24</sup> 一旦发生这种情况，该 IP 就会进入黑名单。<sup>24</sup></p>
+            
+            <p>进入黑名单的后果很严重：</p>
+            <ul>
+                <li>你的合法邮件无法寄达对方信箱。<sup>24</sup></li>
+                <li>访问网站时会被强制要求输入大量的验证码（"点击所有包含红绿灯的方块"），以证明你不是机器人。<sup>28</sup></li>
+                <li>某些金融或流媒体服务可能会完全屏蔽你的访问。<sup>24</sup></li>
+            </ul>
+            
+            <p>家庭用户经常在不知情的情况下进入黑名单，原因可能是你分配到的动态 IP 之前被坏人使用过，或者是你通过 CGNAT 与一个"坏邻居"共享了同一个 IP。<sup>21</sup></p>
+        </section>
+
+        <section>
+            <h2>IP 泄漏：隐私失守的地方</h2>
+            <p>许多人买了 VPN 之后就觉得万事大吉，瞬间隐身了。可惜，技术远比一个开关复杂。技术层面的裂缝被称为"泄漏"(Leaks)。</p>
+            
+            <h3>WebRTC 泄漏</h3>
+            <p>WebRTC 是一项出色的技术，它让浏览器无需插件即可进行视频通话。问题在于，为了建立连接，WebRTC 使用的协议可以绕过你的 VPN，直接发现你真实的本地和公网 IP。<sup>29</sup> 恶意网站可以使用一小段脚本询问浏览器的真实 IP，而浏览器会遵循 WebRTC 的规则如实回答，即使 VPN 处于开启状态。<sup>29</sup></p>
+            
+            <h3>DNS 和 IPv6 泄漏</h3>
+            <p>DNS 泄漏发生在你的电脑由于配置习惯，向你的运营商服务器请求网站地址，而不是使用 VPN 的安全服务器时。<sup>32</sup> 同样，IPv6 泄漏是因为许多旧版 VPN 仅保护 IPv4 流量。如果目标网站支持 IPv6，你的设备可能会绕过 VPN 隧道连接，暴露你的真实身份。<sup>33</sup></p>
+        </section>
+
+        <section>
+            <h2>如何查找你的 IP 地址：实践指南</h2>
+            <p>了解如何检查自己的 IP 是确保隐私工具生效的第一步。我们需要区分"内网"和"外网"视角。</p>
+            
+            <h3>检查公网 IP</h3>
+            <p>最简单的方法是使用我们的在线检测工具。它会告诉你互联网其他部分在看你时"看到"的地址。<sup>35</sup> 如果你开启了 VPN，但工具显示的还是你真实的城市，说明存在泄漏。在终端 (Mac/Linux) 或命令提示符 (Windows) 中输入 <code>curl ifconfig.me</code> 也能快速查看。<sup>35</sup></p>
+            
+            <h3>查找本地（私网）IP</h3>
+            <p>排查家庭网络问题时，你需要本地 IP：</p>
+            <ul>
+                <li><strong>Windows:</strong> 在命令提示符中输入 <code>ipconfig</code>，查找"IPv4 地址"。<sup>36</sup></li>
+                <li><strong>Mac/Linux:</strong> 在终端中输入 <code>ip addr</code> 或 <code>ifconfig</code>。<sup>36</sup></li>
+                <li><strong>移动端:</strong> 进入 Wi-Fi 设置，点击当前连接的网络名称旁边的"i"或齿轮图标。<sup>35</sup></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>保护你的在线隐私</h2>
+            <p>如果 IP 地址是你的数字足迹，你该如何行走而不留痕迹？主要有三种工具，各司其职：</p>
+            
+            <h3>1. VPN (虚拟专用网络)</h3>
+            <p>这是最通用的工具。它在你和远程服务器之间建立一个加密隧道。所有流量都通过这个隧道。对外部世界来说，你的 IP 就是 VPN 服务器的 IP。<sup>38</sup> 非常适合在公共 Wi-Fi 下保护安全，以及防止运营商监控你的活动。<sup>38</sup></p>
+            
+            <h3>2. 代理 (Proxy)</h3>
+            <p>代理就像个中间人。你向代理发送请求，它替你去访问网站。它在目标网站面前隐藏了你的 IP，但通常不加密数据。就像给信封写个化名，但信封本身没上锁。<sup>39</sup></p>
+            
+            <h3>3. Tor (洋葱路由)</h3>
+            <p>这是极致匿名之选。它让你的数据在全球三层志愿者服务器之间跳转。追踪流量来源极其困难，但代价是速度——在 Tor 上浏览感觉就像回到了拨号上网时代。<sup>42</sup></p>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>工具</th>
+                            <th>隐私等级</th>
+                            <th>速度</th>
+                            <th>成本</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>VPN</td>
+                            <td>高</td>
+                            <td>快</td>
+                            <td>通常付费</td>
+                        </tr>
+                        <tr>
+                            <td>代理</td>
+                            <td>中</td>
+                            <td>极快</td>
+                            <td>低/免费</td>
+                        </tr>
+                        <tr>
+                            <td>Tor</td>
+                            <td>最高</td>
+                            <td>极慢</td>
+                            <td>免费</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>IP 与物联网 (IoT)</h2>
+            <p>物联网带来了便利，但也给家庭安全留下了巨大的漏洞。核心问题是：许多此类设备——灯泡、婴儿监护仪、温控器——其实都是拥有 IP 地址的完整电脑，但几乎没有任何安全防护。</p>
+            
+            <h3>UPnP 的危险</h3>
+            <p>许多路由器默认开启了一项名为 <strong>UPnP（通用即插即用）</strong>的功能。它允许网络中的设备自动在路由器的防火墙上"打洞"，以便从互联网访问。<sup>43</sup> 这对快速配置游戏机很方便，但如果某个廉价摄像头利用 UPnP 在你不知情的情况下为黑客打开了后门，那就是一场灾难。<sup>45</sup></p>
+            
+            <p>我一贯建议在路由器设置中关闭 UPnP。如果你确实需要远程访问，手动设置端口转发或使用家用 VPN 会安全得多。<sup>43</sup></p>
+        </section>
+
+        <section>
+            <h2>IP 地址 vs. MAC 地址</h2>
+            <p>人们常把 IP 地址和 MAC 地址搞混。它们是互补的，但职责完全不同。</p>
+            
+            <p>MAC 地址就像汽车的架子号 (VIN)。它是出厂时分配的，对于该硬件是唯一的，且理论上永远不变。<sup>4</sup> IP 地址则像车牌号。它会根据汽车登记地或你搬到的城市而改变。<sup>4</sup></p>
+            
+            <p>在实践中，互联网利用你的 IP 把数据送到你的路由器。一旦进入内部，路由器利用 MAC 地址来确定是将数据包交给你的 iPhone 还是交给你的 PlayStation。<sup>4</sup></p>
+        </section>
+
+        <section>
+            <h2>关于 IP 定位精度的迷思</h2>
+            <p>最后，让我们戳破几个好莱坞大片热衷传播的"神话"。</p>
+            
+            <h3>误区 1："我要追踪他的 IP，五分钟内就出现在他家门口！"</h3>
+            <p>正如我们所见，普通公民是不可能做到的。IP 地址极少能提供优于几公里的精度。如果有人在线威胁说凭 IP 知道你家住址，他们多半是在虚张声势，或者利用了你在社交媒体上自己分享的数据。<sup>22</sup></p>
+            
+            <h3>误区 2："只要用 VPN，我就 100% 隐身了。"</h3>
+            <p>虽然你的 IP 位置被隐藏了，但网站依然可以通过 Cookie、你登录的账号（Google/Facebook）以及浏览器的"数字指纹"来识别你。隐私保护是一个多层模型，IP 只是其中一层。<sup>23</sup></p>
+            
+            <h3>误区 3："IPv6 地址只针对大型企业。"</h3>
+            <p>如果你用的是现代智能手机，你现在可能就在使用 IPv6 而不自知。大多数移动运营商已经几乎完全转向 IPv6，因为旧的 IP 地址已经不够分给所有客户了。<sup>11</sup></p>
+        </section>
+
+        <section>
+            <h2>常见问题 (FAQ)</h2>
+            
+            <h3>我的 IP 地址会在浏览时改变吗？</h3>
+            <p>通常不会。动态 IP 的更换通常发生在路由器重启或地址"租约"到期时。如果在会话中间发生更换，你通常会感觉到连接瞬间中断。<sup>48</sup></p>
+            
+            <h3>为什么我的 IP 显示我在另一个城市？</h3>
+            <p>这是因为地理位置数据库将你的 IP 关联到了运营商的出入口点。如果你的运营商在附近的某个大城市汇聚流量，所有客户都会显示在那儿。<sup>22</sup></p>
+            
+            <h3>别人知道我的公网 IP 危险吗？</h3>
+            <p>知道你的 IP 有点像知道你的电话号码。仅凭它无法"闯入"你的电脑，但可以让别人扫描你的开放端口，或通过发送海量垃圾流量来尝试瘫痪你的网络（DoS 攻击）。<sup>5</sup> 对大多数用户来说，路由器和电脑上的防火墙已经足够。</p>
         </section>
 
         <div class="highlight-box">
-            <p><strong>安全提示：</strong> 您的公网 IP 地址会泄露有关您的互联网服务提供商 (ISP) 和大致地理位置（城市和国家）的信息。</p>
-        </div>
-
-        <section>
-            <h2>为什么要监控您的 IP？</h2>
-            <p>了解您的 IP 地址对于多项技术和安全任务至关重要：</p>
+            <p><strong>结语与实践建议</strong></p>
+            <p>理解 IP 地址的工作原理揭开了互联网的神秘面纱。归根结底，IP 只是一个数字物流系统。它确保你发送的照片到达正确的人手中，你想看的视频流式传输到你的设备上。</p>
+            <p>我希望你从本指南中带走的核心教训是：</p>
             <ul>
-                <li><strong>VPN 验证：</strong> 确认连接到 VPN 后您的 IP 地址是否已成功更改。</li>
-                <li><strong>网络配置：</strong> 设置服务器、在线游戏或远程访问。</li>
-                <li><strong>预防欺诈：</strong> 识别对您网络的可疑访问尝试。</li>
+                <li><strong>监控你的足迹：</strong> 定期使用工具检查你的 IP，确保你的 VPN 确实在工作。<sup>29</sup></li>
+                <li><strong>安全第一：</strong> 关闭 UPnP 并保持路由器固件更新，防止你的网络成为僵尸网络的一部分。<sup>43</sup></li>
+                <li><strong>隐私是一种习惯：</strong> 明白 IP 只是你在线身份的一部分。使用追踪拦截器，并谨慎对待你主动分享的数据。</li>
             </ul>
-        </section>
+            <p>互联网建立在信任和开放的基础上，但现代世界要求我们多一分谨慎。现在你已经了解了设置中那一串数字的意义，你已经更有能力安全、清醒地在数字世界中航行。别忘了定期使用我们的 IP 检测器——它是你在数字时代的第一道防线。</p>
+        </div>
 
         <footer class="footer-action">
             <p>需要实时检查您当前的 IP 地址吗？</p>
@@ -277,13 +627,24 @@
 
         async function getMiniIP() {
             const display = document.getElementById('mini-ip-display');
-            try {
-                const res = await fetch('https://api.ipify.org?format=json', { cache: 'no-store' });
-                const data = await res.json();
-                display.innerText = data.ip;
-            } catch (e) {
-                display.innerText = '检测错误';
+            const endpoints = ['https://api.ipify.org?format=json', 'https://v6.ident.me'];
+            
+            for (const url of endpoints) {
+                try {
+                    const res = await fetch(url, { cache: 'no-store' });
+                    if (url.includes('json')) {
+                        const data = await res.json();
+                        display.innerText = data.ip;
+                    } else {
+                        const text = await res.text();
+                        display.innerText = text.trim();
+                    }
+                    return;
+                } catch (e) {
+                    continue;
+                }
             }
+            display.innerText = '检测错误';
         }
 
         window.addEventListener('load', getMiniIP);
