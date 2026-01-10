@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- Favicon configurado para SEO do Google -->
+    <link rel="icon" href="https://checkmyip.today/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://checkmyip.today/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://checkmyip.today/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://checkmyip.today/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://checkmyip.today/apple-touch-icon.png">
+    
+    <!-- Meta tags para SEO do favicon -->
+    <meta name="theme-color" content="#0d1117">
+    <meta name="msapplication-TileColor" content="#0d1117">
+    
     <!-- 1. Verificações de Propriedade -->
     <meta name="yandex-verification" content="f80d1c3883c1295f" />
+    
+    <!-- Open Graph Tags para melhor compartilhamento -->
+    <meta property="og:title" content="What Is My IP? Check Your Public IP Instantly (IPv4 & IPv6)">
+    <meta property="og:description" content="A clean, simple tool to check your IP, ISP, and basic network information.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://checkmyip.today/">
+    <meta property="og:image" content="https://checkmyip.today/og-image.png">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="What Is My IP? Check Your Public IP Instantly">
+    <meta name="twitter:description" content="Check your public IP address, ISP, and location instantly.">
 
+    <!-- SEO and Meta Tags -->
+    <title>What Is My IP? Check Your Public IP Instantly (IPv4 & IPv6)</title>
+    <meta name="description" content="A clean, simple tool to check your IP, ISP, and basic network information.">
+    <meta name="keywords" content="IP address, check IP, my IP, public IP, IPv4, IPv6, network tool, IP lookup">
+    <meta name="author" content="CheckMyIP.Today">
+    <link rel="canonical" href="https://checkmyip.today/">
+    
     <!-- 2. Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y7GFLQ17GE"></script>
     <script>
@@ -35,17 +65,6 @@
         });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/106197800" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-
-     <!-- SEO and Meta Tags -->
-<title>What Is My IP? Check Your Public IP Instantly (IPv4 & IPv6)</title>
-<meta name="description" content="A clean, simple tool to check your IP, ISP, and basic network information.">
-
-
-    <!-- Favicon padrão para navegadores (MIME type corrigido) -->
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-
     
     <style>
         :root {
@@ -463,6 +482,17 @@
                 if (val) loadIpData(val);
             }
         };
+        
+        // Função para forçar o carregamento do favicon (opcional)
+        function loadFavicon() {
+            const faviconLink = document.createElement('link');
+            faviconLink.rel = 'icon';
+            faviconLink.href = 'https://checkmyip.today/favicon.ico?v=' + new Date().getTime();
+            document.head.appendChild(faviconLink);
+        }
+        
+        // Executa após carregar a página
+        window.addEventListener('load', loadFavicon);
     </script>
 </body>
 </html>
