@@ -6,7 +6,7 @@
     <title>IPv6 Checker – Test If Your Connection Supports IPv6 | checkmyip.today</title>
     <meta name="description" content="Free IPv6 checker tool. Test if your internet connection supports IPv6, understand its benefits, and learn about security considerations. Instant detection with detailed explanations.">
     <meta name="keywords" content="ipv6 checker, ipv6 test, do I have ipv6, ipv6 enabled, ipv6 detection, ipv6 address checker">
-    <link rel="canonical" href="https://checkmyip.today/tools/ipv6-checker/">
+    <link rel="canonical" href="https://checkmyip.today/ipv6-checker.html">
     <style>
         /* CSS Reset and Base */
         * {
@@ -105,15 +105,17 @@
                 transparent 100%);
         }
         
-        /* Navegação Minimalista - Sem caixa, puro */
+        /* Navegação Minimalista - DENTRO do container, canto superior esquerdo */
         .top-nav {
             width: 100%;
-            max-width: 520px;
             margin-bottom: 32px;
             display: flex;
-            justify-content: center;
-            gap: 32px;
+            justify-content: flex-start;
+            gap: 24px;
             flex-wrap: wrap;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            position: relative;
         }
         
         .top-nav a {
@@ -137,7 +139,7 @@
         .top-nav a.active::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: 4px; /* Ajustado para ficar mais próximo */
             left: 0;
             right: 0;
             height: 2px;
@@ -381,13 +383,18 @@
             }
             
             .top-nav {
-                gap: 24px;
-                margin-bottom: 28px;
+                gap: 16px;
+                margin-bottom: 24px;
+                padding-bottom: 18px;
             }
             
             .top-nav a {
                 font-size: 13px;
                 padding: 6px 0;
+            }
+            
+            .top-nav a.active::after {
+                bottom: -18px; /* Ajustado para mobile */
             }
             
             .result-section {
@@ -415,8 +422,13 @@
             
             .top-nav {
                 flex-direction: column;
-                gap: 16px;
-                align-items: center;
+                gap: 12px;
+                align-items: flex-start;
+                padding-bottom: 16px;
+            }
+            
+            .top-nav a.active::after {
+                bottom: -16px; /* Ajustado para mobile vertical */
             }
             
             .section-label {
@@ -441,14 +453,15 @@
     </style>
 </head>
 <body>
-    <!-- Menu Minimalista - Sem caixa, apenas links com traço azul -->
-    <nav class="top-nav">
-        <a href="https://checkmyip.today/">Home</a>
-        <a href="https://checkmyip.today/info.html">IP Guide</a>
-        <a href="https://checkmyip.today/ipv6-checker/" class="active">IPv6 Checker</a>
-    </nav>
     
     <div class="main-container">
+        <!-- Menu DENTRO do container, canto superior esquerdo -->
+        <nav class="top-nav">
+            <a href="index.html">Home</a>
+            <a href="info.html">IP Guide</a>
+            <a href="ipv6-checker.html" class="active">IPv6 Checker</a>
+        </nav>
+        
         <h1>IPv6 Checker – Test If Your Connection Supports IPv6</h1>
         
         <span class="section-label">Connection Test Result</span>
