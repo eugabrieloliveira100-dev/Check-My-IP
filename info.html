@@ -37,7 +37,7 @@
             --success-green: #3fb950;
             --font-main: system-ui, -apple-system, sans-serif;
             --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-            --card-width: 800px; /* Largura fixa do Card */
+            --card-width: 600px; /* Ajustado para sincronizar com a Home */
         }
 
         * {
@@ -46,17 +46,23 @@
             padding: 0;
         }
 
-        /* 1. Estrutura de Container e Eixo Central (Horizontal) */
+        /* Remover scroll visual e forçar barra de rolagem sempre visível */
+        html {
+            overflow-y: scroll; /* Garante que o espaço da barra de scroll sempre exista */
+            scroll-behavior: smooth;
+        }
+
+        /* 1. Centralização vertical corrigida */
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: var(--font-main);
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centralização horizontal absoluta */
-            justify-content: center; */
+            align-items: center;      /* Centraliza horizontalmente */
+            justify-content: center;  /* Centraliza verticalmente */
             min-height: 100vh;
-            padding-top: 20px; /* 2. Respiro específico do topo */
+            padding: 20px 0;          /* Respiro uniforme no topo e base */
             line-height: 1.6;
         }
 
@@ -67,15 +73,14 @@
             flex-direction: column;
         }
 
-        /* 3. Hierarquia de Proximidade - Menu */
+        /* 3. Menu compacto e alinhado */
         .nav-menu {
             display: flex;
-            gap: 20px;
             width: 100%;
             justify-content: space-between;
-            align-items: center;
-            /* Menu alinhado à esquerda (não centralizado) */
-            align-self: flex-start; /* 3. Alinhamento do Menu */
+            align-items: flex-end; /* Alinha os itens pela base */
+            margin-bottom: 8px;    /* Diminui a distância para o card */
+            padding: 0 5px;        /* Pequeno ajuste lateral */
         }
 
         .nav-links {
@@ -129,9 +134,9 @@
             border: 1px solid var(--border-color);
             border-radius: 16px;
             width: 100%;
-            padding: 40px; /* 4. Respiro interno generoso */
+            padding: 40px; /* Respiro interno generoso */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            margin-top: 16px; /* 3. Espaçamento Gap de 16px */
+            margin-top: 16px; /* Espaçamento Gap de 16px */
         }
 
         /* Mini IP Badge Style */
@@ -346,9 +351,7 @@
 
         @media (max-width: 600px) {
             body {
-                padding-top: 10vh; /* Ajuste do padding-top para mobile */
-                padding-left: 16px;
-                padding-right: 16px;
+                padding: 10vh 16px; /* Ajuste do padding para mobile */
             }
             
             .content-card {
@@ -378,6 +381,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
+                padding: 0;
             }
             
             .lang-switcher {
@@ -395,7 +399,7 @@
 
         @media (max-width: 400px) {
             body {
-                padding-top: 8vh;
+                padding: 8vh 16px;
             }
             
             .content-card {
@@ -420,11 +424,6 @@
 
         a:hover {
             text-decoration: underline;
-        }
-
-        /* Scroll suave */
-        html {
-            scroll-behavior: smooth;
         }
     </style>
 </head>
