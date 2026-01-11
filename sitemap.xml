@@ -1,120 +1,128 @@
-<?xml version="1.0" encoding="UTF-8"?>
+ESTÁ CERTO?                                                                                                             <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- Home Page -->
-  <url>
-    <loc>https://checkmyip.today/</loc>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <!-- Home Page -->
+  <url>
+    <loc>https://checkmyip.today/</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
 
-  <!-- Mapeamento do Guia de IP (Página Principal e Traduções) -->
-  
-  <!-- English Version (Canonical Reference) -->
-  <url>
-    <loc>https://checkmyip.today/info.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <!-- Mapeamento do Guia de IP (Página Principal e Traduções) -->
+  
+  <!-- English Version (Canonical Reference) -->
+  <url>
+    <loc>https://checkmyip.today/info.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
 
-  <!-- Spanish Version -->
-  <url>
-    <loc>https://checkmyip.today/info-es.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Spanish Version -->
+  <url>
+    <loc>https://checkmyip.today/info-es.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-  <!-- French Version -->
-  <url>
-    <loc>https://checkmyip.today/info-fr.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- French Version -->
+  <url>
+    <loc>https://checkmyip.today/info-fr.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-  <!-- German Version -->
-  <url>
-    <loc>https://checkmyip.today/info-de.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- German Version -->
+  <url>
+    <loc>https://checkmyip.today/info-de.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-  <!-- Hindi Version -->
-  <url>
-    <loc>https://checkmyip.today/info-hi.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Hindi Version -->
+  <url>
+    <loc>https://checkmyip.today/info-hi.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-  <!-- Chinese Version -->
-  <url>
-    <loc>https://checkmyip.today/info-zh.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Chinese Version -->
+  <url>
+    <loc>https://checkmyip.today/info-zh.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
-  <!-- Russian Version -->
-  <url>
-    <loc>https://checkmyip.today/info-ru.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+    <!-- Russian Version -->
+  <url>
+    <loc>https://checkmyip.today/info-ru.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://checkmyip.today/info.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html"/>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- IPv6 Checker Tool -->
+  <url>
+    <loc>https://checkmyip.today/ipv6-checker.html</loc>
+    <lastmod>2026-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
 </urlset>
