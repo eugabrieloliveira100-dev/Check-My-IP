@@ -67,14 +67,69 @@
             color: var(--text-secondary);
             background-color: var(--bg-page);
             min-height: 100vh;
-            display: flex;
+            display: block;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 24px;
+            padding-top: 80px; /* AQUI: Espaço no topo para o menu */
+            padding-left: 24px;
+            padding-right: 24px;
             font-size: 15px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Container para o menu e conteúdo */
+        .content-wrapper {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        /* Navegação FORA do container, acima e alinhada à esquerda */
+        .top-nav {
+            width: 100%;
+            max-width: 520px;
+            margin-top: 20px;
+            margin-bottom: -10px;
+            display: flex;
+            justify-content: flex-start;
+            gap: 24px;
+            flex-wrap: wrap;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            position: relative; /* AQUI: Necessário para o traço azul */
+        }
+        
+        .top-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition-fast);
+        }
+        
+        .top-nav a:hover {
+            color: var(--text-secondary);
+        }
+        
+        .top-nav a.active {
+            color: var(--text-secondary);
+        }
+        
+        .top-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 1px; /* Ajuste este valor para mudar distância do traço */
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            border-radius: 1px;
         }
         
         /* Container Principal */
@@ -103,48 +158,6 @@
                 transparent 0%, 
                 rgba(255, 255, 255, 0.1) 50%, 
                 transparent 100%);
-        }
-        
-        /* Navegação Minimalista - DENTRO do container, canto superior esquerdo */
-        .top-nav {
-            width: 100%;
-            margin-bottom: 32px;
-            display: flex;
-            justify-content: flex-start;
-            gap: 24px;
-            flex-wrap: wrap;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-subtle);
-            position: relative;
-        }
-        
-        .top-nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 0;
-            position: relative;
-            transition: var(--transition-fast);
-        }
-        
-        .top-nav a:hover {
-            color: var(--text-secondary);
-        }
-        
-        .top-nav a.active {
-            color: var(--text-secondary);
-        }
-        
-        .top-nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 4px; /* Ajustado para ficar mais próximo */
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--accent-blue);
-            border-radius: 1px;
         }
         
         /* Headings */
@@ -370,7 +383,11 @@
         /* Responsive Design */
         @media (max-width: 560px) {
             body {
-                padding: 20px;
+                padding: 60px 20px 20px; /* Ajuste para mobile */
+            }
+            
+            .content-wrapper {
+                max-width: 100%;
             }
             
             .main-container {
@@ -383,9 +400,10 @@
             }
             
             .top-nav {
+                max-width: 100%;
                 gap: 16px;
-                margin-bottom: 24px;
-                padding-bottom: 18px;
+                margin-bottom: 20px;
+                padding-bottom: 16px;
             }
             
             .top-nav a {
@@ -394,7 +412,7 @@
             }
             
             .top-nav a.active::after {
-                bottom: -18px; /* Ajustado para mobile */
+                bottom: -16px;
             }
             
             .result-section {
@@ -412,6 +430,10 @@
         }
         
         @media (max-width: 420px) {
+            body {
+                padding: 60px 15px 15px;
+            }
+            
             .main-container {
                 padding: 20px;
             }
@@ -421,14 +443,13 @@
             }
             
             .top-nav {
-                flex-direction: column;
+                flex-direction: row;
                 gap: 12px;
-                align-items: flex-start;
                 padding-bottom: 16px;
             }
             
             .top-nav a.active::after {
-                bottom: -16px; /* Ajustado para mobile vertical */
+                bottom: -16px;
             }
             
             .section-label {
@@ -454,103 +475,105 @@
 </head>
 <body>
     
-    <div class="main-container">
-        <!-- Menu DENTRO do container, canto superior esquerdo -->
+    <!-- Menu FORA do container, acima e alinhado à esquerda -->
+    <div class="content-wrapper">
         <nav class="top-nav">
             <a href="index.html">Home</a>
             <a href="info.html">IP Guide</a>
             <a href="ipv6-checker.html" class="active">IPv6 Checker</a>
         </nav>
         
-        <h1>IPv6 Checker – Test If Your Connection Supports IPv6</h1>
-        
-        <span class="section-label">Connection Test Result</span>
-        <section class="result-section">
-            <div class="status-container">
-                <div class="status-icon">🔍</div>
-                <div id="statusTitle" class="status-title">Checking IPv6 Status...</div>
-                <p id="statusDescription">Detecting your IPv6 configuration</p>
-            </div>
+        <div class="main-container">
+            <h1>IPv6 Checker – Test If Your Connection Supports IPv6</h1>
             
-            <div class="ip-display">
-                <span class="ip-label">Your IP Address:</span>
-                <span id="ipAddress"><span class="loading"></span> Detecting...</span>
-            </div>
+            <span class="section-label">Connection Test Result</span>
+            <section class="result-section">
+                <div class="status-container">
+                    <div class="status-icon">🔍</div>
+                    <div id="statusTitle" class="status-title">Checking IPv6 Status...</div>
+                    <p id="statusDescription">Detecting your IPv6 configuration</p>
+                </div>
+                
+                <div class="ip-display">
+                    <span class="ip-label">Your IP Address:</span>
+                    <span id="ipAddress"><span class="loading"></span> Detecting...</span>
+                </div>
+                
+                <p id="statusDetails">This may take a few seconds as we test your connection.</p>
+            </section>
             
-            <p id="statusDetails">This may take a few seconds as we test your connection.</p>
-        </section>
-        
-        <span class="section-label">Protocol Information</span>
-        <section>
-            <h2>What is IPv6?</h2>
-            <p>IPv6 (Internet Protocol version 6) is the most recent version of the Internet Protocol, the communications protocol that provides an identification and location system for computers on networks and routes traffic across the Internet.</p>
+            <span class="section-label">Protocol Information</span>
+            <section>
+                <h2>What is IPv6?</h2>
+                <p>IPv6 (Internet Protocol version 6) is the most recent version of the Internet Protocol, the communications protocol that provides an identification and location system for computers on networks and routes traffic across the Internet.</p>
+                
+                <p>IPv6 was developed to replace IPv4, which uses 32-bit addresses (approximately 4.3 billion possible addresses). IPv6 uses 128-bit addresses, providing approximately 3.4×10^38 unique addresses – enough for every device on Earth to have its own public IP address.</p>
+                
+                <h3>Key Differences Between IPv4 and IPv6</h3>
+                <ul>
+                    <li><strong>Address Size:</strong> IPv4 uses 32-bit addresses, IPv6 uses 128-bit addresses</li>
+                    <li><strong>Address Format:</strong> IPv4: 192.168.1.1, IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</li>
+                    <li><strong>Address Space:</strong> IPv4 has ~4.3 billion addresses, IPv6 has 340 undecillion addresses</li>
+                    <li><strong>Auto-configuration:</strong> IPv6 has built-in stateless address autoconfiguration</li>
+                    <li><strong>Security:</strong> IPsec is mandatory in IPv6, optional in IPv4</li>
+                </ul>
+            </section>
             
-            <p>IPv6 was developed to replace IPv4, which uses 32-bit addresses (approximately 4.3 billion possible addresses). IPv6 uses 128-bit addresses, providing approximately 3.4×10^38 unique addresses – enough for every device on Earth to have its own public IP address.</p>
+            <span class="section-label">Importance & Context</span>
+            <section>
+                <h2>Why IPv6 Matters Today</h2>
+                <p>The transition to IPv6 is crucial because:</p>
+                <ol>
+                    <li><strong>IPv4 Exhaustion:</strong> The world has run out of new IPv4 addresses, making IPv6 essential for internet growth</li>
+                    <li><strong>Internet of Things (IoT):</strong> Billions of new connected devices need unique IP addresses</li>
+                    <li><strong>Performance:</strong> IPv6 can reduce routing table sizes and improve routing efficiency</li>
+                    <li><strong>Mobile Networks:</strong> 5G and future mobile technologies heavily rely on IPv6</li>
+                    <li><strong>Global Connectivity:</strong> Many regions now primarily use IPv6 for new connections</li>
+                </ol>
+            </section>
             
-            <h3>Key Differences Between IPv4 and IPv6</h3>
-            <ul>
-                <li><strong>Address Size:</strong> IPv4 uses 32-bit addresses, IPv6 uses 128-bit addresses</li>
-                <li><strong>Address Format:</strong> IPv4: 192.168.1.1, IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</li>
-                <li><strong>Address Space:</strong> IPv4 has ~4.3 billion addresses, IPv6 has 340 undecillion addresses</li>
-                <li><strong>Auto-configuration:</strong> IPv6 has built-in stateless address autoconfiguration</li>
-                <li><strong>Security:</strong> IPsec is mandatory in IPv6, optional in IPv4</li>
-            </ul>
-        </section>
-        
-        <span class="section-label">Importance & Context</span>
-        <section>
-            <h2>Why IPv6 Matters Today</h2>
-            <p>The transition to IPv6 is crucial because:</p>
-            <ol>
-                <li><strong>IPv4 Exhaustion:</strong> The world has run out of new IPv4 addresses, making IPv6 essential for internet growth</li>
-                <li><strong>Internet of Things (IoT):</strong> Billions of new connected devices need unique IP addresses</li>
-                <li><strong>Performance:</strong> IPv6 can reduce routing table sizes and improve routing efficiency</li>
-                <li><strong>Mobile Networks:</strong> 5G and future mobile technologies heavily rely on IPv6</li>
-                <li><strong>Global Connectivity:</strong> Many regions now primarily use IPv6 for new connections</li>
-            </ol>
-        </section>
-        
-        <span class="section-label">Security Considerations</span>
-        <section>
-            <h2>Security & Privacy Considerations</h2>
-            <p>While IPv6 offers technical improvements, it also introduces new considerations:</p>
+            <span class="section-label">Security Considerations</span>
+            <section>
+                <h2>Security & Privacy Considerations</h2>
+                <p>While IPv6 offers technical improvements, it also introduces new considerations:</p>
+                
+                <h3>VPN Compatibility Issues</h3>
+                <p>Many VPN services still have incomplete IPv6 support. If your VPN doesn't properly handle IPv6 traffic, your real IPv6 address might leak, potentially exposing your actual location even when using a VPN.</p>
+                
+                <h3>DNS Leaks Over IPv6</h3>
+                <p>Some systems may continue to use IPv6 for DNS queries even when IPv6 traffic is supposedly blocked, potentially leaking your browsing activity.</p>
+                
+                <h3>Privacy Extensions</h3>
+                <p>Modern operating systems use temporary IPv6 addresses (privacy extensions) to prevent tracking. However, not all systems enable these by default.</p>
+                
+                <p><strong>Recommendation:</strong> If you use a VPN, ensure it properly supports IPv6 or consider disabling IPv6 temporarily while connected to the VPN.</p>
+            </section>
             
-            <h3>VPN Compatibility Issues</h3>
-            <p>Many VPN services still have incomplete IPv6 support. If your VPN doesn't properly handle IPv6 traffic, your real IPv6 address might leak, potentially exposing your actual location even when using a VPN.</p>
-            
-            <h3>DNS Leaks Over IPv6</h3>
-            <p>Some systems may continue to use IPv6 for DNS queries even when IPv6 traffic is supposedly blocked, potentially leaking your browsing activity.</p>
-            
-            <h3>Privacy Extensions</h3>
-            <p>Modern operating systems use temporary IPv6 addresses (privacy extensions) to prevent tracking. However, not all systems enable these by default.</p>
-            
-            <p><strong>Recommendation:</strong> If you use a VPN, ensure it properly supports IPv6 or consider disabling IPv6 temporarily while connected to the VPN.</p>
-        </section>
-        
-        <span class="section-label">Frequently Asked Questions</span>
-        <section>
-            <h2>IPv6 FAQ</h2>
-            
-            <div class="faq-item">
-                <div class="faq-question">What is an IPv6 address?</div>
-                <p>An IPv6 address is a 128-bit identifier for a network interface. It's written in hexadecimal notation, separated by colons (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334). IPv6 addresses can be shortened by removing leading zeros and replacing consecutive zero sections with "::".</p>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">How do I know if IPv6 is enabled?</div>
-                <p>You can use this tool to check! If the tool shows "IPv6 is enabled on your connection" and displays an IPv6 address, then your connection supports IPv6. You can also check your operating system network settings or use command-line tools like `ipconfig` (Windows) or `ifconfig` (Linux/macOS).</p>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Is IPv6 safer than IPv4?</div>
-                <p>IPv6 has built-in security features like mandatory IPsec support, but the protocol itself isn't inherently "safer." Both protocols face similar types of attacks. The larger address space makes scanning attacks harder, but proper security practices are essential regardless of the IP version.</p>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Should I disable IPv6 when using a VPN?</div>
-                <p>This depends on your VPN provider. If your VPN doesn't fully support IPv6, disabling it can prevent leaks. Check with your VPN provider's documentation. Many security experts recommend disabling IPv6 when using a VPN unless you're certain it's properly supported.</p>
-            </div>
-        </section>
+            <span class="section-label">Frequently Asked Questions</span>
+            <section>
+                <h2>IPv6 FAQ</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What is an IPv6 address?</div>
+                    <p>An IPv6 address is a 128-bit identifier for a network interface. It's written in hexadecimal notation, separated by colons (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334). IPv6 addresses can be shortened by removing leading zeros and replacing consecutive zero sections with "::".</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How do I know if IPv6 is enabled?</div>
+                    <p>You can use this tool to check! If the tool shows "IPv6 is enabled on your connection" and displays an IPv6 address, then your connection supports IPv6. You can also check your operating system network settings or use command-line tools like `ipconfig` (Windows) or `ifconfig` (Linux/macOS).</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Is IPv6 safer than IPv4?</div>
+                    <p>IPv6 has built-in security features like mandatory IPsec support, but the protocol itself isn't inherently "safer." Both protocols face similar types of attacks. The larger address space makes scanning attacks harder, but proper security practices are essential regardless of the IP version.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Should I disable IPv6 when using a VPN?</div>
+                    <p>This depends on your VPN provider. If your VPN doesn't fully support IPv6, disabling it can prevent leaks. Check with your VPN provider's documentation. Many security experts recommend disabling IPv6 when using a VPN unless you're certain it's properly supported.</p>
+                </div>
+            </section>
+        </div>
     </div>
     
     <footer>
