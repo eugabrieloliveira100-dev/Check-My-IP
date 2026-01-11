@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   
-<link rel="alternate" hreflang="en" href="https://checkmyip.today/info-en.html" />
-<link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
-<link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
-<link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
-<link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
-<link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
-<link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
-<link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info-en.html" />
+    <link rel="alternate" hreflang="en" href="https://checkmyip.today/info-en.html" />
+    <link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
+    <link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
+    <link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
+    <link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
+    <link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
+    <link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
+    <link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info-en.html" />
     <title>IP Address & Network Security Guide | Check my IP</title>
 
     <!-- Google tag (gtag.js) -->
@@ -25,7 +24,6 @@
     gtag('config', 'G-Y7GFLQ17GE');
     </script>
 
-  
     <style>
         /* CSS Variables - Consistent with Index.html */
         :root {
@@ -39,6 +37,7 @@
             --success-green: #3fb950;
             --font-main: system-ui, -apple-system, sans-serif;
             --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            --page-width: 800px; /* Largura da página para o container adaptável */
         }
 
         * {
@@ -47,6 +46,7 @@
             padding: 0;
         }
 
+        /* Layout centralizado e próximo ao topo */
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
@@ -54,19 +54,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             padding: 20px;
             line-height: 1.6;
+        }
+
+        /* Container principal - centralizado e próximo ao topo */
+        .main-container {
+            width: 100%;
+            max-width: var(--page-width);
+            margin: 0 auto;
+            margin-top: 5vh; /* Próximo ao topo */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Nav Menu */
         .nav-menu {
             display: flex;
             gap: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 15px; /* Regra do Espaçamento Menu-Card */
             width: 100%;
-            max-width: 800px;
             justify-content: space-between;
             align-items: center;
         }
@@ -116,15 +125,15 @@
             font-weight: bold;
         }
 
-        /* Content Card - EXPANDIDO para 800px */
+        /* Content Card */
         .content-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             width: 100%;
-            max-width: 800px;
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 10px; /* Pequeno espaçamento após o menu */
         }
 
         /* Mini IP Badge Style */
@@ -248,18 +257,16 @@
             margin-bottom: 16px;
             font-size: 16px;
             color: var(--text-primary);
-            line-height: 1.6;
         }
 
         ul {
             margin-bottom: 24px;
-            padding-left: 24px;
+            padding-left: 20px;
         }
 
         li {
             margin-bottom: 12px;
             color: var(--text-primary);
-            line-height: 1.6;
         }
 
         .highlight-box {
@@ -327,467 +334,477 @@
             font-style: italic;
         }
 
-        /* Melhorias para legibilidade */
-        section {
-            margin-bottom: 32px;
-        }
-
-        code {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 14px;
-        }
-
-        sup {
-            font-size: 12px;
-            color: var(--accent-blue);
-            vertical-align: super;
-        }
-
-        @media (max-width: 850px) {
-            .content-card { 
-                padding: 30px; 
-                max-width: 95%;
-            }
-            .nav-menu { 
-                max-width: 95%;
-            }
-        }
-
         @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            
+            .main-container {
+                margin-top: 3vh; /* Ainda mais próximo ao topo em mobile */
+            }
+            
             .content-card { 
                 padding: 24px; 
             }
+            
+            h1 { 
+                font-size: 24px; 
+            }
+            
+            .ip-badge-top { 
+                flex-direction: column; 
+                align-items: flex-start; 
+            }
+            
+            .ip-actions { 
+                width: 100%; 
+                justify-content: space-between; 
+            }
+            
+            .btn-check-full { 
+                flex-grow: 1; 
+                text-align: center; 
+            }
+            
             .nav-menu { 
                 flex-direction: column; 
                 align-items: flex-start; 
                 gap: 10px; 
             }
-            h1 { 
-                font-size: 26px; 
-                line-height: 1.3;
-            }
-            h2 {
-                font-size: 20px;
-            }
-            h3 {
-                font-size: 17px;
-            }
-            .ip-badge-top { 
-                flex-direction: column; 
-                align-items: flex-start; 
-            }
-            .ip-actions { 
-                width: 100%; 
-                justify-content: space-between; 
-            }
-            .btn-check-full { 
-                flex-grow: 1; 
-                text-align: center; 
-            }
+            
             table { 
                 font-size: 14px; 
-                display: block;
-                overflow-x: auto;
             }
+            
             td, th { 
-                padding: 10px 8px; 
-                min-width: 120px;
-            }
-            ul {
-                padding-left: 20px;
+                padding: 8px; 
             }
         }
 
+        /* Media query para telas muito pequenas */
         @media (max-width: 400px) {
+            .main-container {
+                margin-top: 2vh;
+            }
+            
             .content-card {
-                padding: 20px;
+                padding: 16px;
             }
-            body {
-                padding: 15px;
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: stretch;
             }
-            h1 {
-                font-size: 22px;
+            
+            .lang-switcher {
+                margin-top: 10px;
+                align-self: flex-start;
             }
+        }
+
+        /* Media query para telas grandes */
+        @media (min-width: 1200px) {
+            :root {
+                --page-width: 900px;
+            }
+            
+            .main-container {
+                margin-top: 4vh; /* Um pouco mais próximo ao topo em telas grandes */
+            }
+        }
+
+        /* Animação suave para scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Estilo para links internos */
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <nav class="nav-menu">
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="info.html" class="active">IP Guide</a>
-            <a href="ipv6-checker.html">IPv6 Checker</a>
-        </div>
-        <div class="lang-switcher">
-            <a href="info.html" class="active-lang">🇺🇸 EN</a> | 
-            <a href="info-es.html">🇪🇸 ES</a> |
-            <a href="info-fr.html">🇫🇷 FR</a> |
-            <a href="info-de.html">🇩🇪 DE</a> |
-            <a href="info-zh.html">🇨🇳 ZH</a> |
-            <a href="info-hi.html">🇮🇳 HI</a> |
-            <a href="info-ru.html">🇷🇺 RU</a>
-        </div>
-    </nav>
+    <div class="main-container">
+        <nav class="nav-menu">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="info.html" class="active">IP Guide</a>
+                <a href="ipv6-checker.html">IPv6 Checker</a>
+            </div>
+            <div class="lang-switcher">
+                <a href="info.html" class="active-lang">🇺🇸 EN</a> | 
+                <a href="info-es.html">🇪🇸 ES</a> |
+                <a href="info-fr.html">🇫🇷 FR</a> |
+                <a href="info-de.html">🇩🇪 DE</a> |
+                <a href="info-zh.html">🇨🇳 ZH</a> |
+                <a href="info-hi.html">🇮🇳 HI</a> |
+                <a href="info-ru.html">🇷🇺 RU</a>
+            </div>
+        </nav>
 
-    <article class="content-card">
-        <!-- IP Badge with Copy and Check buttons -->
-        <div class="ip-badge-top">
-            <div class="ip-badge-info">
-                <span class="ip-badge-label">Your Current IP</span>
-                <div class="ip-badge-row">
-                    <span class="ip-badge-value" id="mini-ip-display">Detecting...</span>
+        <article class="content-card">
+            <!-- IP Badge with Copy and Check buttons -->
+            <div class="ip-badge-top">
+                <div class="ip-badge-info">
+                    <span class="ip-badge-label">Your Current IP</span>
+                    <div class="ip-badge-row">
+                        <span class="ip-badge-value" id="mini-ip-display">Detecting...</span>
+                    </div>
+                </div>
+                <div class="ip-actions">
+                    <button class="btn-copy-mini" id="btn-copy-ip" onclick="copyMiniIP(this)">Copy IP</button>
+                    <a href="/" class="btn-check-full">View Full Details</a>
                 </div>
             </div>
-            <div class="ip-actions">
-                <button class="btn-copy-mini" id="btn-copy-ip" onclick="copyMiniIP(this)">Copy IP</button>
-                <a href="/" class="btn-check-full">View Full Details</a>
+
+            <header>
+                <h1>The Ultimate IP Address Guide: Identity, Infrastructure, and Online Privacy</h1>
+                <p class="subtitle">When I started working with networks over a decade ago, IP addresses were something only systems engineers and tech enthusiasts really talked about.</p>
+            </header>
+
+            <section>
+                <p>Today, the landscape has changed. We live in an era where almost everything—from your fridge to your watch—has a digital identity. As a professional who has spent countless hours configuring routers, troubleshooting connection drops, and securing networks against intrusions, I decided to put together this guide. This isn't just a technical manual; it's a conversation about how the internet actually works "under the hood." I've found that users often feel intimidated by the alphabet soup of internet infrastructure, but the core concepts are actually quite intuitive once you look at them through the lens of practical experience.</p>
+            </section>
+
+            <section>
+                <h2>What is an IP Address? The Concept of Digital Identity</h2>
+                <p>To understand what an IP (Internet Protocol) address is, forget about computers for a second and think about the postal system. If you want to send a letter to a friend, you need an address. Without it, the mail carrier has no idea where to deliver the envelope. On the internet, every device—whether it's your smartphone, laptop, or a gaming server—needs a similar address so that data knows where to go.<sup>1</sup> An IP address is exactly that: a numerical label assigned to each device connected to a network that uses the Internet Protocol for communication.</p>
+                
+                <p>However, there's a nuance that often trips people up: the difference between who you are and where you are. In technical terms, an IP address serves two main functions. First, it identifies the host (the device). Second, it provides the logical location of that host on the network so routers can find the best path to deliver data packets.<sup>3</sup> I often call the IP a "connection identity." If you take your laptop from your house to a coffee shop, your physical identity remains the same, but your digital connection identity changes because you are now at a new entry point in the global network.<sup>4</sup></p>
+                
+                <p>The internet isn't some amorphous cloud; it's a massive physical infrastructure of cables, satellites, and routers. The IP protocol is the set of rules governing how data is addressed and routed through this infrastructure. Every time you load a website, your device is essentially shouting, "Hey, I'm IP X, and I want the data from IP Y!" The website responds by sending small chunks of information, called packets, which carry your IP address as the destination.<sup>1</sup> Without this structure, digital communication would simply collapse.</p>
+            </section>
+
+            <section>
+                <h2>Public vs. Private IP Addresses</h2>
+                <p>One of the first hurdles I encounter when explaining networking is the distinction between public and private addresses. Most people are surprised to learn that their devices actually have two different addresses. To understand this, imagine an office building. The building has a unique street address recognized by the post office—that's the public address. However, inside the building, each room has a number (Room 101, Room 202). Those room numbers only make sense inside that specific building. That's the private address.<sup>6</sup></p>
+                
+                <h3>The Network Boundary</h3>
+                <p>Your home router acts as the "reception desk" for that building. Your Internet Service Provider (ISP) assigns your router a single public IP address. This address is globally unique; no one else in the world has the same public IP as you at that exact moment.<sup>6</sup> All the devices inside your home (phones, tablets, smart TVs) are assigned private IP addresses by the router. These internal addresses usually start with familiar numbers like 192.168.x.x or 10.x.x.x.<sup>6</sup></p>
+                
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>IP Type</th>
+                                <th>Communication Scope</th>
+                                <th>Visibility</th>
+                                <th>Assigned By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Public</strong></td>
+                                <td>Global (Internet)</td>
+                                <td>Visible to all websites/services</td>
+                                <td>Internet Provider (ISP)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Private</strong></td>
+                                <td>Local (Home/Office)</td>
+                                <td>Invisible to the outside world</td>
+                                <td>Your Router (via DHCP)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <p>This structure wasn't just created for organization; it's a vital tool for both security and conservation. Since private IPs aren't visible from the internet, a random hacker can't connect directly to your Wi-Fi printer using just its private IP. They would have to get past your router, which acts as a protective shield.<sup>9</sup> Furthermore, since there are billions of people in the world, we wouldn't have enough public addresses for every smart bulb if each one needed a unique global ID. Using private addresses allows billions of devices to coexist using only a fraction of the available public addresses.<sup>9</sup></p>
+            </section>
+
+            <section>
+                <h2>IPv4 vs. IPv6: The Great Transition</h2>
+                <p>If you've ever looked at your computer's network settings, you might have noticed two types of addresses: a short one made of four blocks of numbers (IPv4) and a long one with a mix of letters and numbers (IPv6). This is the visual representation of the biggest infrastructure upgrade in internet history.</p>
+                
+                <h3>IPv4 Exhaustion</h3>
+                <p>IPv4 (Internet Protocol version 4) is the standard that built the internet as we know it. It uses 32-bit addresses, which allows for a total of about 4.3 billion unique addresses.<sup>11</sup> Back in the 1980s, 4 billion seemed like an infinite number. No one predicted that every human would eventually carry three or four connected devices. Around 2011, the main global pools of IPv4 addresses officially ran out.<sup>11</sup> This created a quiet crisis that network engineers had to solve with technical "patches" while the world migrated to IPv6.</p>
+                
+                <h3>The Vastness of IPv6</h3>
+                <p>IPv6 was designed to be the ultimate successor. It uses 128-bit addresses, allowing for a number of combinations so vast it's hard for the human mind to process. We're talking about 340 undecillion addresses.<sup>11</sup> To give you an idea of the scale, we could assign an IP address to every atom on the surface of the Earth and still have enough left over for several other planets.<sup>11</sup></p>
+                
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>IPv4</th>
+                                <th>IPv6</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Address Size</strong></td>
+                                <td>32 bits</td>
+                                <td>128 bits</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Format</strong></td>
+                                <td>Dotted decimal (e.g., 192.168.1.1)</td>
+                                <td>Hexadecimal with colons (e.g., 2001:db8::1)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Security</strong></td>
+                                <td>Relies on external extensions (IPsec)</td>
+                                <td>IPsec is native and built-in</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Configuration</strong></td>
+                                <td>Requires DHCP or manual setup</td>
+                                <td>Stateless Autoconfiguration (SLAAC)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Efficiency</strong></td>
+                                <td>Variable header size (slower)</td>
+                                <td>Fixed, simplified headers (faster)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <p>Beyond the address space, IPv6 brings significant improvements in routing efficiency and security. In IPv4, security was an "add-on." In IPv6, it was designed from the ground up as an integral part of the protocol.<sup>11</sup> While the transition is taking decades because of the need to replace legacy equipment, IPv6 is what truly enables the exponential growth of the Internet of Things (IoT).<sup>11</sup></p>
+            </section>
+
+            <section>
+                <h2>Static vs. Dynamic IP Addresses</h2>
+                <p>Another concept that causes confusion is address stability. Why does your IP address change every now and then? This brings us to the difference between static and dynamic IPs.</p>
+                
+                <p>Most residential users have a dynamic IP address. This means your ISP "rents" an address to you for a specific period. When that period ends, or if your router restarts, the provider might give you a different address from their available pool.<sup>1</sup> From the provider's perspective, this is very efficient. Not everyone is online at the same time, so they can reuse addresses for different customers as needed.<sup>7</sup> For the average user, this usually makes no difference at all.</p>
+                
+                <p>A static IP address, on the other hand, is like your permanent phone number—it never changes. Businesses, website servers, and email services need static IPs so that other computers always know where to find them.<sup>1</sup> If Google's IP changed every five minutes, the Domain Name System (DNS) would struggle to keep up. Static IPs generally cost more and require more careful configuration, but they are essential for anyone hosting services or needing ultra-stable remote access.<sup>1</sup></p>
+            </section>
+
+            <section>
+                <h2>Anatomy of an IP Address</h2>
+                <p>Let's dissect what these numbers actually mean. When you see something like 172.16.254.1, you're looking at a decimal representation of binary data. Each of the four blocks is called an "octet" because it represents 8 bits of information.<sup>2</sup></p>
+                
+                <h3>Subnetting Logic</h3>
+                <p>An IP address isn't just a random string; it's divided into two main parts: the network prefix and the host identifier. Think of it like a phone number's area code and the individual line number. To determine where the network ends and the device begins, we use something called a Subnet Mask.<sup>16</sup> In a professional setting, we use CIDR notation, like /24. This tells routers that the first 24 bits define the network, and the remaining bits are for individual devices on that network.<sup>16</sup></p>
+                
+                <h3>The IPv6 Format</h3>
+                <p>In IPv6, the anatomy is different. Since the address is so long, we use hexadecimal (0-9 and A-F). The address is divided into eight groups of 16 bits. A pro tip I always share: if you see a :: in the middle of an IPv6 address, it's just shorthand for a string of zeros that were compressed to make the address more readable.</p>
+            </section>
+
+            <section>
+                <h2>NAT and the World of Shared IPs</h2>
+                <p>If you've ever wondered how your ISP connects thousands of people using only a few IPv4 addresses, the answer is NAT (Network Address Translation). I consider NAT one of the most brilliant—and sometimes frustrating—"patches" in computing history.</p>
+                
+                <h3>How NAT Works</h3>
+                <p>NAT works like a translation service. When your computer sends a request to Google, the router replaces your private IP with the home's public IP. It makes a note in an internal table: "Device A asked for this on port X." When the response comes back, the router checks the table and delivers the packet to the correct device.<sup>8</sup></p>
+                
+                <h3>CGNAT: Large-Scale Sharing</h3>
+                <p>With the extreme scarcity of IPv4, many providers (especially mobile carriers) now use Carrier-Grade NAT (CGNAT). Here, NAT happens at the ISP level. Hundreds of different homes might be sharing the same single public IP address.<sup>18</sup> While this saves addresses for the ISP, it can cause real headaches for users:</p>
+                
+                <ul>
+                    <li><strong>Online Gaming Issues:</strong> Games that require direct (P2P) connections often fail or suffer from high lag.<sup>20</sup></li>
+                    <li><strong>Unfair Bans:</strong> If someone sharing your public IP gets banned from a forum or site for bad behavior, you might get blocked too.<sup>20</sup></li>
+                    <li><strong>Remote Access Problems:</strong> You can't easily access your home security camera from outside because you don't have a public IP that belongs only to you.<sup>20</sup></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>What Can Someone Learn From Your IP?</h2>
+                <p>There's a common fear that an IP address is like a GPS tracker pointing directly to your living room chair. As someone who works with geolocation data, I can tell you the reality is less dramatic, though still significant.</p>
+                
+                <h3>Geolocation and Approximation</h3>
+                <p>A public IP address can reveal your approximate location: country, state, and usually the city or region.<sup>22</sup> However, street-level accuracy is extremely low. Often, your IP points to your provider's data center, which might be miles away from your actual house.<sup>22</sup> Country-level accuracy is nearly 95%, but city-level accuracy drops to somewhere between 50% and 80%.<sup>22</sup></p>
+                
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data Revealed</th>
+                                <th>Accuracy Level</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Country/Continent</td>
+                                <td>Very High</td>
+                                <td>Identifies the nation of origin.</td>
+                            </tr>
+                            <tr>
+                                <td>City/Region</td>
+                                <td>Medium</td>
+                                <td>Usually points to the nearest ISP network node.</td>
+                            </tr>
+                            <tr>
+                                <td>Provider (ISP)</td>
+                                <td>Exact</td>
+                                <td>Reveals which company provides your internet (e.g., Comcast, AT&T).</td>
+                            </tr>
+                            <tr>
+                                <td>Connection Type</td>
+                                <td>High</td>
+                                <td>Indicates if you're on mobile, residential, or corporate fiber.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <p>What people often forget is that while a random website can't find your name and home address through your IP, law enforcement can. With a court order, your ISP is required to provide the subscriber details associated with that IP at that specific time.<sup>22</sup></p>
+                
+                <h3>IP Reputation and Blacklists</h3>
+                <p>Think of your IP address like a digital "credit score." Every time you interact with the internet, your IP leaves a trail. Major security companies monitor these trails to build what we call IP Reputation.<sup>24</sup></p>
+                
+                <p><strong>What Ruins Your Reputation?</strong></p>
+                <p>If your computer gets infected with malware and starts sending thousands of spam emails, or if your device participates in a coordinated attack (DDoS) against a website, your IP will be flagged as "malicious".<sup>24</sup> When this happens, the IP enters a Blacklist.<sup>24</sup></p>
+                
+                <p>The consequences of being blacklisted include:</p>
+                <ul>
+                    <li>Your legitimate emails stop reaching their recipients.<sup>24</sup></li>
+                    <li>Websites start forcing you to solve dozens of CAPTCHAs ("click the traffic lights") to prove you aren't a bot.<sup>28</sup></li>
+                    <li>Financial or streaming services might block your access entirely.<sup>24</sup></li>
+                </ul>
+                
+                <p>Residential users often end up on blacklists without knowing it, simply because they inherited a dynamic IP that was previously used by a bad actor, or because they share an IP via CGNAT with someone who misbehaved.<sup>21</sup></p>
+            </section>
+
+            <section>
+                <h2>IP Leaks: Where Privacy Fails</h2>
+                <p>Many people buy a VPN (Virtual Private Network) and think they are instantly invisible. Unfortunately, technology is more complex than a simple "On/Off" switch. There are cracks in the technical armor called "leaks."</p>
+                
+                <h3>WebRTC Leaks</h3>
+                <p>WebRTC is a fantastic technology that allows your browser to make video and audio calls without plugins. The problem is that to establish this connection, WebRTC uses protocols that can bypass your VPN to discover your real local and public IP.<sup>29</sup> A malicious site can use a small script to ask your browser for its real IP, and the browser—following WebRTC rules—will politely answer, even if the VPN is on.<sup>29</sup></p>
+                
+                <h3>DNS and IPv6 Leaks</h3>
+                <p>A DNS Leak happens when your computer, due to a configuration quirk, asks your ISP's server for a website's address instead of using the VPN's secure server.<sup>32</sup> Similarly, an IPv6 Leak occurs because many older VPNs only protect IPv4 traffic. If the site you're visiting supports IPv6, your device might connect to it outside the secure VPN tunnel, exposing your real identity.<sup>33</sup></p>
+            </section>
+
+            <section>
+                <h2>How to Find Your IP Address: A Practical Overview</h2>
+                <p>Knowing how to check your IP is the first step in ensuring your privacy tools are actually working. There is a fundamental difference between seeing your IP "from the inside" and "from the outside."</p>
+                
+                <h3>Checking Your Public IP</h3>
+                <p>The easiest way is to use our checker website. It will tell you exactly what the rest of the internet sees when you connect.<sup>35</sup> If you're using a VPN and the site still shows your real city, you know you have a leak. In a terminal (Mac/Linux) or CMD (Windows), you can also type <code>curl ifconfig.me</code> to get this info instantly.<sup>35</sup></p>
+                
+                <h3>Checking Your Local (Private) IP</h3>
+                <p>To troubleshoot issues on your own network, you need the local IP:</p>
+                <ul>
+                    <li><strong>Windows:</strong> Type <code>ipconfig</code> in the Command Prompt. Look for "IPv4 Address".<sup>36</sup></li>
+                    <li><strong>Mac/Linux:</strong> Type <code>ip addr</code> or <code>ifconfig</code> in the terminal.<sup>36</sup></li>
+                    <li><strong>Mobile:</strong> Go to your Wi-Fi settings and tap on the name of the connected network.<sup>35</sup></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Protecting Your Online Privacy</h2>
+                <p>If an IP address is your digital footprint, how do you walk without leaving a trace? There are three main tools, each with a different purpose.</p>
+                
+                <h3>1. VPN (Virtual Private Network)</h3>
+                <p>A VPN is the most common tool. It creates an encrypted tunnel between you and a remote server. All your traffic passes through this tunnel. To the outside world, your IP is the IP of the VPN server.<sup>38</sup> It's ideal for security on public Wi-Fi and for preventing your ISP from monitoring your activity.<sup>38</sup></p>
+                
+                <h3>2. Proxy</h3>
+                <p>A proxy is like an intermediary. You send your request to the proxy, and it asks the website for you. It hides your IP from the final site, but it usually doesn't encrypt your data. It's like using a pseudonym on a letter but without locking the envelope.<sup>39</sup></p>
+                
+                <h3>3. Tor (The Onion Router)</h3>
+                <p>Tor is the option for extreme anonymity. It bounces your data through three layers of volunteer servers across the globe. It is incredibly difficult to trace the origin of the traffic, but the cost is speed—browsing on Tor feels like going back to the days of dial-up.<sup>42</sup></p>
+                
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tool</th>
+                                <th>Privacy Level</th>
+                                <th>Speed</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>VPN</td>
+                                <td>High</td>
+                                <td>Fast</td>
+                                <td>Usually Paid</td>
+                            </tr>
+                            <tr>
+                                <td>Proxy</td>
+                                <td>Medium</td>
+                                <td>Very Fast</td>
+                                <td>Low/Free</td>
+                            </tr>
+                            <tr>
+                                <td>Tor</td>
+                                <td>Maximum</td>
+                                <td>Very Lent</td>
+                                <td>Free</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>IP and the Internet of Things (IoT)</h2>
+                <p>The Internet of Things has brought convenience, but it has also opened massive holes in home security. The central issue is that many of these devices—bulbs, baby monitors, thermostats—are real computers with IP addresses, but they have almost no security protection.</p>
+                
+                <h3>The Danger of UPnP</h3>
+                <p>Many routers come with a feature called UPnP (Universal Plug and Play) enabled by default. UPnP allows a device on your network to "punch a hole" through your router's firewall automatically so it can be accessed from the internet.<sup>43</sup> This is great for setting up an Xbox quickly, but it's a disaster if a cheap camera uses UPnP to open a port for hackers without you knowing.<sup>45</sup></p>
+                
+                <p>I always recommend disabling UPnP in your router settings. If you need to access something remotely, it's much safer to set up manual port forwarding or use a home VPN.<sup>43</sup></p>
+            </section>
+
+            <section>
+                <h2>IP vs. MAC Address</h2>
+                <p>People often confuse IP addresses with MAC addresses. They are complementary but serve totally different purposes.</p>
+                
+                <p>A MAC Address is like a car's VIN (Vehicle Identification Number). It's assigned at the factory and is unique to that specific piece of hardware. It never changes (theoretically).<sup>4</sup> An IP Address is like the car's license plate. It can change depending on where the car is registered or if you move to a new city.<sup>4</sup></p>
+                
+                <p>In practice, the internet uses your IP to get data to your router. Once inside, the router uses the MAC address to know whether to deliver the data to your iPhone or your PlayStation.<sup>4</sup></p>
+            </section>
+
+            <section>
+                <h2>Myths About IP Location Accuracy</h2>
+                <p>To wrap things up, let's debunk a few myths that Hollywood loves to push.</p>
+                
+                <h3>Myth 1: "I'll track his IP and be at his front door in five minutes!"</h3>
+                <p>As we've seen, this is impossible for a private citizen. An IP address rarely provides accuracy better than a few miles. If someone threatens you online saying they know exactly where you live based on your IP, they are likely bluffing or using other data you provided on social media.<sup>22</sup></p>
+                
+                <h3>Myth 2: "If I use a VPN, I am 100% invisible."</h3>
+                <p>Your IP location is hidden, but websites can still use cookies, your logged-in accounts (Google/Facebook), and your browser's "fingerprint" to know who you are. Privacy is a multi-layered effort, and the IP is only one layer.<sup>23</sup></p>
+                
+                <h3>Myth 3: "IPv6 addresses are only for big corporations."</h3>
+                <p>If you have a modern smartphone, you're likely using IPv6 right now without realizing it. Most mobile carriers have almost entirely migrated to IPv6 because they simply don't have enough IPv4 addresses for all their customers.<sup>11</sup></p>
+            </section>
+
+            <section>
+                <h2>Frequently Asked Questions</h2>
+                
+                <h3>Can my IP address change while I'm browsing?</h3>
+                <p>Usually not. A dynamic IP change typically happens when you restart your router or when your "lease" on the address expires. If it changes mid-session, you'll probably notice a momentary connection drop.<sup>48</sup></p>
+                
+                <h3>Why does my IP say I'm in a different city?</h3>
+                <p>This happens because the geolocation database associates your IP with your provider's exit point. If your ISP centralizes traffic in a nearby major city, all their customers will appear as if they are there.<sup>22</sup></p>
+                
+                <h3>Is it dangerous for someone to know my public IP?</h3>
+                <p>Knowing your IP is like knowing your phone number. On its own, it doesn't let someone "into" your computer, but it does allow them to scan for open ports or send excessive traffic to try and crash your internet (a DoS attack).<sup>5</sup> Having an active firewall on your router and PC is enough for most users.</p>
+            </section>
+
+            <div class="highlight-box">
+                <p><strong>Final Thoughts and Practical Takeaway</strong></p>
+                <p>Understanding how IP addresses work pulls back the curtain on how the internet functions. At the end of the day, the IP is just a digital logistics system. It ensures the photo you sent reaches the right person and the video you want to watch is delivered to your device.</p>
+                <p>The most important lessons I want you to take away are practical:</p>
+                <ul>
+                    <li><strong>Monitor your footprint:</strong> Use tools to check your IP and ensure your VPN is actually doing its job.<sup>29</sup></li>
+                    <li><strong>Security first:</strong> Disable UPnP and keep your router's firmware updated to prevent your network from becoming part of a botnet.<sup>43</sup></li>
+                    <li><strong>Privacy is a habit:</strong> Understand that your IP is just one part of your online identity. Use tracking blockers and be careful with the data you voluntarily share.</li>
+                </ul>
+                <p>The internet was built on trust and openness, but the modern world requires us to be a bit more cautious. Now that you understand that string of numbers in your settings, you are much better equipped to navigate the digital world safely and consciously. Be sure to use our IP checker regularly—it's your first line of defense and diagnosis in the digital age.</p>
             </div>
-        </div>
 
-        <header>
-            <h1>The Ultimate IP Address Guide: Identity, Infrastructure, and Online Privacy</h1>
-            <p class="subtitle">When I started working with networks over a decade ago, IP addresses were something only systems engineers and tech enthusiasts really talked about.</p>
-        </header>
-
-        <section>
-            <p>Today, the landscape has changed. We live in an era where almost everything—from your fridge to your watch—has a digital identity. As a professional who has spent countless hours configuring routers, troubleshooting connection drops, and securing networks against intrusions, I decided to put together this guide. This isn't just a technical manual; it's a conversation about how the internet actually works "under the hood." I've found that users often feel intimidated by the alphabet soup of internet infrastructure, but the core concepts are actually quite intuitive once you look at them through the lens of practical experience.</p>
-        </section>
-
-        <section>
-            <h2>What is an IP Address? The Concept of Digital Identity</h2>
-            <p>To understand what an IP (Internet Protocol) address is, forget about computers for a second and think about the postal system. If you want to send a letter to a friend, you need an address. Without it, the mail carrier has no idea where to deliver the envelope. On the internet, every device—whether it's your smartphone, laptop, or a gaming server—needs a similar address so that data knows where to go.<sup>1</sup> An IP address is exactly that: a numerical label assigned to each device connected to a network that uses the Internet Protocol for communication.</p>
-            
-            <p>However, there's a nuance that often trips people up: the difference between who you are and where you are. In technical terms, an IP address serves two main functions. First, it identifies the host (the device). Second, it provides the logical location of that host on the network so routers can find the best path to deliver data packets.<sup>3</sup> I often call the IP a "connection identity." If you take your laptop from your house to a coffee shop, your physical identity remains the same, but your digital connection identity changes because you are now at a new entry point in the global network.<sup>4</sup></p>
-            
-            <p>The internet isn't some amorphous cloud; it's a massive physical infrastructure of cables, satellites, and routers. The IP protocol is the set of rules governing how data is addressed and routed through this infrastructure. Every time you load a website, your device is essentially shouting, "Hey, I'm IP X, and I want the data from IP Y!" The website responds by sending small chunks of information, called packets, which carry your IP address as the destination.<sup>1</sup> Without this structure, digital communication would simply collapse.</p>
-        </section>
-
-        <section>
-            <h2>Public vs. Private IP Addresses</h2>
-            <p>One of the first hurdles I encounter when explaining networking is the distinction between public and private addresses. Most people are surprised to learn that their devices actually have two different addresses. To understand this, imagine an office building. The building has a unique street address recognized by the post office—that's the public address. However, inside the building, each room has a number (Room 101, Room 202). Those room numbers only make sense inside that specific building. That's the private address.<sup>6</sup></p>
-            
-            <h3>The Network Boundary</h3>
-            <p>Your home router acts as the "reception desk" for that building. Your Internet Service Provider (ISP) assigns your router a single public IP address. This address is globally unique; no one else in the world has the same public IP as you at that exact moment.<sup>6</sup> All the devices inside your home (phones, tablets, smart TVs) are assigned private IP addresses by the router. These internal addresses usually start with familiar numbers like 192.168.x.x or 10.x.x.x.<sup>6</sup></p>
-            
-            <div class="comparison-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>IP Type</th>
-                            <th>Communication Scope</th>
-                            <th>Visibility</th>
-                            <th>Assigned By</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Public</strong></td>
-                            <td>Global (Internet)</td>
-                            <td>Visible to all websites/services</td>
-                            <td>Internet Provider (ISP)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Private</strong></td>
-                            <td>Local (Home/Office)</td>
-                            <td>Invisible to the outside world</td>
-                            <td>Your Router (via DHCP)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <p>This structure wasn't just created for organization; it's a vital tool for both security and conservation. Since private IPs aren't visible from the internet, a random hacker can't connect directly to your Wi-Fi printer using just its private IP. They would have to get past your router, which acts as a protective shield.<sup>9</sup> Furthermore, since there are billions of people in the world, we wouldn't have enough public addresses for every smart bulb if each one needed a unique global ID. Using private addresses allows billions of devices to coexist using only a fraction of the available public addresses.<sup>9</sup></p>
-        </section>
-
-        <section>
-            <h2>IPv4 vs. IPv6: The Great Transition</h2>
-            <p>If you've ever looked at your computer's network settings, you might have noticed two types of addresses: a short one made of four blocks of numbers (IPv4) and a long one with a mix of letters and numbers (IPv6). This is the visual representation of the biggest infrastructure upgrade in internet history.</p>
-            
-            <h3>IPv4 Exhaustion</h3>
-            <p>IPv4 (Internet Protocol version 4) is the standard that built the internet as we know it. It uses 32-bit addresses, which allows for a total of about 4.3 billion unique addresses.<sup>11</sup> Back in the 1980s, 4 billion seemed like an infinite number. No one predicted that every human would eventually carry three or four connected devices. Around 2011, the main global pools of IPv4 addresses officially ran out.<sup>11</sup> This created a quiet crisis that network engineers had to solve with technical "patches" while the world migrated to IPv6.</p>
-            
-            <h3>The Vastness of IPv6</h3>
-            <p>IPv6 was designed to be the ultimate successor. It uses 128-bit addresses, allowing for a number of combinations so vast it's hard for the human mind to process. We're talking about 340 undecillion addresses.<sup>11</sup> To give you an idea of the scale, we could assign an IP address to every atom on the surface of the Earth and still have enough left over for several other planets.<sup>11</sup></p>
-            
-            <div class="comparison-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>IPv4</th>
-                            <th>IPv6</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Address Size</strong></td>
-                            <td>32 bits</td>
-                            <td>128 bits</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Format</strong></td>
-                            <td>Dotted decimal (e.g., 192.168.1.1)</td>
-                            <td>Hexadecimal with colons (e.g., 2001:db8::1)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Security</strong></td>
-                            <td>Relies on external extensions (IPsec)</td>
-                            <td>IPsec is native and built-in</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Configuration</strong></td>
-                            <td>Requires DHCP or manual setup</td>
-                            <td>Stateless Autoconfiguration (SLAAC)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Efficiency</strong></td>
-                            <td>Variable header size (slower)</td>
-                            <td>Fixed, simplified headers (faster)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <p>Beyond the address space, IPv6 brings significant improvements in routing efficiency and security. In IPv4, security was an "add-on." In IPv6, it was designed from the ground up as an integral part of the protocol.<sup>11</sup> While the transition is taking decades because of the need to replace legacy equipment, IPv6 is what truly enables the exponential growth of the Internet of Things (IoT).<sup>11</sup></p>
-        </section>
-
-        <section>
-            <h2>Static vs. Dynamic IP Addresses</h2>
-            <p>Another concept that causes confusion is address stability. Why does your IP address change every now and then? This brings us to the difference between static and dynamic IPs.</p>
-            
-            <p>Most residential users have a dynamic IP address. This means your ISP "rents" an address to you for a specific period. When that period ends, or if your router restarts, the provider might give you a different address from their available pool.<sup>1</sup> From the provider's perspective, this is very efficient. Not everyone is online at the same time, so they can reuse addresses for different customers as needed.<sup>7</sup> For the average user, this usually makes no difference at all.</p>
-            
-            <p>A static IP address, on the other hand, is like your permanent phone number—it never changes. Businesses, website servers, and email services need static IPs so that other computers always know where to find them.<sup>1</sup> If Google's IP changed every five minutes, the Domain Name System (DNS) would struggle to keep up. Static IPs generally cost more and require more careful configuration, but they are essential for anyone hosting services or needing ultra-stable remote access.<sup>1</sup></p>
-        </section>
-
-        <section>
-            <h2>Anatomy of an IP Address</h2>
-            <p>Let's dissect what these numbers actually mean. When you see something like 172.16.254.1, you're looking at a decimal representation of binary data. Each of the four blocks is called an "octet" because it represents 8 bits of information.<sup>2</sup></p>
-            
-            <h3>Subnetting Logic</h3>
-            <p>An IP address isn't just a random string; it's divided into two main parts: the network prefix and the host identifier. Think of it like a phone number's area code and the individual line number. To determine where the network ends and the device begins, we use something called a Subnet Mask.<sup>16</sup> In a professional setting, we use CIDR notation, like /24. This tells routers that the first 24 bits define the network, and the remaining bits are for individual devices on that network.<sup>16</sup></p>
-            
-            <h3>The IPv6 Format</h3>
-            <p>In IPv6, the anatomy is different. Since the address is so long, we use hexadecimal (0-9 and A-F). The address is divided into eight groups of 16 bits. A pro tip I always share: if you see a :: in the middle of an IPv6 address, it's just shorthand for a string of zeros that were compressed to make the address more readable.</p>
-        </section>
-
-        <section>
-            <h2>NAT and the World of Shared IPs</h2>
-            <p>If you've ever wondered how your ISP connects thousands of people using only a few IPv4 addresses, the answer is NAT (Network Address Translation). I consider NAT one of the most brilliant—and sometimes frustrating—"patches" in computing history.</p>
-            
-            <h3>How NAT Works</h3>
-            <p>NAT works like a translation service. When your computer sends a request to Google, the router replaces your private IP with the home's public IP. It makes a note in an internal table: "Device A asked for this on port X." When the response comes back, the router checks the table and delivers the packet to the correct device.<sup>8</sup></p>
-            
-            <h3>CGNAT: Large-Scale Sharing</h3>
-            <p>With the extreme scarcity of IPv4, many providers (especially mobile carriers) now use Carrier-Grade NAT (CGNAT). Here, NAT happens at the ISP level. Hundreds of different homes might be sharing the same single public IP address.<sup>18</sup> While this saves addresses for the ISP, it can cause real headaches for users:</p>
-            
-            <ul>
-                <li><strong>Online Gaming Issues:</strong> Games that require direct (P2P) connections often fail or suffer from high lag.<sup>20</sup></li>
-                <li><strong>Unfair Bans:</strong> If someone sharing your public IP gets banned from a forum or site for bad behavior, you might get blocked too.<sup>20</sup></li>
-                <li><strong>Remote Access Problems:</strong> You can't easily access your home security camera from outside because you don't have a public IP that belongs only to you.<sup>20</sup></li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>What Can Someone Learn From Your IP?</h2>
-            <p>There's a common fear that an IP address is like a GPS tracker pointing directly to your living room chair. As someone who works with geolocation data, I can tell you the reality is less dramatic, though still significant.</p>
-            
-            <h3>Geolocation and Approximation</h3>
-            <p>A public IP address can reveal your approximate location: country, state, and usually the city or region.<sup>22</sup> However, street-level accuracy is extremely low. Often, your IP points to your provider's data center, which might be miles away from your actual house.<sup>22</sup> Country-level accuracy is nearly 95%, but city-level accuracy drops to somewhere between 50% and 80%.<sup>22</sup></p>
-            
-            <div class="comparison-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data Revealed</th>
-                            <th>Accuracy Level</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Country/Continent</td>
-                            <td>Very High</td>
-                            <td>Identifies the nation of origin.</td>
-                        </tr>
-                        <tr>
-                            <td>City/Region</td>
-                            <td>Medium</td>
-                            <td>Usually points to the nearest ISP network node.</td>
-                        </tr>
-                        <tr>
-                            <td>Provider (ISP)</td>
-                            <td>Exact</td>
-                            <td>Reveals which company provides your internet (e.g., Comcast, AT&T).</td>
-                        </tr>
-                        <tr>
-                            <td>Connection Type</td>
-                            <td>High</td>
-                            <td>Indicates if you're on mobile, residential, or corporate fiber.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <p>What people often forget is that while a random website can't find your name and home address through your IP, law enforcement can. With a court order, your ISP is required to provide the subscriber details associated with that IP at that specific time.<sup>22</sup></p>
-            
-            <h3>IP Reputation and Blacklists</h3>
-            <p>Think of your IP address like a digital "credit score." Every time you interact with the internet, your IP leaves a trail. Major security companies monitor these trails to build what we call IP Reputation.<sup>24</sup></p>
-            
-            <p><strong>What Ruins Your Reputation?</strong></p>
-            <p>If your computer gets infected with malware and starts sending thousands of spam emails, or if your device participates in a coordinated attack (DDoS) against a website, your IP will be flagged as "malicious".<sup>24</sup> When this happens, the IP enters a Blacklist.<sup>24</sup></p>
-            
-            <p>The consequences of being blacklisted include:</p>
-            <ul>
-                <li>Your legitimate emails stop reaching their recipients.<sup>24</sup></li>
-                <li>Websites start forcing you to solve dozens of CAPTCHAs ("click the traffic lights") to prove you aren't a bot.<sup>28</sup></li>
-                <li>Financial or streaming services might block your access entirely.<sup>24</sup></li>
-            </ul>
-            
-            <p>Residential users often end up on blacklists without knowing it, simply because they inherited a dynamic IP that was previously used by a bad actor, or because they share an IP via CGNAT with someone who misbehaved.<sup>21</sup></p>
-        </section>
-
-        <section>
-            <h2>IP Leaks: Where Privacy Fails</h2>
-            <p>Many people buy a VPN (Virtual Private Network) and think they are instantly invisible. Unfortunately, technology is more complex than a simple "On/Off" switch. There are cracks in the technical armor called "leaks."</p>
-            
-            <h3>WebRTC Leaks</h3>
-            <p>WebRTC is a fantastic technology that allows your browser to make video and audio calls without plugins. The problem is that to establish this connection, WebRTC uses protocols that can bypass your VPN to discover your real local and public IP.<sup>29</sup> A malicious site can use a small script to ask your browser for its real IP, and the browser—following WebRTC rules—will politely answer, even if the VPN is on.<sup>29</sup></p>
-            
-            <h3>DNS and IPv6 Leaks</h3>
-            <p>A DNS Leak happens when your computer, due to a configuration quirk, asks your ISP's server for a website's address instead of using the VPN's secure server.<sup>32</sup> Similarly, an IPv6 Leak occurs because many older VPNs only protect IPv4 traffic. If the site you're visiting supports IPv6, your device might connect to it outside the secure VPN tunnel, exposing your real identity.<sup>33</sup></p>
-        </section>
-
-        <section>
-            <h2>How to Find Your IP Address: A Practical Overview</h2>
-            <p>Knowing how to check your IP is the first step in ensuring your privacy tools are actually working. There is a fundamental difference between seeing your IP "from the inside" and "from the outside."</p>
-            
-            <h3>Checking Your Public IP</h3>
-            <p>The easiest way is to use our checker website. It will tell you exactly what the rest of the internet sees when you connect.<sup>35</sup> If you're using a VPN and the site still shows your real city, you know you have a leak. In a terminal (Mac/Linux) or CMD (Windows), you can also type <code>curl ifconfig.me</code> to get this info instantly.<sup>35</sup></p>
-            
-            <h3>Checking Your Local (Private) IP</h3>
-            <p>To troubleshoot issues on your own network, you need the local IP:</p>
-            <ul>
-                <li><strong>Windows:</strong> Type <code>ipconfig</code> in the Command Prompt. Look for "IPv4 Address".<sup>36</sup></li>
-                <li><strong>Mac/Linux:</strong> Type <code>ip addr</code> or <code>ifconfig</code> in the terminal.<sup>36</sup></li>
-                <li><strong>Mobile:</strong> Go to your Wi-Fi settings and tap on the name of the connected network.<sup>35</sup></li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Protecting Your Online Privacy</h2>
-            <p>If an IP address is your digital footprint, how do you walk without leaving a trace? There are three main tools, each with a different purpose.</p>
-            
-            <h3>1. VPN (Virtual Private Network)</h3>
-            <p>A VPN is the most common tool. It creates an encrypted tunnel between you and a remote server. All your traffic passes through this tunnel. To the outside world, your IP is the IP of the VPN server.<sup>38</sup> It's ideal for security on public Wi-Fi and for preventing your ISP from monitoring your activity.<sup>38</sup></p>
-            
-            <h3>2. Proxy</h3>
-            <p>A proxy is like an intermediary. You send your request to the proxy, and it asks the website for you. It hides your IP from the final site, but it usually doesn't encrypt your data. It's like using a pseudonym on a letter but without locking the envelope.<sup>39</sup></p>
-            
-            <h3>3. Tor (The Onion Router)</h3>
-            <p>Tor is the option for extreme anonymity. It bounces your data through three layers of volunteer servers across the globe. It is incredibly difficult to trace the origin of the traffic, but the cost is speed—browsing on Tor feels like going back to the days of dial-up.<sup>42</sup></p>
-            
-            <div class="comparison-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tool</th>
-                            <th>Privacy Level</th>
-                            <th>Speed</th>
-                            <th>Cost</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>VPN</td>
-                            <td>High</td>
-                            <td>Fast</td>
-                            <td>Usually Paid</td>
-                        </tr>
-                        <tr>
-                            <td>Proxy</td>
-                            <td>Medium</td>
-                            <td>Very Fast</td>
-                            <td>Low/Free</td>
-                        </tr>
-                        <tr>
-                            <td>Tor</td>
-                            <td>Maximum</td>
-                            <td>Very Lent</td>
-                            <td>Free</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section>
-            <h2>IP and the Internet of Things (IoT)</h2>
-            <p>The Internet of Things has brought convenience, but it has also opened massive holes in home security. The central issue is that many of these devices—bulbs, baby monitors, thermostats—are real computers with IP addresses, but they have almost no security protection.</p>
-            
-            <h3>The Danger of UPnP</h3>
-            <p>Many routers come with a feature called UPnP (Universal Plug and Play) enabled by default. UPnP allows a device on your network to "punch a hole" through your router's firewall automatically so it can be accessed from the internet.<sup>43</sup> This is great for setting up an Xbox quickly, but it's a disaster if a cheap camera uses UPnP to open a port for hackers without you knowing.<sup>45</sup></p>
-            
-            <p>I always recommend disabling UPnP in your router settings. If you need to access something remotely, it's much safer to set up manual port forwarding or use a home VPN.<sup>43</sup></p>
-        </section>
-
-        <section>
-            <h2>IP vs. MAC Address</h2>
-            <p>People often confuse IP addresses with MAC addresses. They are complementary but serve totally different purposes.</p>
-            
-            <p>A MAC Address is like a car's VIN (Vehicle Identification Number). It's assigned at the factory and is unique to that specific piece of hardware. It never changes (theoretically).<sup>4</sup> An IP Address is like the car's license plate. It can change depending on where the car is registered or if you move to a new city.<sup>4</sup></p>
-            
-            <p>In practice, the internet uses your IP to get data to your router. Once inside, the router uses the MAC address to know whether to deliver the data to your iPhone or your PlayStation.<sup>4</sup></p>
-        </section>
-
-        <section>
-            <h2>Myths About IP Location Accuracy</h2>
-            <p>To wrap things up, let's debunk a few myths that Hollywood loves to push.</p>
-            
-            <h3>Myth 1: "I'll track his IP and be at his front door in five minutes!"</h3>
-            <p>As we've seen, this is impossible for a private citizen. An IP address rarely provides accuracy better than a few miles. If someone threatens you online saying they know exactly where you live based on your IP, they are likely bluffing or using other data you provided on social media.<sup>22</sup></p>
-            
-            <h3>Myth 2: "If I use a VPN, I am 100% invisible."</h3>
-            <p>Your IP location is hidden, but websites can still use cookies, your logged-in accounts (Google/Facebook), and your browser's "fingerprint" to know who you are. Privacy is a multi-layered effort, and the IP is only one layer.<sup>23</sup></p>
-            
-            <h3>Myth 3: "IPv6 addresses are only for big corporations."</h3>
-            <p>If you have a modern smartphone, you're likely using IPv6 right now without realizing it. Most mobile carriers have almost entirely migrated to IPv6 because they simply don't have enough IPv4 addresses for all their customers.<sup>11</sup></p>
-        </section>
-
-        <section>
-            <h2>Frequently Asked Questions</h2>
-            
-            <h3>Can my IP address change while I'm browsing?</h3>
-            <p>Usually not. A dynamic IP change typically happens when you restart your router or when your "lease" on the address expires. If it changes mid-session, you'll probably notice a momentary connection drop.<sup>48</sup></p>
-            
-            <h3>Why does my IP say I'm in a different city?</h3>
-            <p>This happens because the geolocation database associates your IP with your provider's exit point. If your ISP centralizes traffic in a nearby major city, all their customers will appear as if they are there.<sup>22</sup></p>
-            
-            <h3>Is it dangerous for someone to know my public IP?</h3>
-            <p>Knowing your IP is like knowing your phone number. On its own, it doesn't let someone "into" your computer, but it does allow them to scan for open ports or send excessive traffic to try and crash your internet (a DoS attack).<sup>5</sup> Having an active firewall on your router and PC is enough for most users.</p>
-        </section>
-
-        <div class="highlight-box">
-            <p><strong>Final Thoughts and Practical Takeaway</strong></p>
-            <p>Understanding how IP addresses work pulls back the curtain on how the internet functions. At the end of the day, the IP is just a digital logistics system. It ensures the photo you sent reaches the right person and the video you want to watch is delivered to your device.</p>
-            <p>The most important lessons I want you to take away are practical:</p>
-            <ul>
-                <li><strong>Monitor your footprint:</strong> Use tools to check your IP and ensure your VPN is actually doing its job.<sup>29</sup></li>
-                <li><strong>Security first:</strong> Disable UPnP and keep your router's firmware updated to prevent your network from becoming part of a botnet.<sup>43</sup></li>
-                <li><strong>Privacy is a habit:</strong> Understand that your IP is just one part of your online identity. Use tracking blockers and be careful with the data you voluntarily share.</li>
-            </ul>
-            <p>The internet was built on trust and openness, but the modern world requires us to be a bit more cautious. Now that you understand that string of numbers in your settings, you are much better equipped to navigate the digital world safely and consciously. Be sure to use our IP checker regularly—it's your first line of defense and diagnosis in the digital age.</p>
-        </div>
-
-        <footer class="footer-action">
-            <p>Need to verify your current IP address in real-time?</p>
-            <a href="/" class="btn-primary">Back to Diagnostic Tool</a>
-        </footer>
-    </article>
+            <footer class="footer-action">
+                <p>Need to verify your current IP address in real-time?</p>
+                <a href="/" class="btn-primary">Back to Diagnostic Tool</a>
+            </footer>
+        </article>
+    </div>
 
     <script>
         function copyMiniIP(btn) {
