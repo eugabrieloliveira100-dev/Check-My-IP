@@ -23,7 +23,6 @@
     "name": "CheckMyIP.Today",
     "url": "https://checkmyip.today"
   }
- 
 }
 </script>
     
@@ -463,6 +462,8 @@
                 ipMainLabel.innerText = 'PUBLIC IP ADDRESS';
                 subtitleEl.innerText = 'Diagnostic Tool';
                 ipv6Section.style.display = 'none';
+                // Limpa o campo de busca quando volta ao modo normal
+                searchInput.value = '';
             }
 
             try {
@@ -496,8 +497,14 @@
         }
 
         window.onload = () => loadIpData();
-        refreshBtn.onclick = () => { searchInput.value = ''; loadIpData(null, true); };
-        searchBtn.onclick = () => { const val = searchInput.value.trim(); if (val) loadIpData(val); };
+        refreshBtn.onclick = () => { 
+            searchInput.value = ''; 
+            loadIpData(null, true); 
+        };
+        searchBtn.onclick = () => { 
+            const val = searchInput.value.trim(); 
+            if (val) loadIpData(val); 
+        };
         
         searchInput.onkeypress = (e) => {
             if (e.key === 'Enter') {
