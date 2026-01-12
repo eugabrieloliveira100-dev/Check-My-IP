@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whois Lookup - Check Domain & IP Ownership | CheckMyIP.Today</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free Whois lookup tool. Check domain registration details, IP ownership, and network information instantly. Perfect for investigating domains and IP addresses.">
+    <meta name="keywords" content="whois lookup, domain lookup, whois checker, domain ownership, ip whois, domain information, whois search">
+    <meta name="author" content="CheckMyIP.Today">
+    <link rel="canonical" href="https://checkmyip.today/whois-lookup.html">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y7GFLQ17GE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Y7GFLQ17GE');
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-hover: #1f6feb;
+            --success-green: #3fb950;
+            --error-red: #f85149;
+            --warning-orange: #f0883e;
+            --info-cyan: #79c0ff;
+            --font-main: system-ui, -apple-system, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Container principal - MESMO para todas as páginas */
+        .site-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation Menu - MESMO para todas as páginas */
+        .nav-menu {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 5px 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        /* Card base - MESMA estrutura */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+        }
+
+        /* Header consistente */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+        }
+
+        .card-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Search Section */
+        .search-section {
+            margin-bottom: 32px;
+        }
+
+        .search-wrapper {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px 18px;
+            color: var(--text-primary);
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: var(--font-main);
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent-blue);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--text-secondary);
+        }
+
+        /* Botões consistentes */
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 14px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: var(--font-main);
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Result Container */
+        .result-container {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0;
+            margin-top: 32px;
+            display: none;
+            overflow: hidden;
+        }
+
+        .result-header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-content {
+            padding: 24px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .copy-btn {
+            background: var(--border-color);
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            color: var(--text-primary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #444c56;
+        }
+
+        .copy-btn.copied {
+            background: var(--success-green);
+            color: white;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: rgba(88, 166, 255, 0.08);
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .info-box h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            margin-bottom: 0;
+        }
+
+        .info-box li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        /* Domain Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .status-active {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--success-green);
+            border: 1px solid rgba(63, 185, 80, 0.3);
+        }
+
+        .status-expired {
+            background: rgba(248, 81, 73, 0.15);
+            color: var(--error-red);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+        }
+
+        .status-pending {
+            background: rgba(240, 136, 62, 0.15);
+            color: var(--warning-orange);
+            border: 1px solid rgba(240, 136, 62, 0.3);
+        }
+
+        .status-redemption {
+            background: rgba(121, 192, 255, 0.15);
+            color: var(--info-cyan);
+            border: 1px solid rgba(121, 192, 255, 0.3);
+        }
+
+        .status-available {
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+        }
+
+        /* Domain Info Sections */
+        .domain-section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .info-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.2s;
+        }
+
+        .info-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .info-card h4 {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .info-card p {
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 500;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+
+        .info-card .info-value {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: #ffffff;
+            margin-top: 4px;
+        }
+
+        .info-card .info-note {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Timeline for domain lifecycle */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+        }
+
+        .timeline-date {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .timeline-event {
+            font-size: 14px;
+            color: var(--text-primary);
+            margin-top: 4px;
+        }
+
+        .timeline-event.completed {
+            color: var(--success-green);
+        }
+
+        .timeline-event.upcoming {
+            color: var(--warning-orange);
+        }
+
+        /* Nameserver List */
+        .nameserver-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .nameserver-tag {
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-family: var(--font-mono);
+            color: var(--accent-blue);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(88, 166, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-blue);
+            animation: spin 1s ease-in-out infinite;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error Message */
+        .error-message {
+            color: var(--error-red);
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+            padding: 12px 16px;
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            border-radius: 8px;
+        }
+
+        /* Domain Examples */
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .example-tag {
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: var(--accent-blue);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .example-tag:hover {
+            background: rgba(88, 166, 255, 0.2);
+            color: #ffffff;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .site-container {
+                max-width: 95%;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .card-title h1 {
+                font-size: 24px;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-wrapper {
+                flex-direction: column;
+            }
+            
+            input[type="text"] {
+                padding: 12px 16px;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                width: 100%;
+            }
+            
+            .result-content {
+                padding: 20px;
+                font-size: 13px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+            
+            .domain-section {
+                margin-bottom: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+            }
+            
+            .card-title h1 {
+                font-size: 22px;
+            }
+            
+            .search-wrapper {
+                gap: 10px;
+            }
+            
+            .result-title {
+                font-size: 16px;
+            }
+            
+            .info-box {
+                padding: 16px;
+            }
+            
+            .examples {
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 15px;
+            }
+        }
+
+        /* Scrollbar styling for result content */
+        .result-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .result-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .result-content::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .result-content::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-blue);
+        }
+
+        /* Progress bar for domain age */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-blue);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="site-container">
+        <!-- Navigation Menu - MESMA ESTRUTURA de todas as páginas -->
+        <nav class="nav-menu">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="info.html">IP Guide</a>
+                <a href="ipv6-checker.html">IPv6 Checker</a>
+                <a href="whois-lookup.html" class="active">Whois Lookup</a>
+            </div>
+        </nav>
+
+        <!-- Card principal - MESMA ESTRUTURA base -->
+        <main class="card">
+            <!-- Header consistente -->
+            <header class="card-header">
+                <div class="card-title">
+                    <h1>Whois Lookup Tool</h1>
+                    <div class="card-subtitle">Complete Domain & IP Information</div>
+                </div>
+            </header>
+
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-wrapper">
+                    <input type="text" id="domainInput" placeholder="Enter domain name or IP address (e.g., example.com, 8.8.8.8)" autocomplete="off">
+                    <button id="lookupBtn" class="btn btn-primary">Lookup Domain</button>
+                </div>
+                
+                <div class="examples">
+                    <span class="example-tag" data-domain="google.com">google.com</span>
+                    <span class="example-tag" data-domain="github.com">github.com</span>
+                    <span class="example-tag" data-domain="wikipedia.org">wikipedia.org</span>
+                    <span class="example-tag" data-domain="cloudflare.com">cloudflare.com</span>
+                </div>
+                
+                <div id="errorMessage" class="error-message"></div>
+            </section>
+
+            <!-- Info Box -->
+            <div class="info-box">
+                <h3>📋 What Information You'll Get</h3>
+                <p>This Whois lookup provides comprehensive domain information including:</p>
+                <div class="info-grid">
+                    <div>
+                        <h4>Domain Status</h4>
+                        <p>Active, Expired, or Available status with lifecycle stage</p>
+                    </div>
+                    <div>
+                        <h4>Critical Dates</h4>
+                        <p>Creation, update, and expiration dates with timeline</p>
+                    </div>
+                    <div>
+                        <h4>Registrar Details</h4>
+                        <p>Registrar info and abuse contact for reporting</p>
+                    </div>
+                    <div>
+                        <h4>DNS Configuration</h4>
+                        <p>Nameservers controlling domain traffic</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parsed Results Container -->
+            <div id="parsedResults" style="display: none;">
+                <!-- 1. DOMAIN IDENTIFICATION -->
+                <section class="domain-section">
+                    <div class="section-title">
+                        <span>🔍</span>
+                        <span>Domain Identification</span>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>Domain Name</h4>
+                            <p id="domainName">-</p>
+                            <div id="domainStatus" class="status-badge status-active">Active</div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4>Current Status</h4>
+                            <div id="statusBadges"></div>
+                            <p id="statusDescription" class="info-note">Checking domain status...</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4>TLD / Extension</h4>
+                            <p id="domainTLD">-</p>
+                            <div class="progress-container">
+                                <div id="domainAgeProgress" class="progress-bar" style="width: 50%"></div>
+                            </div>
+                            <div id="domainAgeText" class="progress-text">Age: Calculating...</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. DOMAIN LIFECYCLE -->
+                <section class="domain-section">
+                    <div class="section-title">
+                        <span>📅</span>
+                        <span>Domain Lifecycle</span>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>Creation Date</h4>
+                            <p id="creationDate">-</p>
+                            <p class="info-value" id="creationDateAgo">-</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4>Last Updated</h4>
+                            <p id="updatedDate">-</p>
+                            <p class="info-value" id="updatedDateAgo">-</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4>Expiration Date</h4>
+                            <p id="expirationDate">-</p>
+                            <p class="info-value" id="expirationIn">-</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date" id="timelineCreation">-</div>
+                            <div class="timeline-event completed">Domain Created</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date" id="timelineUpdate">-</div>
+                            <div class="timeline-event completed">Last Updated</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date" id="timelineExpiration">-</div>
+                            <div class="timeline-event upcoming">Expires</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. REGISTRAR INFORMATION -->
+                <section class="domain-section">
+                    <div class="section-title">
+                        <span>🏢</span>
+                        <span>Registrar Information</span>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>Registrar</h4>
+                            <p id="registrarName">-</p>
+                            <p class="info-note">Domain registration company</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4>IANA ID</h4>
+                            <p id="registrarIanaId">-</p>
+                            <p class="info-note">Official registrar ID</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4>Abuse Contact</h4>
+                            <p id="abuseEmail">-</p>
+                            <p id="abusePhone">-</p>
+                            <p class="info-note">For spam/phishing reports</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h4>Registrar URL</h4>
+                            <p id="registrarUrl">-</p>
+                            <a href="#" id="registrarLink" target="_blank" class="btn btn-secondary btn-small" style="margin-top: 8px; display: none;">Visit Website</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. DNS CONFIGURATION -->
+                <section class="domain-section">
+                    <div class="section-title">
+                        <span>🌐</span>
+                        <span>DNS Configuration</span>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>Nameservers</h4>
+                        <div id="nameserversList" class="nameserver-list">
+                            <span class="nameserver-tag">Loading...</span>
+                        </div>
+                        <p class="info-note" style="margin-top: 12px;">These servers control where your domain traffic is directed</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Raw Results Container -->
+            <div id="resultContainer" class="result-container">
+                <div class="result-header">
+                    <div class="result-title">
+                        <span id="resultIcon">📄</span>
+                        <span id="resultTitle">Raw Whois Data</span>
+                    </div>
+                    <button id="copyBtn" class="copy-btn" style="display: none;">Copy Raw Data</button>
+                </div>
+                <div id="resultContent" class="result-content">
+                    <!-- Raw Whois data will appear here -->
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="info-box" style="margin-top: 32px;">
+                <h3>💡 Understanding Domain Statuses</h3>
+                <div class="info-grid">
+                    <div>
+                        <span class="status-badge status-active">Active</span>
+                        <p style="margin-top: 8px; font-size: 13px;">Domain is registered and active</p>
+                    </div>
+                    <div>
+                        <span class="status-badge status-expired">Expired</span>
+                        <p style="margin-top: 8px; font-size: 13px;">Registration period has ended</p>
+                    </div>
+                    <div>
+                        <span class="status-badge status-redemption">Redemption</span>
+                        <p style="margin-top: 8px; font-size: 13px;">30-day recovery period after expiry</p>
+                    </div>
+                    <div>
+                        <span class="status-badge status-pending">Pending Delete</span>
+                        <p style="margin-top: 8px; font-size: 13px;">Will be released soon</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer consistente -->
+            <footer class="card-footer" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-color); text-align: center;">
+                <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+                    All lookups are performed in real-time. No data is stored on our servers.
+                </p>
+                <a href="/" class="btn btn-secondary">Back to Home</a>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // DOM Elements
+        const domainInput = document.getElementById('domainInput');
+        const lookupBtn = document.getElementById('lookupBtn');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultContent = document.getElementById('resultContent');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultIcon = document.getElementById('resultIcon');
+        const errorMessage = document.getElementById('errorMessage');
+        const exampleTags = document.querySelectorAll('.example-tag');
+        const copyBtn = document.getElementById('copyBtn');
+        const parsedResults = document.getElementById('parsedResults');
+
+        // Parsed data elements
+        const domainNameEl = document.getElementById('domainName');
+        const domainStatusEl = document.getElementById('domainStatus');
+        const statusBadgesEl = document.getElementById('statusBadges');
+        const statusDescriptionEl = document.getElementById('statusDescription');
+        const domainTLDEl = document.getElementById('domainTLD');
+        const domainAgeProgressEl = document.getElementById('domainAgeProgress');
+        const domainAgeTextEl = document.getElementById('domainAgeText');
+        
+        // Dates
+        const creationDateEl = document.getElementById('creationDate');
+        const creationDateAgoEl = document.getElementById('creationDateAgo');
+        const updatedDateEl = document.getElementById('updatedDate');
+        const updatedDateAgoEl = document.getElementById('updatedDateAgo');
+        const expirationDateEl = document.getElementById('expirationDate');
+        const expirationInEl = document.getElementById('expirationIn');
+        
+        // Timeline
+        const timelineCreationEl = document.getElementById('timelineCreation');
+        const timelineUpdateEl = document.getElementById('timelineUpdate');
+        const timelineExpirationEl = document.getElementById('timelineExpiration');
+        
+        // Registrar
+        const registrarNameEl = document.getElementById('registrarName');
+        const registrarIanaIdEl = document.getElementById('registrarIanaId');
+        const abuseEmailEl = document.getElementById('abuseEmail');
+        const abusePhoneEl = document.getElementById('abusePhone');
+        const registrarUrlEl = document.getElementById('registrarUrl');
+        const registrarLinkEl = document.getElementById('registrarLink');
+        
+        // DNS
+        const nameserversListEl = document.getElementById('nameserversList');
+
+        // Mock database for demonstration
+        const domainDatabase = {
+            'google.com': {
+                domainName: 'GOOGLE.COM',
+                tld: '.com',
+                status: ['clientTransferProhibited', 'clientUpdateProhibited', 'clientDeleteProhibited'],
+                creationDate: '1997-09-15T04:00:00Z',
+                updatedDate: '2023-09-09T15:39:04Z',
+                expirationDate: '2028-09-14T04:00:00Z',
+                registrar: 'MarkMonitor Inc.',
+                registrarIanaId: '292',
+                abuseEmail: 'abusecomplaints@markmonitor.com',
+                abusePhone: '+1.2083895740',
+                registrarUrl: 'https://www.markmonitor.com',
+                nameservers: ['ns1.google.com', 'ns2.google.com', 'ns3.google.com', 'ns4.google.com'],
+                rawData: `Domain Name: GOOGLE.COM
+Registrar: MarkMonitor Inc.
+Creation Date: 1997-09-15T04:00:00Z
+Expiration Date: 2028-09-14T04:00:00Z
+Updated Date: 2023-09-09T15:39:04Z
+Name Server: NS1.GOOGLE.COM
+Name Server: NS2.GOOGLE.COM
+Name Server: NS3.GOOGLE.COM
+Name Server: NS4.GOOGLE.COM
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited
+Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited
+Registrant Organization: Google LLC
+Registrant Country: US
+Registrar Abuse Contact Email: abusecomplaints@markmonitor.com
+Registrar Abuse Contact Phone: +1.2083895740`
+            },
+            
+            'github.com': {
+                domainName: 'GITHUB.COM',
+                tld: '.com',
+                status: ['clientTransferProhibited', 'ok'],
+                creationDate: '2007-10-09T18:20:50Z',
+                updatedDate: '2023-09-10T09:18:28Z',
+                expirationDate: '2024-10-09T18:20:50Z',
+                registrar: 'MarkMonitor Inc.',
+                registrarIanaId: '292',
+                abuseEmail: 'abusecomplaints@markmonitor.com',
+                abusePhone: '+1.2083895740',
+                registrarUrl: 'https://www.markmonitor.com',
+                nameservers: ['ns-1283.awsdns-32.org', 'ns-1707.awsdns-21.co.uk', 'ns-421.awsdns-52.com', 'ns-520.awsdns-01.net'],
+                rawData: `Domain Name: GITHUB.COM
+Registrar: MarkMonitor Inc.
+Creation Date: 2007-10-09T18:20:50Z
+Expiration Date: 2024-10-09T18:20:50Z
+Updated Date: 2023-09-10T09:18:28Z
+Name Server: NS-1283.AWSDNS-32.ORG
+Name Server: NS-1707.AWSDNS-21.CO.UK
+Name Server: NS-421.AWSDNS-52.COM
+Name Server: NS-520.AWSDNS-01.NET
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Domain Status: ok https://icann.org/epp#ok
+Registrant Organization: GitHub, Inc.
+Registrant Country: US
+Registrar Abuse Contact Email: abusecomplaints@markmonitor.com
+Registrar Abuse Contact Phone: +1.2083895740`
+            },
+            
+            'wikipedia.org': {
+                domainName: 'WIKIPEDIA.ORG',
+                tld: '.org',
+                status: ['clientTransferProhibited', 'ok'],
+                creationDate: '2001-01-13T00:12:14Z',
+                updatedDate: '2023-10-10T07:31:23Z',
+                expirationDate: '2025-01-13T00:12:14Z',
+                registrar: 'MarkMonitor Inc.',
+                registrarIanaId: '292',
+                abuseEmail: 'abusecomplaints@markmonitor.com',
+                abusePhone: '+1.2083895740',
+                registrarUrl: 'https://www.markmonitor.com',
+                nameservers: ['ns0.wikimedia.org', 'ns1.wikimedia.org', 'ns2.wikimedia.org'],
+                rawData: `Domain Name: WIKIPEDIA.ORG
+Registrar: MarkMonitor Inc.
+Creation Date: 2001-01-13T00:12:14Z
+Expiration Date: 2025-01-13T00:12:14Z
+Updated Date: 2023-10-10T07:31:23Z
+Name Server: NS0.WIKIMEDIA.ORG
+Name Server: NS1.WIKIMEDIA.ORG
+Name Server: NS2.WIKIMEDIA.ORG
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Domain Status: ok https://icann.org/epp#ok
+Registrant Organization: Wikimedia Foundation, Inc.
+Registrant Country: US
+Registrar Abuse Contact Email: abusecomplaints@markmonitor.com
+Registrar Abuse Contact Phone: +1.2083895740`
+            },
+            
+            'cloudflare.com': {
+                domainName: 'CLOUDFLARE.COM',
+                tld: '.com',
+                status: ['clientTransferProhibited', 'clientUpdateProhibited', 'clientDeleteProhibited'],
+                creationDate: '2009-12-08T19:30:04Z',
+                updatedDate: '2023-12-08T19:30:04Z',
+                expirationDate: '2029-12-08T19:30:04Z',
+                registrar: 'CSC Corporate Domains, Inc.',
+                registrarIanaId: '299',
+                abuseEmail: 'domainabuse@cscglobal.com',
+                abusePhone: '+1.8887802723',
+                registrarUrl: 'https://www.cscglobal.com',
+                nameservers: ['ns3.cloudflare.com', 'ns4.cloudflare.com', 'ns5.cloudflare.com', 'ns6.cloudflare.com'],
+                rawData: `Domain Name: CLOUDFLARE.COM
+Registrar: CSC Corporate Domains, Inc.
+Creation Date: 2009-12-08T19:30:04Z
+Expiration Date: 2029-12-08T19:30:04Z
+Updated Date: 2023-12-08T19:30:04Z
+Name Server: NS3.CLOUDFLARE.COM
+Name Server: NS4.CLOUDFLARE.COM
+Name Server: NS5.CLOUDFLARE.COM
+Name Server: NS6.CLOUDFLARE.COM
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited
+Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited
+Registrant Organization: Cloudflare, Inc.
+Registrant Country: US
+Registrar Abuse Contact Email: domainabuse@cscglobal.com
+Registrar Abuse Contact Phone: +1.8887802723`
+            }
+        };
+
+        // Example domains click handler
+        exampleTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                domainInput.value = tag.getAttribute('data-domain');
+                domainInput.focus();
+            });
+        });
+
+        // Format date to readable string
+        function formatDate(dateString) {
+            if (!dateString || dateString === '-') return '-';
+            
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } catch (e) {
+                return dateString;
+            }
+        }
+
+        // Calculate time ago
+        function timeAgo(dateString) {
+            if (!dateString) return '-';
+            
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return 'Today';
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 30) return `${diffDays} days ago`;
+            if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
+            return `${Math.floor(diffDays / 365)} years ago`;
+        }
+
+        // Calculate time until expiration
+        function timeUntil(dateString) {
+            if (!dateString) return '-';
+            
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = date - now;
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            
+            if (diffDays < 0) return 'Expired';
+            if (diffDays === 0) return 'Expires today';
+            if (diffDays === 1) return 'Expires tomorrow';
+            if (diffDays < 30) return `Expires in ${diffDays} days`;
+            if (diffDays < 365) return `Expires in ${Math.floor(diffDays / 30)} months`;
+            return `Expires in ${Math.floor(diffDays / 365)} years`;
+        }
+
+        // Get status badge class
+        function getStatusBadgeClass(status) {
+            const statusLower = status.toLowerCase();
+            
+            if (statusLower.includes('pending')) return 'status-pending';
+            if (statusLower.includes('redemption')) return 'status-redemption';
+            if (statusLower.includes('expired')) return 'status-expired';
+            if (statusLower.includes('available') || statusLower.includes('not registered')) return 'status-available';
+            if (statusLower.includes('ok') || statusLower.includes('active')) return 'status-active';
+            
+            return 'status-active';
+        }
+
+        // Get status description
+        function getStatusDescription(statuses) {
+            if (!statuses || statuses.length === 0) return 'Status unknown';
+            
+            const hasActive = statuses.some(s => s.toLowerCase().includes('ok') || s.toLowerCase().includes('active'));
+            const hasTransferProhibited = statuses.some(s => s.toLowerCase().includes('transferprohibited'));
+            const hasDeleteProhibited = statuses.some(s => s.toLowerCase().includes('deleteprohibited'));
+            
+            if (hasActive) {
+                let desc = 'Domain is active and registered';
+                if (hasTransferProhibited) desc += '. Transfer is locked';
+                if (hasDeleteProhibited) desc += '. Deletion is prevented';
+                return desc;
+            }
+            
+            return 'Domain status requires attention';
+        }
+
+        // Calculate domain age percentage
+        function calculateDomainAge(creationDate, expirationDate) {
+            if (!creationDate || !expirationDate) return 50;
+            
+            const created = new Date(creationDate);
+            const expires = new Date(expirationDate);
+            const now = new Date();
+            
+            const totalLifetime = expires - created;
+            const timeElapsed = now - created;
+            
+            if (totalLifetime <= 0) return 100;
+            
+            const percentage = (timeElapsed / totalLifetime) * 100;
+            return Math.min(Math.max(percentage, 0), 100);
+        }
+
+        // Format nameservers list
+        function formatNameservers(nameservers) {
+            if (!nameservers || nameservers.length === 0) {
+                return '<span class="nameserver-tag">No nameservers found</span>';
+            }
+            
+            return nameservers.map(ns => 
+                `<span class="nameserver-tag">${ns.toLowerCase()}</span>`
+            ).join('');
+        }
+
+        // Display parsed domain information
+        function displayParsedInfo(domainData) {
+            // 1. DOMAIN IDENTIFICATION
+            domainNameEl.textContent = domainData.domainName;
+            domainTLDEl.textContent = domainData.tld || '.com';
+            
+            // Status badges
+            statusBadgesEl.innerHTML = '';
+            if (domainData.status && domainData.status.length > 0) {
+                domainData.status.forEach(status => {
+                    const badgeClass = getStatusBadgeClass(status);
+                    const badge = document.createElement('span');
+                    badge.className = `status-badge ${badgeClass}`;
+                    badge.textContent = status.split(' ')[0]; // Take first word
+                    statusBadgesEl.appendChild(badge);
+                });
+            }
+            
+            statusDescriptionEl.textContent = getStatusDescription(domainData.status);
+            
+            // Domain age progress
+            const agePercentage = calculateDomainAge(domainData.creationDate, domainData.expirationDate);
+            domainAgeProgressEl.style.width = `${agePercentage}%`;
+            
+            const created = new Date(domainData.creationDate);
+            const now = new Date();
+            const ageYears = Math.floor((now - created) / (1000 * 60 * 60 * 24 * 365));
+            domainAgeTextEl.textContent = `Age: ${ageYears} years`;
+            
+            // 2. DOMAIN LIFECYCLE
+            creationDateEl.textContent = formatDate(domainData.creationDate);
+            creationDateAgoEl.textContent = timeAgo(domainData.creationDate);
+            
+            updatedDateEl.textContent = formatDate(domainData.updatedDate);
+            updatedDateAgoEl.textContent = timeAgo(domainData.updatedDate);
+            
+            expirationDateEl.textContent = formatDate(domainData.expirationDate);
+            expirationInEl.textContent = timeUntil(domainData.expirationDate);
+            
+            // Timeline
+            timelineCreationEl.textContent = formatDate(domainData.creationDate);
+            timelineUpdateEl.textContent = formatDate(domainData.updatedDate);
+            timelineExpirationEl.textContent = formatDate(domainData.expirationDate);
+            
+            // 3. REGISTRAR INFORMATION
+            registrarNameEl.textContent = domainData.registrar || 'Not available';
+            registrarIanaIdEl.textContent = domainData.registrarIanaId || 'N/A';
+            abuseEmailEl.textContent = domainData.abuseEmail || 'Not provided';
+            abusePhoneEl.textContent = domainData.abusePhone || 'Not provided';
+            registrarUrlEl.textContent = domainData.registrarUrl || 'Not available';
+            
+            if (domainData.registrarUrl && domainData.registrarUrl.startsWith('http')) {
+                registrarLinkEl.href = domainData.registrarUrl;
+                registrarLinkEl.style.display = 'inline-block';
+            } else {
+                registrarLinkEl.style.display = 'none';
+            }
+            
+            // 4. DNS CONFIGURATION
+            nameserversListEl.innerHTML = formatNameservers(domainData.nameservers);
+            
+            // Show parsed results
+            parsedResults.style.display = 'block';
+        }
+
+        // Perform Whois lookup
+        async function performWhoisLookup(domain) {
+            // Clean input
+            const cleanedDomain = domain.trim().toLowerCase();
+            
+            if (!cleanedDomain) {
+                showError('Please enter a domain name');
+                return;
+            }
+
+            // Show loading state
+            lookupBtn.disabled = true;
+            lookupBtn.innerHTML = '<span class="loading"></span> Analyzing Domain...';
+            errorMessage.style.display = 'none';
+            resultContainer.style.display = 'none';
+            parsedResults.style.display = 'none';
+            copyBtn.style.display = 'none';
+
+            try {
+                // Simulate network delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Check if domain exists in our mock database
+                if (domainDatabase[cleanedDomain]) {
+                    const domainData = domainDatabase[cleanedDomain];
+                    
+                    // Display parsed information
+                    displayParsedInfo(domainData);
+                    
+                    // Display raw data
+                    resultTitle.textContent = `Raw Whois Data for: ${cleanedDomain}`;
+                    resultIcon.textContent = '📄';
+                    resultContent.textContent = domainData.rawData;
+                    resultContainer.style.display = 'block';
+                    copyBtn.style.display = 'block';
+                    
+                    // Scroll to parsed results
+                    parsedResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                } else {
+                    // Generic domain data for unknown domains
+                    const genericData = {
+                        domainName: cleanedDomain.toUpperCase(),
+                        tld: '.' + cleanedDomain.split('.').pop(),
+                        status: ['Available for registration'],
+                        creationDate: '-',
+                        updatedDate: '-',
+                        expirationDate: '-',
+                        registrar: 'Not registered',
+                        registrarIanaId: 'N/A',
+                        abuseEmail: 'Not applicable',
+                        abusePhone: 'Not applicable',
+                        registrarUrl: '#',
+                        nameservers: [],
+                        rawData: `Domain Name: ${cleanedDomain.toUpperCase()}
+Status: AVAILABLE
+This domain is not currently registered.
+You may register this domain through any accredited registrar.`
+                    };
+                    
+                    displayParsedInfo(genericData);
+                    resultContent.textContent = genericData.rawData;
+                    resultContainer.style.display = 'block';
+                }
+
+            } catch (error) {
+                console.error('Whois lookup error:', error);
+                showError('Unable to retrieve domain information. Please try again.');
+                
+                resultIcon.textContent = '❌';
+                resultTitle.textContent = 'Lookup Failed';
+                resultContent.textContent = `Error: ${error.message}`;
+                resultContainer.style.display = 'block';
+                
+            } finally {
+                // Reset button state
+                lookupBtn.disabled = false;
+                lookupBtn.textContent = 'Lookup Domain';
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        // Copy results to clipboard
+        copyBtn.addEventListener('click', async () => {
+            try {
+                const textToCopy = resultContent.textContent;
+                await navigator.clipboard.writeText(textToCopy);
+                
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            } catch (error) {
+                showError('Failed to copy to clipboard');
+            }
+        });
+
+        // Event Listeners
+        lookupBtn.addEventListener('click', () => {
+            const domain = domainInput.value.trim();
+            performWhoisLookup(domain);
+        });
+
+        domainInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const domain = domainInput.value.trim();
+                performWhoisLookup(domain);
+            }
+        });
+
+        // Auto-focus input on page load
+        window.addEventListener('load', () => {
+            domainInput.focus();
+        });
+
+        // Validate input on change
+        domainInput.addEventListener('input', () => {
+            const domain = domainInput.value.trim();
+            if (domain) {
+                domainInput.style.borderColor = 'var(--accent-blue)';
+            } else {
+                domainInput.style.borderColor = 'var(--border-color)';
+            }
+        });
+    </script>
+</body>
+</html>
