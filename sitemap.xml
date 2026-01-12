@@ -125,4 +125,14 @@ xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <priority>0.8</priority>
   </url>
 
+   <!--Whois Lookup -->
+   <url>
+    <loc>https://checkmyip.today/whois-lookup.html</loc>
+    <lastmod>2026-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+
+  
 </urlset>
