@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How Does a VPN Hide Your IP Address? - Technical Guide</title>
-    <meta name="description" content="Technical explanation of how VPNs hide your IP address through tunneling, encryption, and server routing.">
+    <title>What is My IP Address? - Technical Guide</title>
+    <meta name="description" content="Understand what an IP address is, how it works, the difference between public/private IPs, IPv4 vs IPv6, and how to find your IP addresses.">
     
     <style>
         :root {
@@ -458,6 +458,51 @@
             font-size: 16px;
         }
 
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(88, 166, 255, 0.1);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ip-example {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+
+        .ip-example-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
         .navigation-links {
             display: flex;
             justify-content: space-between;
@@ -564,6 +609,10 @@
                 flex-direction: column;
                 gap: 16px;
             }
+            
+            .comparison-table {
+                font-size: 14px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -618,6 +667,10 @@
             .related-list {
                 flex-direction: column;
             }
+            
+            .comparison-table {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
@@ -638,125 +691,219 @@
         <main class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <h1>How Does a VPN Hide Your IP Address?</h1>
-                    <div class="card-subtitle">VPN & Security</div>
+                    <h1>What is My IP Address?</h1>
+                    <div class="card-subtitle">IP Basics</div>
                 </div>
             </div>
 
             <div class="article-content">
-                <p>A Virtual Private Network (VPN) hides your IP address by creating an encrypted tunnel between your device and a VPN server, then routing all your internet traffic through that server. Websites and online services see the VPN server's IP address instead of your real one.</p>
+                <p>Your IP address is a numerical label assigned to your device's network interface that serves as its unique identification on a network using the Internet Protocol. It essentially handles two critical tasks: identifying who the device is (host identification) and specifying where it is located in the network topology so that data can be routed to it correctly.</p>
 
-                <div class="key-point">
-                    <h4>💡 Key Concept</h4>
-                    <p>A VPN doesn't just hide your IP—it encrypts all data between your device and the VPN server, creating a secure private network over the public internet.</p>
+                <div class="privacy-tip">
+                    <h3>🔍 Quick Check</h3>
+                    <p>Want to see your current public IP address right now? Visit our <a href="info.html" class="cta-link">IP Checker Tool</a> for instant results with location and ISP details.</p>
                 </div>
 
-                <h2>The Technical Process: Step by Step</h2>
+                <h2>The Logic of the Address: Identification and Location</h2>
+                <p>Think of an IP address as a logical address rather than a physical one. Unlike a MAC address, which is hardcoded into your hardware by the manufacturer and stays the same forever, an IP address is assigned by software—either manually or automatically through a protocol like DHCP—and changes depending on which network you connect to.</p>
 
-                <h3>1. Connection Establishment</h3>
-                <p>When you connect to a VPN service, your device establishes a secure, encrypted connection to a VPN server operated by the VPN provider. This connection uses protocols like WireGuard, OpenVPN, or IKEv2/IPsec.</p>
+                <div class="key-point">
+                    <h4>💡 Key Analogy</h4>
+                    <p>A MAC address is like your social security number (it identifies you regardless of where you are), while an IP address is like your current mailing address (it changes if you move to a new house).</p>
+                </div>
 
-                <h3>2. IP Address Replacement</h3>
-                <p>Once connected, all your internet traffic is routed through the VPN server. Websites and online services see the VPN server's IP address instead of your actual IP address.</p>
+                <p>This logical structure is what allows routers to manage global traffic efficiently; they don't need to know every single machine's name, just which "neighborhood" (network prefix) the data belongs to.</p>
 
                 <div class="tech-diagram">
-                    <div class="diagram-title">VPN IP Masking Process</div>
+                    <div class="diagram-title">IP Address vs MAC Address</div>
                     <div class="diagram-flow">
-                        Your Device (Real IP: 192.168.1.100)<br>
-                        ↓ [Encrypted Tunnel]<br>
-                        VPN Server (Public IP: 203.0.113.45)<br>
+                        MAC Address: 00:1A:2B:3C:4D:5E (Permanent)<br>
                         ↓<br>
-                        Website (Sees: 203.0.113.45)
+                        IP Address: 192.168.1.100 (Changes per network)<br>
+                        ↓<br>
+                        Router routes based on IP network prefix
                     </div>
                 </div>
 
-                <h3>3. Encryption Layer</h3>
-                <p>VPNs use strong encryption (typically AES-256) to protect your data. This means:</p>
+                <h2>Why You Have Two Different IP Addresses</h2>
+                <p>Most people actually use two different IP addresses simultaneously: a public one and a private one.</p>
+
+                <h3>Public IP Address</h3>
+                <p>Your public IP is the address assigned to your router by your Internet Service Provider (ISP). This is the face your entire home or office network shows to the global internet. Any server you visit online sees this address, not the specific device you are holding.</p>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">Example Public IP:</span>
+                    203.0.113.45
+                </div>
+
+                <h3>Private IP Address</h3>
+                <p>Your private (or local) IP is assigned by your router to each individual device inside your home network—like your phone, laptop, or smart TV. These addresses (often starting with 192.168.x.x or 10.x.x.x) are only valid within your local network and cannot be seen directly from the outside.</p>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">Example Private IPs:</span>
+                    192.168.1.101 (Your laptop)<br>
+                    192.168.1.102 (Your phone)<br>
+                    192.168.1.103 (Your smart TV)
+                </div>
+
+                <h3>The Bridge: NAT</h3>
+                <p>To make this work, your router uses a process called Network Address Translation (NAT). It acts as a middleman, taking the data requests from your private devices, "signing" them with the single public IP, and then routing the incoming answers back to the correct internal device. This system was originally a workaround to save the limited supply of IPv4 addresses, but it has become a standard security and networking layer.</p>
+
+                <div class="tech-diagram">
+                    <div class="diagram-title">NAT Process Simplified</div>
+                    <div class="diagram-flow">
+                        Device (192.168.1.100) → Request to Google<br>
+                        ↓ NAT Translation ↓<br>
+                        Router changes source to Public IP (203.0.113.45)<br>
+                        ↓<br>
+                        Google sees: 203.0.113.45<br>
+                        ↓<br>
+                        Response goes back to 203.0.113.45<br>
+                        ↓ NAT Reversal ↓<br>
+                        Router sends to 192.168.1.100
+                    </div>
+                </div>
+
+                <h2>IPv4 vs. IPv6: The Format Shift</h2>
+                <p>You will notice IP addresses come in two distinct formats:</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>IPv4</th>
+                            <th>IPv6</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Address Size</td>
+                            <td>32-bit</td>
+                            <td>128-bit</td>
+                        </tr>
+                        <tr>
+                            <td>Format</td>
+                            <td>192.0.2.1 (decimal)</td>
+                            <td>2001:0db8:85a3::8a2e:0370:7334 (hex)</td>
+                        </tr>
+                        <tr>
+                            <td>Total Addresses</td>
+                            <td>~4.3 billion</td>
+                            <td>3.4×10³⁸ (virtually infinite)</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>Legacy, exhausted</td>
+                            <td>Modern standard</td>
+                        </tr>
+                        <tr>
+                            <td>NAT Required</td>
+                            <td>Yes (due to scarcity)</td>
+                            <td>No (enough addresses for all)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>IPv4:</strong> The legacy standard using 32-bit addresses, usually seen as four sets of numbers (e.g., 192.0.2.1). Because it only supports about 4.3 billion addresses, the world officially ran out of new IPv4 blocks years ago.</p>
+
+                <p><strong>IPv6:</strong> The modern replacement using 128-bit addresses, written in hexadecimal (e.g., 2001:0db8:85a3::8a2e:0370:7334). It provides a virtually infinite number of addresses—enough to give every atom on the planet its own IP—eliminating the need for complex workarounds like NAT in the long term.</p>
+
+                <div class="privacy-tip">
+                    <h3>📡 Check Your IPv6 Support</h3>
+                    <p>Not all networks support IPv6 yet. Use our <a href="ipv6-checker.html" class="cta-link">IPv6 Checker Tool</a> to see if your connection is using the modern protocol.</p>
+                </div>
+
+                <h2>Static vs. Dynamic Addresses</h2>
+                <p>How an address is assigned also matters:</p>
+
+                <div class="key-point">
+                    <h4>🔄 Dynamic IPs</h4>
+                    <p>Most home users have dynamic addresses. Your ISP or router "leases" you an address from a pool, and it might change every time you reboot your router or the lease expires. This is why your public IP can change over time.</p>
+                </div>
+
+                <div class="key-point">
+                    <h4>📍 Static IPs</h4>
+                    <p>These are fixed and never change. They are essential for businesses hosting websites, mail servers, or VPNs, but they are usually more expensive and require manual configuration.</p>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Dynamic IP</th>
+                            <th>Static IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Stability</td>
+                            <td>Changes periodically</td>
+                            <td>Always the same</td>
+                        </tr>
+                        <tr>
+                            <td>Cost</td>
+                            <td>Usually free/included</td>
+                            <td>Additional monthly fee</td>
+                        </tr>
+                        <tr>
+                            <td>Configuration</td>
+                            <td>Automatic (DHCP)</td>
+                            <td>Manual setup required</td>
+                        </tr>
+                        <tr>
+                            <td>Best For</td>
+                            <td>Home users, general browsing</td>
+                            <td>Servers, hosting, VPNs</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Practical Check: How to Find Your IP</h2>
+                <p>If you need to find your addresses right now:</p>
+
+                <h3>To find your Public IP:</h3>
                 <ul>
-                    <li>Your ISP can't see which websites you visit</li>
-                    <li>Your data is protected from interception on public Wi-Fi</li>
-                    <li>Your online activities are hidden from network observers</li>
+                    <li>Simply search "What is my IP" in Google</li>
+                    <li>Use our <a href="info.html">IP Checker Tool</a> for detailed information</li>
+                    <li>Terminal command: <code>curl ifconfig.me</code> or <code>curl ipinfo.io/ip</code></li>
                 </ul>
 
-                <h2>Types of VPN Protocols</h2>
-
-                <h3>WireGuard</h3>
-                <p>A modern VPN protocol known for its simplicity, speed, and strong security. Uses state-of-the-art cryptography and has a smaller codebase than older protocols.</p>
-
-                <h3>OpenVPN</h3>
-                <p>An open-source protocol that's highly configurable and considered very secure. Can bypass most firewalls and works on almost any platform.</p>
-
-                <h3>IKEv2/IPsec</h3>
-                <p>Particularly good for mobile devices as it handles network changes well (switching from Wi-Fi to cellular data). Developed by Microsoft and Cisco.</p>
-
-                <h2>What Your ISP Can Still See</h2>
-                <p>While a VPN hides your browsing activity, your ISP can still see:</p>
+                <h3>To find your Private IP (Windows):</h3>
                 <ul>
-                    <li>That you're connected to a VPN server</li>
-                    <li>The amount of data transferred (but not the content)</li>
-                    <li>The VPN server's IP address</li>
-                    <li>The timing of your connections</li>
+                    <li>Open Command Prompt, type <code>ipconfig</code>, look for "IPv4 Address"</li>
+                    <li>Settings > Network & Internet > View your network properties</li>
+                </ul>
+
+                <h3>To find your Private IP (Mac):</h3>
+                <ul>
+                    <li>System Settings > Network > Select connection > Details</li>
+                    <li>Terminal command: <code>ipconfig getifaddr en0</code> (for Wi-Fi)</li>
+                </ul>
+
+                <h3>To find your Private IP (Mobile):</h3>
+                <ul>
+                    <li><strong>iPhone:</strong> Settings > Wi-Fi > tap "i" next to network</li>
+                    <li><strong>Android:</strong> Settings > Connections > Wi-Fi > gear icon > View more</li>
                 </ul>
 
                 <div class="privacy-tip">
-                    <h3>🔒 Privacy Tip</h3>
-                    <p>To check if your VPN is working correctly, visit our <a href="info.html" class="cta-link">IP Checker Tool</a> before and after connecting. You should see different IP addresses and locations.</p>
-                    <p>Also use our <a href="ipv6-checker.html" class="cta-link">IPv6 Checker</a> to ensure IPv6 isn't leaking your real address.</p>
+                    <h3>🛡️ Privacy Consideration</h3>
+                    <p>Remember that your public IP can reveal your approximate location and ISP. If you need to hide it for privacy reasons, consider using a VPN. Your private IP is only visible within your local network and poses no privacy risk online.</p>
                 </div>
-
-                <h2>Limitations of VPN IP Hiding</h2>
-
-                <h3>DNS Leaks</h3>
-                <p>If your device uses your ISP's DNS servers instead of the VPN's, websites can still determine your approximate location through DNS queries.</p>
-
-                <h3>WebRTC Leaks</h3>
-                <p>WebRTC (Web Real-Time Communication) in browsers can sometimes reveal your real IP address even when using a VPN.</p>
-
-                <h3>Browser Fingerprinting</h3>
-                <p>Websites can use browser fingerprinting techniques that don't rely on IP addresses to track you across sessions.</p>
-
-                <h2>VPN vs Other Privacy Tools</h2>
-
-                <div class="tech-diagram">
-                    <div class="diagram-title">Comparison: VPN vs Proxy vs Tor</div>
-                    <div class="diagram-flow">
-                        <strong>VPN:</strong> Encrypts ALL traffic, hides IP, medium speed<br>
-                        <strong>Proxy:</strong> Routes traffic, may hide IP, no encryption<br>
-                        <strong>Tor:</strong> Multiple encryption layers, very slow, maximum anonymity
-                    </div>
-                </div>
-
-                <h2>Best Practices for VPN Use</h2>
-                <ol>
-                    <li><strong>Choose a reputable provider:</strong> Look for transparent no-logs policies and independent audits</li>
-                    <li><strong>Enable kill switch:</strong> Prevents data leaks if VPN connection drops</li>
-                    <li><strong>Use DNS leak protection:</strong> Ensure your VPN handles DNS queries properly</li>
-                    <li><strong>Regularly test for leaks:</strong> Use tools to verify no IP or DNS leaks</li>
-                    <li><strong>Keep software updated:</strong> Ensure your VPN client has the latest security patches</li>
-                </ol>
-
-                <h2>Technical Considerations</h2>
-                <p>When evaluating VPNs technically, consider:</p>
-                <ul>
-                    <li><strong>Encryption strength:</strong> AES-256 is current standard</li>
-                    <li><strong>Protocol options:</strong> Multiple protocol support is better</li>
-                    <li><strong>Server locations:</strong> More locations provide better options</li>
-                    <li><strong>Connection logs:</strong> True no-logging policy is essential for privacy</li>
-                    <li><strong>Jurisdiction:</strong> Provider's legal jurisdiction affects data retention laws</li>
-                </ul>
 
                 <div class="navigation-links">
                     <a href="Technical_Guide.html" class="nav-btn">← Back to Technical Guide</a>
-                    <a href="vpn-logging-policies.html" class="nav-btn">Next: VPN Logging Policies →</a>
+                    <a href="ipv4-vs-ipv6.html" class="nav-btn">Next: IPv4 vs IPv6 →</a>
                 </div>
 
                 <div class="related-links">
                     <div class="related-title">Related Topics</div>
                     <div class="related-list">
+                        <a href="ipv4-vs-ipv6.html" class="related-tag">IPv4 vs IPv6</a>
+                        <a href="public-vs-private-ip.html" class="related-tag">Public vs Private IP</a>
+                        <a href="why-ip-changes.html" class="related-tag">Why IP Address Changes</a>
                         <a href="hide-ip-address.html" class="related-tag">Hide IP Address</a>
-                        <a href="prevent-ip-tracking.html" class="related-tag">Prevent IP Tracking</a>
-                        <a href="vpn-leak-protection.html" class="related-tag">VPN Leak Protection</a>
-                        <a href="info.html" class="related-tag">Check My IP</a>
+                        <a href="ipv6-checker.html" class="related-tag">IPv6 Checker Tool</a>
                     </div>
                 </div>
             </div>
@@ -773,7 +920,7 @@
                 const linkHref = link.getAttribute('href');
                 if (linkHref === currentPage || 
                     (currentPage === '' && linkHref === '/') ||
-                    (currentPage.includes('guide') && linkHref.includes('Technical_Guide'))) {
+                    (currentPage.includes('what-is-my-ip') && link.textContent.includes('Technical Guide'))) {
                     link.classList.add('active');
                 } else {
                     link.classList.remove('active');
