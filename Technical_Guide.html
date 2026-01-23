@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP & Privacy Technical Guide | Knowledge Hub</title>
+    <meta name="description" content="Technical documentation hub for IP addresses, privacy protection, VPNs, DNS, and network troubleshooting.">
+    
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-hover: #1f6feb;
+            --success-green: #3fb950;
+            --error-red: #f85149;
+            --font-main: system-ui, -apple-system, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .site-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 5px 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        /* Card base */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+        }
+
+        /* Header */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+        }
+
+        .card-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Hub Introduction */
+        .hub-intro {
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hub-intro p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        /* Category Cards */
+        .category-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .category-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: border-color 0.2s;
+        }
+
+        .category-card:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .category-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--accent-blue);
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        /* Article Links Grid */
+        .article-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .article-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .article-link-item {
+            padding: 14px 16px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .article-link-item:hover {
+            background: rgba(88, 166, 255, 0.05);
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .article-link {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .article-number {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            min-width: 20px;
+        }
+
+        .article-link-text {
+            font-size: 15px;
+            line-height: 1.4;
+            color: var(--text-primary);
+        }
+
+        /* Quick Tools Section */
+        .tools-section {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tools-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .tool-card {
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.05);
+        }
+
+        .tool-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            display: block;
+        }
+
+        .tool-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        /* Footer Note */
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .site-container {
+                max-width: 95%;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .card-title h1 {
+                font-size: 24px;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .category-card {
+                padding: 20px;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+            }
+            
+            .card-title h1 {
+                font-size: 22px;
+            }
+            
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-container">
+        <!-- Menu de Navegação -->
+        <nav class="nav-menu">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="info.html">IP Guide</a>
+                <a href="ipv6-checker.html">IPv6 Checker</a>
+                <a href="whois-lookup.html">Whois Lookup</a>
+                <a href="/guide/" class="active">Technical Guide</a>
+            </div>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h1>IP & Privacy Technical Guide</h1>
+                    <div class="card-subtitle">Knowledge Hub & Documentation Index</div>
+                </div>
+            </div>
+
+            <!-- Introdução do Hub -->
+            <div class="hub-intro">
+                <p>This hub organizes technical documentation about IP addresses, privacy protection, VPNs, DNS, and network troubleshooting. Each topic links to a dedicated page with detailed explanations.</p>
+            </div>
+
+            <!-- Grid de Categorias -->
+            <div class="category-grid">
+                <!-- Categoria 1: IP Basics -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
+                            <line x1="8" y1="2" x2="8" y2="22"></line>
+                            <line x1="16" y1="2" x2="16" y2="22"></line>
+                        </svg>
+                        <h2 class="category-title">IP Basics</h2>
+                    </div>
+                    <div class="article-links">
+                        <div class="article-link-item">
+                            <a href="/guide/what-is-my-ip.html" class="article-link">
+                                <span class="article-number">01</span>
+                                <span class="article-link-text">What is my IP address?</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/ipv4-vs-ipv6.html" class="article-link">
+                                <span class="article-number">02</span>
+                                <span class="article-link-text">IPv4 vs IPv6: what's the difference?</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/public-vs-private-ip.html" class="article-link">
+                                <span class="article-number">03</span>
+                                <span class="article-link-text">Public vs private IP addresses</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/why-ip-changes.html" class="article-link">
+                                <span class="article-number">04</span>
+                                <span class="article-link-text">Why does my IP address change?</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoria 2: Privacy & Tracking -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <h2 class="category-title">Privacy & Tracking</h2>
+                    </div>
+                    <div class="article-links">
+                        <div class="article-link-item">
+                            <a href="/guide/does-ip-reveal-location.html" class="article-link">
+                                <span class="article-number">05</span>
+                                <span class="article-link-text">Does my IP reveal my location?</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/how-websites-track-you.html" class="article-link">
+                                <span class="article-number">06</span>
+                                <span class="article-link-text">How websites track your activity</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/prevent-ip-tracking.html" class="article-link">
+                                <span class="article-number">07</span>
+                                <span class="article-link-text">How to prevent IP tracking</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/hide-ip-address.html" class="article-link">
+                                <span class="article-number">08</span>
+                                <span class="article-link-text">How to hide your IP address</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoria 3: VPN & Security -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 12m-10 0a10 10 0 1 0 20 0a10 10 0 1 0 -20 0"></path>
+                            <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                            <path d="M12 12l5 2.5"></path>
+                            <path d="M12 12v6.5"></path>
+                        </svg>
+                        <h2 class="category-title">VPN & Security</h2>
+                    </div>
+                    <div class="article-links">
+                        <div class="article-link-item">
+                            <a href="/guide/how-vpn-hides-ip.html" class="article-link">
+                                <span class="article-number">09</span>
+                                <span class="article-link-text">How a VPN hides your IP</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/vpn-logging-policies.html" class="article-link">
+                                <span class="article-number">10</span>
+                                <span class="article-link-text">VPN logging policies explained</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/vpn-leak-protection.html" class="article-link">
+                                <span class="article-number">11</span>
+                                <span class="article-link-text">Preventing VPN leaks</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoria 4: DNS & Network -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                        <h2 class="category-title">DNS & Network</h2>
+                    </div>
+                    <div class="article-links">
+                        <div class="article-link-item">
+                            <a href="/guide/what-is-dns.html" class="article-link">
+                                <span class="article-number">12</span>
+                                <span class="article-link-text">What is DNS and how it works</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/dns-privacy-encryption.html" class="article-link">
+                                <span class="article-number">13</span>
+                                <span class="article-link-text">DNS privacy: DoH and DoT explained</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/public-dns-providers.html" class="article-link">
+                                <span class="article-number">14</span>
+                                <span class="article-link-text">Public DNS providers comparison</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoria 5: Troubleshooting -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9.172 16.172a4 4 0 0 1 5.656 0"></path>
+                            <path d="M6.343 12.343a8 8 0 0 1 11.314 0"></path>
+                            <path d="M3.515 8.515c4.686-4.687 12.284-4.687 17 0"></path>
+                        </svg>
+                        <h2 class="category-title">Network Troubleshooting</h2>
+                    </div>
+                    <div class="article-links">
+                        <div class="article-link-item">
+                            <a href="/guide/fix-no-internet-access.html" class="article-link">
+                                <span class="article-number">15</span>
+                                <span class="article-link-text">Fix "no internet access" errors</span>
+                            </a>
+                        </div>
+                        <div class="article-link-item">
+                            <a href="/guide/website-blocked-access.html" class="article-link">
+                                <span class="article-number">16</span>
+                                <span class="article-link-text">Website blocked by IP or region</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Ferramentas Rápidas -->
+            <div class="tools-section">
+                <h3 class="tools-title">Quick Tools</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <a href="/info.html" class="tool-link">
+                            <div>🔍</div>
+                            <div class="tool-name">Check My IP</div>
+                        </a>
+                    </div>
+                    <div class="tool-card">
+                        <a href="/ipv6-checker.html" class="tool-link">
+                            <div>📶</div>
+                            <div class="tool-name">IPv6 Checker</div>
+                        </a>
+                    </div>
+                    <div class="tool-card">
+                        <a href="/whois-lookup.html" class="tool-link">
+                            <div>📄</div>
+                            <div class="tool-name">Whois Lookup</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nota de Rodapé -->
+            <div class="footer-note">
+                Each topic above links to a standalone technical documentation page.
+            </div>
+        </main>
+    </div>
+</body>
+</html>
