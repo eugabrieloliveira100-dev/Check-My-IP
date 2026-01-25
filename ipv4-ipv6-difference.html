@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How Does a VPN Hide Your IP Address? - Technical Guide</title>
-    <meta name="description" content="Technical explanation of how VPNs hide your IP address through tunneling, encryption, and server routing.">
+    <title>IPv4 vs IPv6: What's the Difference? - Technical Guide</title>
+    <meta name="description" content="Understand the key differences between IPv4 and IPv6 addresses, why we need IPv6, and what it means for your internet experience.">
     
     <style>
         :root {
@@ -458,6 +458,104 @@
             font-size: 16px;
         }
 
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(88, 166, 255, 0.1);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ip-example {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+
+        .ip-example-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .quote-box {
+            background: rgba(88, 166, 255, 0.08);
+            border-left: 4px solid var(--accent-blue);
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+
+        .quote-box p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+
+        .stats-box {
+            background: rgba(59, 185, 80, 0.08);
+            border: 1px solid rgba(59, 185, 80, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .stats-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--success-green);
+            margin-bottom: 16px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 16px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
         .navigation-links {
             display: flex;
             justify-content: space-between;
@@ -484,39 +582,39 @@
             background: rgba(88, 166, 255, 0.1);
         }
 
-        .related-links {
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border-color);
+        /* REMOVIDO: .related-links e tudo relacionado a ele */
+
+        /* Tool Integration */
+        .tool-integration {
+            background: rgba(88, 166, 255, 0.08);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
         }
 
-        .related-title {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
+        .tool-integration h3 {
+            font-size: 18px;
             font-weight: 600;
-        }
-
-        .related-list {
+            color: #ffffff;
+            margin-bottom: 16px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
+            align-items: center;
+            gap: 8px;
         }
 
-        .related-tag {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 8px 16px;
-            font-size: 14px;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .related-tag:hover {
-            border-color: var(--accent-blue);
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 16px;
             color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        .tool-link:hover {
+            text-decoration: underline;
         }
 
         /* Responsividade */
@@ -563,6 +661,14 @@
             .navigation-links {
                 flex-direction: column;
                 gap: 16px;
+            }
+            
+            .comparison-table {
+                font-size: 14px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -615,15 +721,15 @@
                 font-size: 19px;
             }
             
-            .related-list {
-                flex-direction: column;
+            .comparison-table {
+                font-size: 13px;
             }
         }
     </style>
 </head>
 <body>
     <div class="site-container">
-        <!-- Menu de Navegação (exatamente como fornecido) -->
+        <!-- Menu de Navegação -->
         <nav class="nav-menu">
             <div class="nav-links">
                 <a href="/">Home</a>
@@ -638,127 +744,247 @@
         <main class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <h1>How Does a VPN Hide Your IP Address?</h1>
-                    <div class="card-subtitle">VPN & Security</div>
+                    <h1>IPv4 vs IPv6: What's the Difference?</h1>
+                    <div class="card-subtitle">IP Basics</div>
                 </div>
             </div>
 
             <div class="article-content">
-                <p>A Virtual Private Network (VPN) hides your IP address by creating an encrypted tunnel between your device and a VPN server, then routing all your internet traffic through that server. Websites and online services see the VPN server's IP address instead of your real one.</p>
+                <p>If you've ever checked your IP address and thought, "Why does mine look like 192.168.0.1... but my friend's looks like a weird sci-fi code with colons?" — congrats, you've just bumped into the IPv4 vs IPv6 question. I've been there too. The first time I saw an IPv6 address, I honestly thought something was broken.</p>
+                
+                <p>Let's clear this up in a chill, no-headache way.</p>
+
+                <div class="quote-box">
+                    <p>Think of your IP address like your home address on the internet. When you visit a website, send a message, or stream a video, data needs to know where to go and where it came from. The IP is that destination label.</p>
+                    <p><strong>No IP, no internet. Simple as that.</strong></p>
+                </div>
+
+                <h2>IPv4: The Classic (and Crowded) System</h2>
+                
+                <p>IPv4 is the original internet addressing system. It's been around since the early days, when nobody imagined billions of people would be walking around with smartphones, smart TVs, smart fridges... you get the idea.</p>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">Example IPv4 Address:</span>
+                    192.168.1.1
+                </div>
+
+                <p>Four numbers, separated by dots. Each number goes from 0 to 255.</p>
+
+                <h3>Why IPv4 Worked So Well</h3>
+                <ul>
+                    <li>It's short</li>
+                    <li>Easy to read</li>
+                    <li>Easy to remember (relatively)</li>
+                    <li>Every system supports it</li>
+                </ul>
+
+                <h3>The Big Problem?</h3>
+                <p>We ran out of addresses.</p>
+
+                <div class="stats-box">
+                    <div class="stats-title">IPv4 Address Capacity</div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">4.3 Billion</div>
+                            <div class="stat-label">Total IPv4 Addresses</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">8 Billion+</div>
+                            <div class="stat-label">People on Earth</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 16px; color: var(--text-secondary);">That's not even one IP per person!</p>
+                </div>
+
+                <p>IPv4 can generate about 4.3 billion unique addresses. That sounded infinite back in the 80s. Today? Not even close.</p>
+
+                <p>To survive, the internet started using tricks like:</p>
+                <ul>
+                    <li><strong>NAT (Network Address Translation)</strong></li>
+                    <li><strong>Shared IPs</strong></li>
+                    <li><strong>Carrier-grade NATs from ISPs</strong></li>
+                </ul>
+
+                <p>Basically: a lot of devices pretending to be fewer devices. It works... but it's kinda duct tape.</p>
+
+                <div class="tool-integration">
+                    <h3>🔍 Check Your Current IP</h3>
+                    <p>Want to see if you're using IPv4 or IPv6? Use our <a href="info.html" class="tool-link">IP Checker Tool</a> to see your current IP address details.</p>
+                </div>
+
+                <h2>IPv6: The Future That's Already Here</h2>
+                
+                <p>IPv6 was created to solve the "we're out of IPs" problem once and for all.</p>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">Example IPv6 Address:</span>
+                    2001:0db8:85a3:0000:0000:8a2e:0370:7334
+                </div>
+
+                <p>Yeah... not exactly pretty. But hear me out.</p>
+
+                <h3>Why IPv6 Exists</h3>
+                <p>IPv6 uses 128 bits instead of IPv4's 32 bits.</p>
+
+                <div class="stats-box">
+                    <div class="stats-title">The Numbers Don't Lie</div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">32-bit</div>
+                            <div class="stat-label">IPv4 Address Size</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">128-bit</div>
+                            <div class="stat-label">IPv6 Address Size</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 16px; color: var(--text-secondary);">That means:</p>
+                    <div style="text-align: center; margin-top: 12px;">
+                        <div style="font-size: 18px; font-weight: 600; color: #ffffff;">IPv4: ~4.3 billion addresses</div>
+                        <div style="font-size: 18px; font-weight: 600; color: var(--accent-blue); margin-top: 8px;">IPv6: 340 undecillion addresses</div>
+                    </div>
+                </div>
+
+                <p>That's a 3 with 38 zeros after it. Enough IPs for every human, device, toaster, and probably your dog's smart collar — multiple times over.</p>
+
+                <h2>Key Differences (Without the Boring Textbook Vibe)</h2>
+
+                <h3>1. Address Format</h3>
+                <div class="tech-diagram">
+                    <div class="diagram-title">Address Comparison</div>
+                    <div class="diagram-flow">
+                        <strong>IPv4:</strong> Numbers + dots<br>
+                        <code>8.8.8.8</code><br><br>
+                        <strong>IPv6:</strong> Hexadecimal + colons<br>
+                        <code>2001:4860:4860::8888</code>
+                    </div>
+                </div>
+
+                <p>IPv6 looks scary at first, but most systems shorten it automatically. You rarely need to type it.</p>
+
+                <h3>2. No More NAT Headaches</h3>
+                <div class="key-point">
+                    <h4>💡 Game Changer</h4>
+                    <p>One of my favorite things about IPv6: every device can have its own public IP.</p>
+                </div>
+
+                <p>That means:</p>
+                <ul>
+                    <li>Easier peer-to-peer connections</li>
+                    <li>Better for gaming</li>
+                    <li>Better for VoIP</li>
+                    <li>Cleaner networking overall</li>
+                </ul>
+
+                <p>With IPv4, NAT often feels like yelling through a wall: "Can you hear me now?"</p>
+
+                <h3>3. Better Security (By Design)</h3>
+                <p>IPv6 was built with modern security in mind.</p>
+                <ul>
+                    <li>IPsec support is native</li>
+                    <li>No need to expose ports the same messy way</li>
+                    <li>Less reliance on hacks and workarounds</li>
+                </ul>
 
                 <div class="key-point">
-                    <h4>💡 Key Concept</h4>
-                    <p>A VPN doesn't just hide your IP—it encrypts all data between your device and the VPN server, creating a secure private network over the public internet.</p>
+                    <h4>⚠️ Important Note</h4>
+                    <p>IPv6 isn't magically "secure by default" — bad configuration can still mess things up. But the foundation is stronger.</p>
                 </div>
 
-                <h2>The Technical Process: Step by Step</h2>
-
-                <h3>1. Connection Establishment</h3>
-                <p>When you connect to a VPN service, your device establishes a secure, encrypted connection to a VPN server operated by the VPN provider. This connection uses protocols like WireGuard, OpenVPN, or IKEv2/IPsec.</p>
-
-                <h3>2. IP Address Replacement</h3>
-                <p>Once connected, all your internet traffic is routed through the VPN server. Websites and online services see the VPN server's IP address instead of your actual IP address.</p>
-
-                <div class="tech-diagram">
-                    <div class="diagram-title">VPN IP Masking Process</div>
-                    <div class="diagram-flow">
-                        Your Device (Real IP: 192.168.1.100)<br>
-                        ↓ [Encrypted Tunnel]<br>
-                        VPN Server (Public IP: 203.0.113.45)<br>
-                        ↓<br>
-                        Website (Sees: 203.0.113.45)
-                    </div>
-                </div>
-
-                <h3>3. Encryption Layer</h3>
-                <p>VPNs use strong encryption (typically AES-256) to protect your data. This means:</p>
+                <h3>4. Performance: Is IPv6 Faster?</h3>
+                <p><strong>Short answer:</strong> sometimes.</p>
+                <p><strong>Longer answer:</strong></p>
                 <ul>
-                    <li>Your ISP can't see which websites you visit</li>
-                    <li>Your data is protected from interception on public Wi-Fi</li>
-                    <li>Your online activities are hidden from network observers</li>
+                    <li>IPv6 has simpler packet headers</li>
+                    <li>Fewer network translation steps</li>
+                    <li>More direct routing</li>
                 </ul>
 
-                <h2>Types of VPN Protocols</h2>
-
-                <h3>WireGuard</h3>
-                <p>A modern VPN protocol known for its simplicity, speed, and strong security. Uses state-of-the-art cryptography and has a smaller codebase than older protocols.</p>
-
-                <h3>OpenVPN</h3>
-                <p>An open-source protocol that's highly configurable and considered very secure. Can bypass most firewalls and works on almost any platform.</p>
-
-                <h3>IKEv2/IPsec</h3>
-                <p>Particularly good for mobile devices as it handles network changes well (switching from Wi-Fi to cellular data). Developed by Microsoft and Cisco.</p>
-
-                <h2>What Your ISP Can Still See</h2>
-                <p>While a VPN hides your browsing activity, your ISP can still see:</p>
-                <ul>
-                    <li>That you're connected to a VPN server</li>
-                    <li>The amount of data transferred (but not the content)</li>
-                    <li>The VPN server's IP address</li>
-                    <li>The timing of your connections</li>
-                </ul>
-
-                <div class="privacy-tip">
-                    <h3>🔒 Privacy Tip</h3>
-                    <p>To check if your VPN is working correctly, visit our <a href="info.html" class="cta-link">IP Checker Tool</a> before and after connecting. You should see different IP addresses and locations.</p>
-                    <p>Also use our <a href="ipv6-checker.html" class="cta-link">IPv6 Checker</a> to ensure IPv6 isn't leaking your real address.</p>
+                <div class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>IPv4</th>
+                            <th>IPv6</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Address Space</td>
+                            <td>Limited (4.3B)</td>
+                            <td>Virtually unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Header Size</td>
+                            <td>20-60 bytes</td>
+                            <td>40 bytes fixed</td>
+                        </tr>
+                        <tr>
+                            <td>NAT Required</td>
+                            <td>Almost always</td>
+                            <td>Not needed</td>
+                        </tr>
+                        <tr>
+                            <td>Security</td>
+                            <td>Optional (IPsec)</td>
+                            <td>Built-in (IPsec)</td>
+                        </tr>
+                        <tr>
+                            <td>Auto-configuration</td>
+                            <td>DHCP required</td>
+                            <td>Stateless auto-config</td>
+                        </tr>
+                    </tbody>
                 </div>
 
-                <h2>Limitations of VPN IP Hiding</h2>
+                <p>In real life, speed depends more on:</p>
+                <ul>
+                    <li>Your ISP</li>
+                    <li>Network configuration</li>
+                    <li>The website or service you're accessing</li>
+                </ul>
+                <p>But in clean setups, IPv6 often feels smoother.</p>
 
-                <h3>DNS Leaks</h3>
-                <p>If your device uses your ISP's DNS servers instead of the VPN's, websites can still determine your approximate location through DNS queries.</p>
-
-                <h3>WebRTC Leaks</h3>
-                <p>WebRTC (Web Real-Time Communication) in browsers can sometimes reveal your real IP address even when using a VPN.</p>
-
-                <h3>Browser Fingerprinting</h3>
-                <p>Websites can use browser fingerprinting techniques that don't rely on IP addresses to track you across sessions.</p>
-
-                <h2>VPN vs Other Privacy Tools</h2>
-
-                <div class="tech-diagram">
-                    <div class="diagram-title">Comparison: VPN vs Proxy vs Tor</div>
-                    <div class="diagram-flow">
-                        <strong>VPN:</strong> Encrypts ALL traffic, hides IP, medium speed<br>
-                        <strong>Proxy:</strong> Routes traffic, may hide IP, no encryption<br>
-                        <strong>Tor:</strong> Multiple encryption layers, very slow, maximum anonymity
-                    </div>
+                <div class="tool-integration">
+                    <h3>📡 Test Your IPv6 Support</h3>
+                    <p>Curious if your network supports IPv6? Use our <a href="ipv6-checker.html" class="tool-link">IPv6 Checker Tool</a> to find out instantly.</p>
                 </div>
 
-                <h2>Best Practices for VPN Use</h2>
-                <ol>
-                    <li><strong>Choose a reputable provider:</strong> Look for transparent no-logs policies and independent audits</li>
-                    <li><strong>Enable kill switch:</strong> Prevents data leaks if VPN connection drops</li>
-                    <li><strong>Use DNS leak protection:</strong> Ensure your VPN handles DNS queries properly</li>
-                    <li><strong>Regularly test for leaks:</strong> Use tools to verify no IP or DNS leaks</li>
-                    <li><strong>Keep software updated:</strong> Ensure your VPN client has the latest security patches</li>
-                </ol>
-
-                <h2>Technical Considerations</h2>
-                <p>When evaluating VPNs technically, consider:</p>
+                <h2>So... Which One Am I Using?</h2>
+                <p>Most people today use both.</p>
+                <p>This is called <strong>dual-stack</strong>:</p>
                 <ul>
-                    <li><strong>Encryption strength:</strong> AES-256 is current standard</li>
-                    <li><strong>Protocol options:</strong> Multiple protocol support is better</li>
-                    <li><strong>Server locations:</strong> More locations provide better options</li>
-                    <li><strong>Connection logs:</strong> True no-logging policy is essential for privacy</li>
-                    <li><strong>Jurisdiction:</strong> Provider's legal jurisdiction affects data retention laws</li>
+                    <li>IPv4 for older systems</li>
+                    <li>IPv6 for modern services</li>
                 </ul>
+                <p>Your device quietly picks the best option available. You don't even notice — unless you check your IP, like you did here 😉</p>
 
+                <h2>Should You Care as a Normal User?</h2>
+                <p>Honestly? A little, yes.</p>
+                <p>IPv6 matters if:</p>
+                <ul>
+                    <li>You care about future-proofing</li>
+                    <li>You run servers or services</li>
+                    <li>You want better connectivity and fewer NAT issues</li>
+                    <li>You're into privacy, networking, or security</li>
+                </ul>
+                <p>If you're just browsing memes? The internet will handle it for you. But understanding it gives you an edge.</p>
+
+                <div class="quote-box">
+                    <p><strong>Final thoughts (real talk)</strong></p>
+                    <p>IPv4 is like an old city with narrow streets and traffic everywhere. IPv6 is a brand-new city with endless space and better planning.</p>
+                    <p>We're not abandoning the old city overnight — but make no mistake, the future is clearly IPv6.</p>
+                    <p>And if you ever see a long, weird IP full of colons again, don't panic. Nothing's broken. You're just looking at the internet leveling up.</p>
+                </div>
+
+                <!-- REMOVIDO: Seção Related Links -->
+                
                 <div class="navigation-links">
-                    <a href="Technical_Guide.html" class="nav-btn">← Back to Technical Guide</a>
-                    <a href="vpn-logging-policies.html" class="nav-btn">Next: VPN Logging Policies →</a>
+                    <a href="what-is-my-ip.html" class="nav-btn">← Previous: What is My IP Address?</a>
+                    <a href="Technical_Guide.html" class="nav-btn">↑ Back to Technical Guide</a>
+                    <a href="public-vs-private-ip.html" class="nav-btn">Next: Public vs Private IP →</a>
                 </div>
 
-                <div class="related-links">
-                    <div class="related-title">Related Topics</div>
-                    <div class="related-list">
-                        <a href="hide-ip-address.html" class="related-tag">Hide IP Address</a>
-                        <a href="prevent-ip-tracking.html" class="related-tag">Prevent IP Tracking</a>
-                        <a href="vpn-leak-protection.html" class="related-tag">VPN Leak Protection</a>
-                        <a href="info.html" class="related-tag">Check My IP</a>
-                    </div>
-                </div>
             </div>
         </main>
     </div>
@@ -773,7 +999,7 @@
                 const linkHref = link.getAttribute('href');
                 if (linkHref === currentPage || 
                     (currentPage === '' && linkHref === '/') ||
-                    (currentPage.includes('guide') && linkHref.includes('Technical_Guide'))) {
+                    (currentPage.includes('ipv4-vs-ipv6') && link.textContent.includes('Technical Guide'))) {
                     link.classList.add('active');
                 } else {
                     link.classList.remove('active');
