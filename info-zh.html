@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="alternate" hreflang="en" href="https://checkmyip.today/info-en.html" />
-<link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
-<link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
-<link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
-<link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
-<link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
-<link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
-<link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info-en.html" />
+    <link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
+    <link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
+    <link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
+    <link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
+    <link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
+    <link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
+    <link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info-en.html" />
     <title>IP 地址终极指南：网络身份、基础设施与隐私保护 | Check my IP</title>
 
     <!-- Google tag (gtag.js) -->
@@ -19,7 +19,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-Y7GFLQ17GE');
     </script>
 
@@ -83,11 +82,6 @@
 
         .nav-menu a:hover { color: var(--accent-blue); }
         .nav-menu a.active { color: var(--text-primary); border-bottom: 2px solid var(--accent-blue); padding-bottom: 2px; }
-
-        .lang-switcher { font-size: 13px; color: var(--text-secondary); }
-        .lang-switcher a { text-decoration: none; color: var(--text-secondary); padding: 2px 4px; transition: color 0.2s; }
-        .lang-switcher a:hover { color: var(--accent-blue); }
-        .lang-switcher .active-lang { color: var(--text-primary); font-weight: bold; }
 
         .content-card {
             background-color: var(--card-bg);
@@ -156,9 +150,45 @@
             color: #ffffff;
         }
 
-        header { margin-bottom: 32px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
-        h1 { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
-        .subtitle { color: var(--text-secondary); font-size: 16px; }
+        /* Card Header with Language Switcher */
+        .card-header {
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .card-title h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        /* Language Switcher in Header */
+        .lang-switcher-header {
+            margin-top: 24px;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .lang-switcher-header a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 2px;
+            transition: color 0.2s;
+        }
+
+        .lang-switcher-header a:hover,
+        .lang-switcher-header a.active-lang {
+            color: var(--accent-blue);
+        }
+
         h2 { font-size: 22px; color: var(--accent-blue); margin: 32px 0 16px; }
         h3 { font-size: 18px; color: var(--text-primary); margin: 24px 0 12px; }
         p { margin-bottom: 16px; font-size: 16px; color: var(--text-primary); }
@@ -226,7 +256,7 @@
 
         @media (max-width: 600px) {
             .content-card { padding: 24px; }
-            h1 { font-size: 24px; }
+            .card-title h1 { font-size: 24px; }
             .ip-badge-top { flex-direction: column; align-items: flex-start; }
             .ip-actions { width: 100%; justify-content: space-between; }
             .nav-menu { flex-direction: column; align-items: flex-start; gap: 10px; }
@@ -241,21 +271,12 @@
         <div class="nav-links">
             <a href="/">首页</a>
             <a href="info-zh.html" class="active">IP 指南</a>
-            <a href="/tools/ipv6-checker/">IPv6 检测器 (Jiǎncè qì)</a>
-            <a href="whois-lookup.html" class="active">域名查询</a>
+            <a href="/tools/ipv6-checker/">IPv6 检测器</a>
+            <a href="whois-lookup.html">域名查询</a>
             <a href="Technical_Guide.html">Technical Guide</a>
             <a href="guide_ipv6.html">Guide IPv6</a>
-
         </div>
-        <div class="lang-switcher">
-            <a href="info.html">🇺🇸 EN</a> | 
-            <a href="info-es.html">🇪🇸 ES</a> |
-            <a href="info-fr.html">🇫🇷 FR</a> |
-            <a href="info-de.html">🇩🇪 DE</a> |
-            <a href="info-zh.html" class="active-lang">🇨🇳 ZH</a> |
-            <a href="info-hi.html">🇮🇳 HI</a> |
-            <a href="info-ru.html">🇷🇺 RU</a>
-        </div>
+        <!-- Language switcher removed from nav menu -->
     </nav>
 
     <article class="content-card">
@@ -272,9 +293,22 @@
             </div>
         </div>
 
-        <header>
-            <h1>IP 地址终极指南：网络身份、基础设施与隐私保护</h1>
-            <p class="subtitle">十多年前，当我开始从事网络工作时，IP 地址还是只有系统管理员或技术发烧友才会讨论的话题。</p>
+        <header class="card-header">
+            <div class="card-title">
+                <h1>IP 地址终极指南：网络身份、基础设施与隐私保护</h1>
+                <div class="card-subtitle">Network Security & Online Privacy</div>
+                
+                <!-- Language switcher moved to header -->
+                <div class="lang-switcher-header">
+                    <a href="info-en.html">🇺🇸 EN</a> |
+                    <a href="info-es.html">🇪🇸 ES</a> |
+                    <a href="info-fr.html">🇫🇷 FR</a> |
+                    <a href="info-de.html">🇩🇪 DE</a> |
+                    <a href="info-zh.html" class="active-lang">🇨🇳 ZH</a> |
+                    <a href="info-hi.html">🇮🇳 HI</a> |
+                    <a href="info-ru.html">🇷🇺 RU</a>
+                </div>
+            </div>
         </header>
 
         <section>
@@ -554,7 +588,7 @@
             <p>物联网带来了便利，但也给家庭安全留下了巨大的漏洞。核心问题是：许多此类设备——灯泡、婴儿监护仪、温控器——其实都是拥有 IP 地址的完整电脑，但几乎没有任何安全防护。</p>
             
             <h3>UPnP 的危险</h3>
-            <p>许多路由器默认开启了一项名为 <strong>UPnP（通用即插即用）</strong>的功能。它允许网络中的设备自动在路由器的防火墙上"打洞"，以便从互联网访问。<sup>43</sup> 这对快速配置游戏机很方便，但如果某个廉价摄像头利用 UPnP 在你不知情的情况下为黑客打开了后门，那就是一场灾难。<sup>45</sup></p>
+            <p>许多路由器默认开启了一项功能 <strong>UPnP（通用即插即用）</strong>。它允许网络中的设备自动在路由器的防火墙上"打洞"，以便从互联网访问。<sup>43</sup> 这对快速配置游戏机很方便，但如果某个廉价摄像头利用 UPnP 在你不知情的情况下为黑客打开了后门，那就是一场灾难。<sup>45</sup></p>
             
             <p>我一贯建议在路由器设置中关闭 UPnP。如果你确实需要远程访问，手动设置端口转发或使用家用 VPN 会安全得多。<sup>43</sup></p>
         </section>
