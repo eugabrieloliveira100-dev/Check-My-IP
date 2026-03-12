@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="alternate" hreflang="en" href="https://checkmyip.today/info-en.html" />
-<link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
-<link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
-<link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
-<link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
-<link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
-<link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
-<link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info-en.html" />
+    <link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
+    <link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
+    <link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
+    <link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
+    <link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
+    <link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
+    <link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info-en.html" />
     <title>IP-адресация без купюр: Гид по сетевой идентичности и защите приватности | Проверка моего IP</title>
 
     <!-- Google tag (gtag.js) -->
@@ -19,7 +19,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-Y7GFLQ17GE');
     </script>
 
@@ -66,7 +65,7 @@
             line-height: 1.6;
         }
 
-        /* Nav Menu */
+        /* Nav Menu - Simplified without language switcher */
         .nav-menu {
             display: flex;
             gap: 20px;
@@ -98,28 +97,6 @@
             color: var(--text-primary);
             border-bottom: 2px solid var(--accent-blue);
             padding-bottom: 2px;
-        }
-
-        /* Language Switcher */
-        .lang-switcher {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .lang-switcher a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            padding: 2px 4px;
-            transition: color 0.2s;
-        }
-
-        .lang-switcher a:hover {
-            color: var(--accent-blue);
-        }
-
-        .lang-switcher .active-lang {
-            color: var(--text-primary);
-            font-weight: bold;
         }
 
         /* Content Card */
@@ -220,22 +197,43 @@
             color: #ffffff;
         }
 
-        header {
+        /* Card Header with Language Switcher */
+        .card-header {
             margin-bottom: 32px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 20px;
         }
 
-        h1 {
+        .card-title h1 {
             font-size: 32px;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 8px;
         }
 
-        .subtitle {
+        .card-subtitle {
             color: var(--text-secondary);
             font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        /* Language Switcher in Header */
+        .lang-switcher-header {
+            margin-top: 24px;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .lang-switcher-header a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 2px;
+            transition: color 0.2s;
+        }
+
+        .lang-switcher-header a:hover,
+        .lang-switcher-header a.active-lang {
+            color: var(--accent-blue);
         }
 
         h2 {
@@ -332,7 +330,7 @@
 
         @media (max-width: 600px) {
             .content-card { padding: 24px; }
-            h1 { font-size: 24px; }
+            .card-title h1 { font-size: 24px; }
             .ip-badge-top { flex-direction: column; align-items: flex-start; }
             .ip-actions { width: 100%; justify-content: space-between; }
             .btn-check-full { flex-grow: 1; text-align: center; }
@@ -349,20 +347,11 @@
             <a href="index.html">Главная</a>
             <a href="info-ru.html" class="active">Справочник по IP</a>
             <a href="/tools/ipv6-checker/">Проверка IPv6</a>
-            <a href="whois-lookup.html" class="active">поиск Whois</a>
+            <a href="whois-lookup.html">поиск Whois</a>
             <a href="Technical_Guide.html">Technical Guide</a>
             <a href="guide_ipv6.html">Guide IPv6</a>
-
         </div>
-        <div class="lang-switcher">
-            <a href="info-ru.html" class="active-lang">🇷🇺 RU</a> |
-            <a href="info.html">🇺🇸 EN</a> |
-            <a href="info-es.html">🇪🇸 ES</a> |
-            <a href="info-fr.html">🇫🇷 FR</a> |
-            <a href="info-de.html">🇩🇪 DE</a> |
-            <a href="info-zh.html">🇨🇳 ZH</a> |
-            <a href="info-hi.html">🇮🇳 HI</a>
-        </div>
+        <!-- Language switcher removed from nav menu -->
     </nav>
 
     <article class="content-card">
@@ -380,9 +369,22 @@
             </div>
         </div>
 
-        <header>
-            <h1>IP-адресация без купюр: Гид по сетевой идентичности, инфраструктуре и защите приватности</h1>
-            <p class="subtitle">Больше десяти лет назад, когда я только начинал ковыряться в железках и настраивать первые сетки, IP-адреса были темой исключительно для «своих» — сисадминов и заядлых технарей.</p>
+        <header class="card-header">
+            <div class="card-title">
+                <h1>IP-адресация без купюр: Гид по сетевой идентичности, инфраструктуре и защите приватности</h1>
+                <div class="card-subtitle">Network Security & Online Privacy</div>
+                
+                <!-- Language switcher moved to header -->
+                <div class="lang-switcher-header">
+                    <a href="info-en.html">🇺🇸 EN</a> |
+                    <a href="info-es.html">🇪🇸 ES</a> |
+                    <a href="info-fr.html">🇫🇷 FR</a> |
+                    <a href="info-de.html">🇩🇪 DE</a> |
+                    <a href="info-zh.html">🇨🇳 ZH</a> |
+                    <a href="info-hi.html">🇮🇳 HI</a> |
+                    <a href="info-ru.html" class="active-lang">🇷🇺 RU</a>
+                </div>
+            </div>
         </header>
 
         <section>
