@@ -87,6 +87,7 @@
             display: flex;
             gap: 20px;
             align-items: center;
+            flex-wrap: nowrap;
         }
 
        .nav-links a {
@@ -296,23 +297,20 @@
             border-top: 1px solid var(--border-color);
         }
 
-        .card-footer p {
+         .card-footer p {
             font-size: 16px;
             color: var(--text-secondary);
             margin-bottom: 16px;
         }
 
         /* Language switcher - MESMO para todas as páginas */
-        .lang-switcher {
+      
+
+         .lang-switcher {
             font-size: 12px;
             color: var(--text-secondary);
-        }
-
-        .lang-switcher a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin: 0 2px;
-        }
+            white-space: nowrap;
+}
 
         .lang-switcher a:hover,
         .lang-switcher a.active-lang {
