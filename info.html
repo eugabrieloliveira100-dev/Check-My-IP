@@ -377,22 +377,27 @@
                 font-size: 13px;
             }
         }
-        .lang-switcher-header {
-        margin-top: 10px;
-        font-size: 13px;
-        color: var(--text-secondary);
+          lang-switcher-header {
+              margin-top: 12px;
+              font-size: 16px;
+              color: var(--text-secondary);
+       }
+
+          .lang-switcher-header a {
+              color: var(--text-secondary);
+              text-decoration: none;
+              margin-right: 8px;
+              font-weight: 500;
 }
 
-        .lang-switcher-header a {
-           color: var(--text-secondary);
-           text-decoration: none;
+          .lang-switcher-header a:hover {
+              color: var(--accent-blue);
 }
 
-       .lang-switcher-header a:hover,
-       .lang-switcher-header a.active-lang {
-          color: var(--accent-blue);
+          .lang-switcher-header a.active-lang {
+              color: var(--accent-blue);
+              font-weight: 600;
 }
-        
     </style>
 </head>
 <body>
