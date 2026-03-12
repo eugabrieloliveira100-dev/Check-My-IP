@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="alternate" hreflang="en" href="https://checkmyip.today/info-en.html" />
-<link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
-<link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
-<link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
-<link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
-<link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
-<link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
-<link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info-en.html" />
+    <link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
+    <link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
+    <link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
+    <link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
+    <link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
+    <link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
+    <link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info-en.html" />
     <title>Guide Complet de l'Adresse IP : Identité, Infrastructure et Protection | Check my IP</title>
 
     <!-- Google tag (gtag.js) -->
@@ -19,7 +19,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-Y7GFLQ17GE');
     </script>
 
@@ -66,7 +65,7 @@
             line-height: 1.6;
         }
 
-        /* Nav Menu */
+        /* Nav Menu - Simplified without language switcher */
         .nav-menu {
             display: flex;
             gap: 20px;
@@ -98,28 +97,6 @@
             color: var(--text-primary);
             border-bottom: 2px solid var(--accent-blue);
             padding-bottom: 2px;
-        }
-
-        /* Language Switcher */
-        .lang-switcher {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .lang-switcher a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            padding: 2px 4px;
-            transition: color 0.2s;
-        }
-
-        .lang-switcher a:hover {
-            color: var(--accent-blue);
-        }
-
-        .lang-switcher .active-lang {
-            color: var(--text-primary);
-            font-weight: bold;
         }
 
         /* Content Card */
@@ -220,22 +197,43 @@
             color: #ffffff;
         }
 
-        header {
+        /* Card Header with Language Switcher */
+        .card-header {
             margin-bottom: 32px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 20px;
         }
 
-        h1 {
+        .card-title h1 {
             font-size: 32px;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 8px;
         }
 
-        .subtitle {
+        .card-subtitle {
             color: var(--text-secondary);
             font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        /* Language Switcher in Header */
+        .lang-switcher-header {
+            margin-top: 24px;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .lang-switcher-header a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 2px;
+            transition: color 0.2s;
+        }
+
+        .lang-switcher-header a:hover,
+        .lang-switcher-header a.active-lang {
+            color: var(--accent-blue);
         }
 
         h2 {
@@ -338,11 +336,12 @@
 
         @media (max-width: 600px) {
             .content-card { padding: 24px; }
-            h1 { font-size: 24px; }
+            .card-title h1 { font-size: 24px; }
             .ip-badge-top { flex-direction: column; align-items: flex-start; }
             .ip-actions { width: 100%; justify-content: space-between; }
             .btn-check-full { flex-grow: 1; text-align: center; }
             .nav-menu { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .nav-links { flex-wrap: wrap; }
             table { font-size: 14px; }
             td, th { padding: 8px; }
         }
@@ -354,19 +353,11 @@
         <div class="nav-links">
             <a href="/">Accueil</a>
             <a href="info-fr.html" class="active">Guide IP</a>
-             <a href="/tools/ipv6-checker/">Testeur IPv6</a>
-            <a href="whois-lookup.html" class="active">Recherche Whois</a>
+            <a href="/tools/ipv6-checker/">Testeur IPv6</a>
+            <a href="whois-lookup.html">Recherche Whois</a>
             <a href="Technical_Guide.html">Technical Guide</a>
         </div>
-        <div class="lang-switcher">
-            <a href="info.html">🇺🇸 EN</a> | 
-            <a href="info-es.html">🇪🇸 ES</a> |
-            <a href="info-fr.html" class="active-lang">🇫🇷 FR</a> |
-            <a href="info-de.html">🇩🇪 DE</a> |
-            <a href="info-zh.html">🇨🇳 ZH</a> |
-            <a href="info-hi.html">🇮🇳 HI</a> |
-            <a href="info-ru.html">🇷🇺 RU</a>
-        </div>
+        <!-- Language switcher removed from nav menu -->
     </nav>
 
     <article class="content-card">
@@ -384,9 +375,22 @@
             </div>
         </div>
 
-        <header>
-            <h1>Le guide complet de l'adresse IP : identité, infrastructure et protection de la vie privée</h1>
-            <p class="subtitle">Quand j'ai commencé à travailler dans le secteur des réseaux il y a plus de dix ans, l'adresse IP était un sujet réservé aux administrateurs systèmes et aux passionnés d'informatique.</p>
+        <header class="card-header">
+            <div class="card-title">
+                <h1>Le guide complet de l'adresse IP : identité, infrastructure et protection de la vie privée</h1>
+                <div class="card-subtitle">Network Security & Online Privacy</div>
+                
+                <!-- Language switcher moved to header -->
+                <div class="lang-switcher-header">
+                    <a href="info-en.html">🇺🇸 EN</a> |
+                    <a href="info-es.html">🇪🇸 ES</a> |
+                    <a href="info-fr.html" class="active-lang">🇫🇷 FR</a> |
+                    <a href="info-de.html">🇩🇪 DE</a> |
+                    <a href="info-zh.html">🇨🇳 ZH</a> |
+                    <a href="info-hi.html">🇮🇳 HI</a> |
+                    <a href="info-ru.html">🇷🇺 RU</a>
+                </div>
+            </div>
         </header>
 
         <section>
@@ -447,7 +451,7 @@
             <p>L'IPv4 (Internet Protocol version 4) est le standard sur lequel Internet s'est construit. Il utilise des adresses de 32 bits, ce qui permet un total d'environ 4,3 milliards d'adresses uniques.<sup>11</sup> Dans les années 1980, 4 milliards semblaient être un nombre infini. Personne n'avait prévu que chaque être humain possèderait trois ou quatre appareils connectés. Vers 2011, les stocks mondiaux d'adresses IPv4 ont commencé à s'épuiser officiellement.<sup>11</sup> Cela a créé une crise silencieuse que les ingénieurs réseau ont dû résoudre avec des « pansements » techniques en attendant que le monde migre vers l'IPv6.</p>
             
             <h3>L'immensité de l'IPv6</h3>
-            <p>L'IPv6 a été conçu pour être le successeur définitif. Il utilise des adresses de 128 bits, permettant un nombre de combinaisons si vaste qu'il est difficile pour l'esprit humain de le concevoir. On parle de 340 sextillions d'adresses.<sup>11</sup> Pour vous donner une idée de l'échelle, nous pourrions attribuer une adresse IP à chaque atome à la surface de la Terre et il en resterait encore pour plusieurs autres planètes.<sup>11</sup></p>
+            <p>L'IPv6 a été conçu pour être le successeur définitif. Il utilise des adresses de 128 bits, ce qui permet un nombre de combinaisons si vaste qu'il est difficile pour l'esprit humain de le concevoir. On parle de 340 sextillions d'adresses.<sup>11</sup> Pour vous donner une idée de l'échelle, nous pourrions attribuer une adresse IP à chaque atome à la surface de la Terre et il en resterait encore pour plusieurs autres planètes.<sup>11</sup></p>
             
             <div class="comparison-table">
                 <table>
