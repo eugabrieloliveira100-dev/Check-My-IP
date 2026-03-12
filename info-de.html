@@ -67,7 +67,7 @@
             line-height: 1.6;
         }
 
-        /* Nav Menu */
+        /* Nav Menu - Simplified without language switcher */
         .nav-menu {
             display: flex;
             gap: 20px;
@@ -99,28 +99,6 @@
             color: var(--text-primary);
             border-bottom: 2px solid var(--accent-blue);
             padding-bottom: 2px;
-        }
-
-        /* Language Switcher */
-        .lang-switcher {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .lang-switcher a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            padding: 2px 4px;
-            transition: color 0.2s;
-        }
-
-        .lang-switcher a:hover {
-            color: var(--accent-blue);
-        }
-
-        .lang-switcher .active-lang {
-            color: var(--text-primary);
-            font-weight: bold;
         }
 
         /* Content Card */
@@ -221,22 +199,43 @@
             color: #ffffff;
         }
 
-        header {
+        /* Card Header with Language Switcher */
+        .card-header {
             margin-bottom: 32px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 20px;
         }
 
-        h1 {
+        .card-title h1 {
             font-size: 32px;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 8px;
         }
 
-        .subtitle {
+        .card-subtitle {
             color: var(--text-secondary);
             font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        /* Language Switcher in Header */
+        .lang-switcher-header {
+            margin-top: 24px;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .lang-switcher-header a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 2px;
+            transition: color 0.2s;
+        }
+
+        .lang-switcher-header a:hover,
+        .lang-switcher-header a.active-lang {
+            color: var(--accent-blue);
         }
 
         h2 {
@@ -339,11 +338,12 @@
 
         @media (max-width: 600px) {
             .content-card { padding: 24px; }
-            h1 { font-size: 24px; }
+            .card-title h1 { font-size: 24px; }
             .ip-badge-top { flex-direction: column; align-items: flex-start; }
             .ip-actions { width: 100%; justify-content: space-between; }
             .btn-check-full { flex-grow: 1; text-align: center; }
             .nav-menu { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .nav-links { flex-wrap: wrap; }
             table { font-size: 14px; }
             td, th { padding: 8px; }
         }
@@ -356,18 +356,10 @@
             <a href="/">Startseite</a>
             <a href="info-de.html" class="active">IP-Leitfaden</a>
             <a href="/tools/ipv6-checker/">IPv6-Prüfer</a>
-            <a href="whois-lookup.html" class="active">Whois-Abfrage</a>
+            <a href="whois-lookup.html">Whois-Abfrage</a>
             <a href="Technical_Guide.html">Technical Guide</a>
         </div>
-        <div class="lang-switcher">
-            <a href="info.html">🇺🇸 EN</a> | 
-            <a href="info-es.html">🇪🇸 ES</a> |
-            <a href="info-fr.html">🇫🇷 FR</a> |
-            <a href="info-de.html" class="active-lang">🇩🇪 DE</a> |
-            <a href="info-zh.html">🇨🇳 ZH</a> |
-            <a href="info-hi.html">🇮🇳 HI</a> |
-            <a href="info-ru.html">🇷🇺 RU</a>
-        </div>
+        <!-- Language switcher removed from nav menu -->
     </nav>
 
     <article class="content-card">
@@ -385,9 +377,22 @@
             </div>
         </div>
 
-        <header>
-            <h1>Der ultimative IP-Adressen Leitfaden: Identität, Infrastruktur und Privatsphäre</h1>
-            <p class="subtitle">Als ich vor über einem Jahrzehnt mit Netzwerken zu arbeiten begann, waren IP-Adressen ein Thema, das nur Systemingenieure und Technikenthusiasten wirklich besprachen.</p>
+        <header class="card-header">
+            <div class="card-title">
+                <h1>Der ultimative IP-Adressen Leitfaden: Identität, Infrastruktur und Privatsphäre</h1>
+                <div class="card-subtitle">Network Security & Online Privacy</div>
+                
+                <!-- Language switcher moved to header -->
+                <div class="lang-switcher-header">
+                    <a href="info-en.html">🇺🇸 EN</a> |
+                    <a href="info-es.html">🇪🇸 ES</a> |
+                    <a href="info-fr.html">🇫🇷 FR</a> |
+                    <a href="info-de.html" class="active-lang">🇩🇪 DE</a> |
+                    <a href="info-zh.html">🇨🇳 ZH</a> |
+                    <a href="info-hi.html">🇮🇳 HI</a> |
+                    <a href="info-ru.html">🇷🇺 RU</a>
+                </div>
+            </div>
         </header>
 
         <section>
