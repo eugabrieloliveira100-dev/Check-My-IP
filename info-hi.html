@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="alternate" hreflang="en" href="https://checkmyip.today/info-en.html" />
-<link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
-<link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
-<link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
-<link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
-<link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
-<link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
-<link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info-en.html" />
+    <link rel="alternate" hreflang="es" href="https://checkmyip.today/info-es.html" />
+    <link rel="alternate" hreflang="fr" href="https://checkmyip.today/info-fr.html" />
+    <link rel="alternate" hreflang="de" href="https://checkmyip.today/info-de.html" />
+    <link rel="alternate" hreflang="zh" href="https://checkmyip.today/info-zh.html" />
+    <link rel="alternate" hreflang="hi" href="https://checkmyip.today/info-hi.html" />
+    <link rel="alternate" hreflang="ru" href="https://checkmyip.today/info-ru.html" />
+    <link rel="alternate" hreflang="x-default" href="https://checkmyip.today/info-en.html" />
     
     <title>IP एड्रेस की 'अल्टीमेट' गाइड: डिजिटल पहचान और प्राइवेसी का सच | Check my IP</title>
 
@@ -91,24 +91,6 @@
             color: var(--text-primary);
             border-bottom: 2px solid var(--accent-blue);
             padding-bottom: 2px;
-        }
-
-        .lang-switcher {
-            display: flex;
-            gap: 10px;
-            font-size: 13px;
-            align-items: center;
-        }
-
-        .lang-switcher a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            padding: 2px 4px;
-        }
-
-        .lang-switcher .active-lang {
-            color: var(--text-primary);
-            font-weight: bold;
         }
 
         .content-card {
@@ -206,8 +188,45 @@
             color: #ffffff;
         }
 
-        h1 { font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
-        .subtitle { color: var(--text-secondary); font-size: 16px; margin-bottom: 32px; }
+        /* Card Header with Language Switcher */
+        .card-header {
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .card-title h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        /* Language Switcher in Header */
+        .lang-switcher-header {
+            margin-top: 24px;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .lang-switcher-header a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 2px;
+            transition: color 0.2s;
+        }
+
+        .lang-switcher-header a:hover,
+        .lang-switcher-header a.active-lang {
+            color: var(--accent-blue);
+        }
+
         h2 { font-size: 22px; color: var(--accent-blue); margin: 32px 0 16px; }
         h3 { font-size: 18px; color: var(--text-primary); margin: 24px 0 12px; }
         p { margin-bottom: 16px; font-size: 16px; color: var(--text-primary); }
@@ -276,7 +295,7 @@
 
         @media (max-width: 600px) {
             .content-card { padding: 25px; }
-            h1 { font-size: 24px; }
+            .card-title h1 { font-size: 24px; }
             .ip-badge-top { flex-direction: column; align-items: flex-start; }
             .ip-actions { width: 100%; justify-content: space-between; }
             .nav-menu { flex-direction: column; align-items: flex-start; gap: 10px; }
@@ -292,20 +311,10 @@
             <a href="/">Home</a>
             <a href="info-hi.html" class="active">IP Guide</a>
             <a href="/tools/ipv6-checker/">IPv6 परीक्षक (Pareekshak)</a>
-            <a href="whois-lookup.html" class="active">व्होइस लुकअप</a>
+            <a href="whois-lookup.html">व्होइस लुकअप</a>
             <a href="Technical_Guide.html">Technical Guide</a>
-            <a href="guide_ipv6.html">Guide IPv6</a>
-
         </div>
-        <div class="lang-switcher">
-            <a href="info.html">🇺🇸 EN</a> | 
-            <a href="info-es.html">🇪🇸 ES</a> |
-            <a href="info-fr.html">🇫🇷 FR</a> |
-            <a href="info-de.html">🇩🇪 DE</a> |
-            <a href="info-zh.html">🇨🇳 ZH</a> |
-            <a href="info-hi.html" class="active-lang">हिन्दी</a> |
-            <a href="info-ru.html">🇷🇺 RU</a>
-        </div>
+        <!-- Language switcher removed from nav menu -->
     </nav>
 
     <main class="content-card">
@@ -322,8 +331,25 @@
             </div>
         </div>
 
+        <header class="card-header">
+            <div class="card-title">
+                <h1>IP एड्रेस का 'अल्टीमेट' गाइड: आपकी डिजिटल पहचान और प्राइवेसी का सच</h1>
+                <div class="card-subtitle">Network Security & Online Privacy</div>
+                
+                <!-- Language switcher moved to header -->
+                <div class="lang-switcher-header">
+                    <a href="info-en.html">🇺🇸 EN</a> |
+                    <a href="info-es.html">🇪🇸 ES</a> |
+                    <a href="info-fr.html">🇫🇷 FR</a> |
+                    <a href="info-de.html">🇩🇪 DE</a> |
+                    <a href="info-zh.html">🇨🇳 ZH</a> |
+                    <a href="info-hi.html" class="active-lang">🇮🇳 HI</a> |
+                    <a href="info-ru.html">🇷🇺 RU</a>
+                </div>
+            </div>
+        </header>
+
         <div id="lang-hi" class="lang-section active">
-            <h1>IP एड्रेस का 'अल्टीमेट' गाइड: आपकी डिजिटल पहचान और प्राइवेसी का सच</h1>
             <p class="subtitle">जब मैंने करीब एक दशक पहले नेटवर्किंग की दुनिया में कदम रखा था, तब IP एड्रेस जैसी बातें सिर्फ सिस्टम एडमिन्स या टेक एक्सपर्ट्स के बीच ही होती थीं।</p>
 
             <p>लेकिन आज कहानी बदल चुकी है। आज हम उस दौर में हैं जहाँ आपके हाथ की घड़ी से लेकर घर के फ्रिज तक की अपनी एक "डिजिटल पहचान" है। एक प्रोफेशनल के तौर पर, जिसने अनगिनत घंटे राउटर्स को कॉन्फ़िगर करने, इंटरनेट की समस्याओं को सुलझाने और नेटवर्क हमलों से बचने में बिताए हैं, मैंने सोचा कि क्यों न एक ऐसी गाइड लिखी जाए जो केवल तकनीकी मैनुअल न हो, बल्कि इंटरनेट की इस 'हूड' के नीचे छिपी दुनिया की एक सीधी-सादी चर्चा हो।</p>
@@ -457,107 +483,4 @@
                         <tr>
                             <th>औजार</th>
                             <th>प्राइवेसी स्तर</th>
-                            <th>स्पीड</th>
-                            <th>कीमत</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>VPN</strong></td>
-                            <td>उच्च</td>
-                            <td>तेज</td>
-                            <td>भुगतान किया</td>
-                        </tr>
-                        <tr>
-                            <td><strong>प्रॉक्सी</strong></td>
-                            <td>मध्यम</td>
-                            <td>बहुत तेज</td>
-                            <td>मुफ्त/सस्ता</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tor</strong></td>
-                            <td>अधिकतम</td>
-                            <td>धीमा</td>
-                            <td>मुफ्त</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3>नेटवर्किंग के औजार: खुद चेक करें अपना IP</h3>
-            <p>एक नेटवर्क इंजीनियर के तौर पर, मैं हमेशा सलाह देता हूँ कि आपको अपने डिवाइस के बारे में पता होना चाहिए।</p>
-
-            <h4>पब्लिक IP कैसे देखें?</h4>
-            <p>बस गूगल पर "What is my IP" सर्च करें। अगर VPN चालू होने के बाद भी आपका असली शहर दिख रहा है, तो समझिये आपका IP 'लीक' हो रहा है ।</p>
-
-            <h4>लोकल (प्राइवेट) IP कैसे देखें?</h4>
-            <ul>
-                <li><strong>Windows:</strong> कमांड प्रॉम्प्ट में ipconfig टाइप करें।</li>
-                <li><strong>Linux/Mac:</strong> टर्मिनल में ifconfig या ip addr चलाएं ।</li>
-            </ul>
-
-            <div class="highlight-box">
-                <p><strong>निष्कर्ष और मेरी राय</strong></p>
-                <p>IP एड्रेस को सिर्फ नंबरों का खेल मत समझिये; यह इंटरनेट की बुनियादी रसद व्यवस्था (Logistics) है। मेरा अनुभव कहता है कि आने वाले समय में IPv6 ही एकमात्र रास्ता है। अगर आप एक गेमर हैं या वर्क-फ्रॉम-होम करते हैं और कनेक्टिविटी की समस्या झेल रहे हैं, तो अपने ISP से स्टेटिक IP के बारे में बात करें या ब्रिज मोड का इस्तेमाल करें 18।</p>
-                <p>डिजिटल दुनिया में सुरक्षित रहने के लिए अपने राउटर की UPnP सेटिंग्स को बंद रखें और समय-समय पर अपना पब्लिक IP चेक करते रहें । याद रखिये, इंटरनेट एक खुला समंदर है, और आपकी सुरक्षा इस बात पर निर्भर करती है कि आप अपनी डिजिटल पहचान (IP) को कितनी समझदारी से मैनेज करते हैं।</p>
-                <p>उम्मीद है कि इस गाइड ने आपके कुछ तकनीकी डर दूर किए होंगे। अगली बार जब आपका इंटरनेट धीमा हो, तो कम से कम आपको पता होगा कि पर्दे के पीछे क्या चल रहा है!</p>
-            </div>
-
-            <div class="footer-action">
-                <p>क्या आपको वास्तविक समय में अपना वर्तमान IP एड्रेस जांचना है?</p>
-                <a href="/" class="btn-primary">डायग्नोस्टिक टूल पर वापस जाएं</a>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        function copyMiniIP(btn) {
-            const ipText = document.getElementById('mini-ip-display').innerText;
-            if (ipText === 'खोज रहा है...' || ipText === 'त्रुटि') return;
-
-            const textArea = document.createElement("textarea");
-            textArea.value = ipText;
-            document.body.appendChild(textArea);
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                const originalText = btn.innerText;
-                btn.innerText = 'कॉपी किया गया!';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove('copied');
-                }, 2000);
-            } catch (err) {
-                console.error('Copy failed', err);
-            }
-            document.body.removeChild(textArea);
-        }
-
-        async function getMiniIP() {
-            const display = document.getElementById('mini-ip-display');
-            const endpoints = ['https://api.ipify.org?format=json', 'https://v6.ident.me'];
-            
-            for (const url of endpoints) {
-                try {
-                    const res = await fetch(url, { cache: 'no-store' });
-                    if (url.includes('json')) {
-                        const data = await res.json();
-                        display.innerText = data.ip;
-                    } else {
-                        const text = await res.text();
-                        display.innerText = text.trim();
-                    }
-                    return;
-                } catch (e) {
-                    continue;
-                }
-            }
-            display.innerText = 'त्रुटि';
-        }
-
-        window.addEventListener('load', getMiniIP);
-    </script>
-</body>
-</html>
+                           
