@@ -107,23 +107,6 @@
             border-bottom: 2px solid var(--accent-blue);
         }
 
-        /* Language switcher - MESMO para todas as páginas */
-        .lang-switcher {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .lang-switcher a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin: 0 2px;
-        }
-
-        .lang-switcher a:hover,
-        .lang-switcher a.active-lang {
-            color: var(--accent-blue);
-        }
-
         /* Card base - MESMA estrutura */
         .card {
             background-color: var(--card-bg);
@@ -135,12 +118,11 @@
             margin-top: 10px;
         }
 
-        /* Header consistente */
+        /* Card Header com Language Switcher */
         .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
             margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
         }
 
         .card-title h1 {
@@ -156,6 +138,25 @@
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+        }
+
+        /* Language Switcher no Header */
+        .lang-switcher-header {
+            margin-top: 24px;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .lang-switcher-header a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 2px;
+            transition: color 0.2s;
+        }
+
+        .lang-switcher-header a:hover,
+        .lang-switcher-header a.active-lang {
+            color: var(--accent-blue);
         }
 
         /* IP Badge - estilo consistente */
@@ -399,12 +400,6 @@
                 justify-content: space-between;
             }
             
-            .lang-switcher {
-                width: 100%;
-                text-align: center;
-                margin-top: 10px;
-            }
-            
             .ip-badge {
                 flex-direction: column;
                 align-items: flex-start;
@@ -450,10 +445,6 @@
                 padding: 8px 12px;
                 font-size: 13px;
             }
-            
-            .lang-switcher {
-                font-size: 11px;
-            }
         }
     </style>
 </head>
@@ -468,24 +459,27 @@
                 <a href="whois-lookup.html">Búsqueda Whois</a>
                 <a href="Technical_Guide.html">Technical Guide</a>
             </div>
-            <div class="lang-switcher">
-                <a href="info.html">🇺🇸 EN</a> | 
-                <a href="info-es.html" class="active-lang">🇪🇸 ES</a> |
-                <a href="info-fr.html">🇫🇷 FR</a> |
-                <a href="info-de.html">🇩🇪 DE</a> |
-                <a href="info-zh.html">🇨🇳 ZH</a> |
-                <a href="info-hi.html">🇮🇳 HI</a> |
-                <a href="info-ru.html">🇷🇺 RU</a>
-            </div>
+            <!-- Language switcher removido do menu de navegação -->
         </nav>
 
         <!-- Card principal - MESMA ESTRUTURA base -->
         <main class="card">
-            <!-- Header consistente -->
+            <!-- Header com Language Switcher -->
             <header class="card-header">
                 <div class="card-title">
                     <h1>Guía Definitiva de Dirección IP</h1>
                     <div class="card-subtitle">Identidad, Infraestructura y Privacidad Online</div>
+                    
+                    <!-- Language switcher movido para o header -->
+                    <div class="lang-switcher-header">
+                        <a href="info-en.html">🇺🇸 EN</a> |
+                        <a href="info-es.html" class="active-lang">🇪🇸 ES</a> |
+                        <a href="info-fr.html">🇫🇷 FR</a> |
+                        <a href="info-de.html">🇩🇪 DE</a> |
+                        <a href="info-zh.html">🇨🇳 ZH</a> |
+                        <a href="info-hi.html">🇮🇳 HI</a> |
+                        <a href="info-ru.html">🇷🇺 RU</a>
+                    </div>
                 </div>
             </header>
 
