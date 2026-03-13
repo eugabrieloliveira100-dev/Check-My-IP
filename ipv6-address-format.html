@@ -1,1 +1,911 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Does My IPv6 Address Have Letters? - Technical Guide</title>
+    <meta name="description" content="Understand why IPv6 addresses contain letters, how hexadecimal works, zero compression rules, and how to read IPv6 addresses like a pro.">
+    
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-hover: #1f6feb;
+            --success-green: #3fb950;
+            --error-red: #f85149;
+            --font-main: system-ui, -apple-system, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Container principal - MESMO para todas as páginas */
+        .site-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation Menu - MESMO para todas as páginas */
+        .nav-menu {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 5px 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        /* Card base - MESMA estrutura */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+        }
+
+        .card.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Header consistente */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+        }
+
+        .card-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Botões consistentes */
+        .btn {
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        .btn-copied {
+            background: var(--success-green) !important;
+            color: white !important;
+        }
+
+        /* Refresh button */
+        .refresh-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .refresh-btn:hover {
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .refresh-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .refresh-btn.spinning svg {
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Info sections */
+        .info-section {
+            margin-bottom: 24px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            gap: 12px;
+        }
+
+        .ip-value {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            color: #ffffff;
+            word-break: break-all;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: var(--border-color);
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: var(--text-primary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #444c56;
+        }
+
+        .copy-btn.copied {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .geo-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .isp-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .location-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Privacy Tip / CTA boxes */
+        .privacy-tip {
+            background: rgba(88, 166, 255, 0.08);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .privacy-tip h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .privacy-tip p {
+            font-size: 16px;
+            color: #ffffff;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 16px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .cta-link:hover {
+            text-decoration: underline;
+        }
+
+        .disclosure {
+            display: block;
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Search Container */
+        .search-container {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .search-wrapper {
+            display: flex;
+            gap: 12px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .search-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 20px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+            text-align: center;
+        }
+
+        #ipv6-section {
+            display: none;
+        }
+
+        /* Estilos específicos para artigos do Guia */
+        .article-content {
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .article-content h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+            color: #ffffff;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+            color: var(--accent-blue);
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0 16px 20px;
+            color: var(--text-primary);
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content code {
+            font-family: var(--font-mono);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: var(--accent-blue);
+        }
+
+        .tech-diagram {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .diagram-title {
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .diagram-flow {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .key-point {
+            background: rgba(88, 166, 255, 0.05);
+            border-left: 3px solid var(--accent-blue);
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .key-point h4 {
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(88, 166, 255, 0.1);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ip-example {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+
+        .ip-example-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .navigation-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .related-links {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .related-title {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .related-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .related-tag {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .related-tag:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .site-container {
+                max-width: 95%;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .card-title h1 {
+                font-size: 24px;
+            }
+            
+            .nav-menu {
+              flex-direction: column;
+              gap: 15px;
+              align-items: flex-start;
+           }
+    
+            .nav-links {
+               width: 100%;
+               justify-content: space-between;
+            }
+            
+            .info-row, .geo-info {
+                padding: 14px;
+            }
+            
+            .ip-value {
+                font-size: 16px;
+            }
+            
+            .privacy-tip {
+                padding: 20px;
+            }
+            
+            .article-content h2 {
+                font-size: 20px;
+            }
+            
+            .navigation-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .comparison-table {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+            }
+            
+            .card-title h1 {
+                font-size: 22px;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .refresh-btn {
+                align-self: flex-start;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .copy-btn {
+                align-self: flex-end;
+            }
+            
+            .search-wrapper {
+                flex-direction: column;
+            }
+            
+            .search-btn {
+                padding: 12px;
+            }
+            
+            .privacy-tip h3 {
+                font-size: 16px;
+            }
+            
+            .privacy-tip p {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 19px;
+            }
+            
+            .related-list {
+                flex-direction: column;
+            }
+            
+            .comparison-table {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-container">
+        <!-- Menu de Navegação (exatamente como fornecido) -->
+        <nav class="nav-menu">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="info.html">IP Guide</a>
+                <a href="ipv6-checker.html">IPv6 Checker</a>
+                <a href="whois-lookup.html">Whois Lookup</a>
+                <a href="Technical_Guide.html">Technical Guide</a>
+            </div>
+        </nav>
+
+        <!-- Conteúdo Principal do Artigo -->
+        <main class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h1>Why Does My IPv6 Address Have Letters?</h1>
+                    <div class="card-subtitle">The Format Explained Simply</div>
+                </div>
+            </div>
+
+            <div class="article-content">
+                <h3>The Hook: "Is My Internet Broken?"</h3>
+                <p>If you've ever Googled "What is my IP address" and were expecting to see something cozy and familiar like 192.168.1.1, only to be greeted by a monstrosity like 2001:0db8:85a3:0000:0000:8a2e:0370:7334... you probably had one of two thoughts:</p>
+
+                <ul>
+                    <li>"My computer is glitching."</li>
+                    <li>"The internet is speaking in code now."</li>
+                </ul>
+
+                <p>Take a deep breath. Your computer is fine. The internet just grew up, and we need to talk about why your new digital mailbox looks like this.</p>
+
+                <h2>The Base-16 Secret (Why Letters?)</h2>
+                <p>You might be wondering, "Why are there letters in my IP address? I thought computers only used numbers."</p>
+
+                <p>Usually, humans count using Base-10 (0 through 9). Once we hit 9, we add a digit (10, 11, 12...). But IPv6 uses Hexadecimal (Base-16).</p>
+
+                <div class="key-point">
+                    <h4>💡 Simple Analogy</h4>
+                    <p>Imagine you are counting something, and you only have one single slot for a character. In the normal world, you can only count from 0 to 9 before you run out of space. That is only 10 possibilities.</p>
+                    <p>Now, what if you wanted to count to 16 using only one slot? You can't, right? Wrong. In IPv6, we borrow the letters A, B, C, D, E, and F to represent the numbers 10, 11, 12, 13, 14, and 15.</p>
+                </div>
+
+                <div class="tech-diagram">
+                    <div class="diagram-title">Hexadecimal Values</div>
+                    <div class="diagram-flow">
+                        A = 10<br>
+                        B = 11<br>
+                        C = 12<br>
+                        D = 13<br>
+                        E = 14<br>
+                        F = 15
+                    </div>
+                </div>
+
+                <p>Why do we do this? Because it keeps the address shorter. If we wrote IPv6 addresses using only the normal digits we know (0-9), the address would be absurdly long—like a page of random numbers. By using letters, we squeeze a lot more information into a tiny space.</p>
+
+                <h2>The Anatomy of an IPv6 Address</h2>
+                <p>Now that you know why the letters are there, let's look at the shape of the address.</p>
+
+                <p>An IPv6 address isn't just a random jumble. It has a strict structure. Think of it like a license plate: it looks like gibberish, but it follows specific rules.</p>
+
+                <div class="key-point">
+                    <h4>📋 Structure Comparison</h4>
+                    <p><strong>Old IPv4:</strong> 4 groups of numbers separated by dots (.)<br>
+                    Example: 192.168.1.1</p>
+                    <p><strong>New IPv6:</strong> 8 groups of letters and numbers separated by colons (:)<br>
+                    Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</p>
+                </div>
+
+                <p>Specifically, it is 8 groups of 4 hexadecimal characters, separated by colons (:).</p>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">Full IPv6 Address:</span>
+                    2001:0db8:85a3:0000:0000:8a2e:0370:7334
+                </div>
+
+                <h2>The "Cheat Codes" (Zero Compression)</h2>
+                <p>Here is the best part. Even network engineers think the address above looks a bit messy. So, they invented two "cheat codes" to shrink them down. If you want to read IPv6 address formats easily, you need to know how to spot these shortcuts.</p>
+
+                <h3>Rule 1: Drop the Leading Zeros</h3>
+                <p>In any group of four, you can remove the zeros at the very front.</p>
+                
+                <div class="tech-diagram">
+                    <div class="diagram-title">Leading Zero Removal</div>
+                    <div class="diagram-flow">
+                        0db8 → db8<br>
+                        0370 → 370<br>
+                        0000 → 0
+                    </div>
+                </div>
+
+                <h3>Rule 2: The Double Colon (::) — The Super Shortcut</h3>
+                <p>If you have two or more groups in a row that are all zeros, you can replace that entire string of empty groups with a double colon (::). <strong>But you can only do this once in an address!</strong></p>
+
+                <p>Look at this magic trick:</p>
+                <p>The long address above has two groups of 0000 right in the middle.</p>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">Before (The Scary Version):</span>
+                    2001:0db8:85a3:0000:0000:8a2e:0370:7334
+                </div>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">After (The Short & Sweet Version):</span>
+                    2001:db8:85a3::8a2e:370:7334
+                </div>
+
+                <div class="key-point">
+                    <h4>✨ The Magic of ::</h4>
+                    <p>See that ::? That is the internet's way of saying, "Trust me, there are a bunch of zeros hidden here." This feature is officially called IPv6 zero compression, and it makes the hexadecimal IP address much easier to write down.</p>
+                </div>
+
+                <h2>Visual Guide: IPv4 vs IPv6 Format</h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>IPv4</th>
+                            <th>IPv6</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Format</td>
+                            <td>Dotted Decimal</td>
+                            <td>Hexadecimal with colons</td>
+                        </tr>
+                        <tr>
+                            <td>Example</td>
+                            <td>192.168.1.1</td>
+                            <td>2001:db8:85a3::8a2e:370:7334</td>
+                        </tr>
+                        <tr>
+                            <td>Groups</td>
+                            <td>4 groups</td>
+                            <td>8 groups</td>
+                        </tr>
+                        <tr>
+                            <td>Separator</td>
+                            <td>Dot (.)</td>
+                            <td>Colon (:)</td>
+                        </tr>
+                        <tr>
+                            <td>Numbers Used</td>
+                            <td>0-9 only</td>
+                            <td>0-9 and A-F</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Common IPv6 Address Examples</h2>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">Localhost (Loopback):</span>
+                    ::1<br>
+                    <small style="color: var(--text-secondary);">(This is IPv6's version of 127.0.0.1)</small>
+                </div>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">IPv6 with multiple zero groups:</span>
+                    2001:db8:0:0:0:0:0:1 → 2001:db8::1
+                </div>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">Link-local address:</span>
+                    fe80::1
+                </div>
+
+                <h2>Quick Reference: Reading IPv6</h2>
+                <ul>
+                    <li><strong>Letters A-F</strong> represent numbers 10-15</li>
+                    <li><strong>8 groups</strong> separated by colons</li>
+                    <li><strong>Leading zeros</strong> can be dropped in any group</li>
+                    <li><strong>::</strong> replaces one or more groups of zeros (use only once)</li>
+                    <li>Each group is <strong>16 bits</strong> (4 hex characters)</li>
+                </ul>
+
+                <div class="privacy-tip">
+                    <h3>🔍 See Your Own IPv6 Address</h3>
+                    <p>So, the next time you see letters in your IP address, don't panic. You aren't being hacked, and your Wi-Fi isn't speaking a dead language. You are simply looking at the modern internet's phone number: a highly efficient, compressed code designed to ensure every device on Earth has a unique home.</p>
+                    <p>Now that you know the secret language of IPv6, why not take a look at your own?</p>
+                    <p><a href="ipv6-checker.html" class="cta-link">→ Click here to use our FREE IPv6 Connection Checker</a></p>
+                    <p class="disclosure">See your unique IPv6 address format in action. Can you spot the zeros and the letters in yours?</p>
+                </div>
+
+                <div class="key-point">
+                    <h4>📝 Quick Quiz</h4>
+                    <p>Look at this address: 2001:db8::1</p>
+                    <p>How many groups of zeros are hidden in the :: ?<br>
+                    <strong>Answer:</strong> 6 groups! (2001:db8:0:0:0:0:0:1)</p>
+                </div>
+
+                <div class="navigation-links">
+                    <a href="Technical_Guide.html" class="nav-btn">← Back to Technical Guide</a>
+                    <a href="what-is-ipv6.html" class="nav-btn">Next: What is IPv6? →</a>
+                </div>
+
+                <div class="related-links">
+                    <div class="related-title">Related Topics</div>
+                    <div class="related-list">
+                        <a href="what-is-ipv6.html" class="related-tag">What is IPv6?</a>
+                        <a href="ipv4-vs-ipv6.html" class="related-tag">IPv4 vs IPv6</a>
+                        <a href="ipv6-checker.html" class="related-tag">IPv6 Checker</a>
+                        <a href="public-vs-private-ip.html" class="related-tag">Public vs Private IP</a>
+                        <a href="dont-use-ipv6.html" class="related-tag">Hidden Costs of IPv4</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Ativar link ativo no menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPage || 
+                    (currentPage === '' && linkHref === '/') ||
+                    (currentPage.includes('ipv6-format') && link.textContent.includes('Technical Guide'))) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
