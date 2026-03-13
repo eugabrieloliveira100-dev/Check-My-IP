@@ -1,1 +1,891 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is IPv6? The Ultimate Beginner's Guide - Technical Guide</title>
+    <meta name="description" content="Learn what IPv6 is, why it's needed, how it differs from IPv4, and check if your network is ready for the future of the internet.">
+    
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-hover: #1f6feb;
+            --success-green: #3fb950;
+            --error-red: #f85149;
+            --font-main: system-ui, -apple-system, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Container principal - MESMO para todas as páginas */
+        .site-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation Menu - MESMO para todas as páginas */
+        .nav-menu {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 5px 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        /* Card base - MESMA estrutura */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+        }
+
+        .card.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Header consistente */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+        }
+
+        .card-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Botões consistentes */
+        .btn {
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        .btn-copied {
+            background: var(--success-green) !important;
+            color: white !important;
+        }
+
+        /* Refresh button */
+        .refresh-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .refresh-btn:hover {
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .refresh-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .refresh-btn.spinning svg {
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Info sections */
+        .info-section {
+            margin-bottom: 24px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            gap: 12px;
+        }
+
+        .ip-value {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            color: #ffffff;
+            word-break: break-all;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: var(--border-color);
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: var(--text-primary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #444c56;
+        }
+
+        .copy-btn.copied {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .geo-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .isp-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .location-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Privacy Tip / CTA boxes */
+        .privacy-tip {
+            background: rgba(88, 166, 255, 0.08);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .privacy-tip h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .privacy-tip p {
+            font-size: 16px;
+            color: #ffffff;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 16px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .cta-link:hover {
+            text-decoration: underline;
+        }
+
+        .disclosure {
+            display: block;
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Search Container */
+        .search-container {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .search-wrapper {
+            display: flex;
+            gap: 12px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .search-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 20px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+            text-align: center;
+        }
+
+        #ipv6-section {
+            display: none;
+        }
+
+        /* Estilos específicos para artigos do Guia */
+        .article-content {
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .article-content h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+            color: #ffffff;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+            color: var(--accent-blue);
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0 16px 20px;
+            color: var(--text-primary);
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content code {
+            font-family: var(--font-mono);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: var(--accent-blue);
+        }
+
+        .tech-diagram {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .diagram-title {
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .diagram-flow {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .key-point {
+            background: rgba(88, 166, 255, 0.05);
+            border-left: 3px solid var(--accent-blue);
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .key-point h4 {
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(88, 166, 255, 0.1);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ip-example {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+
+        .ip-example-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .navigation-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .related-links {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .related-title {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .related-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .related-tag {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .related-tag:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .site-container {
+                max-width: 95%;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .card-title h1 {
+                font-size: 24px;
+            }
+            
+            .nav-menu {
+              flex-direction: column;
+              gap: 15px;
+              align-items: flex-start;
+           }
+    
+            .nav-links {
+               width: 100%;
+               justify-content: space-between;
+            }
+            
+            .info-row, .geo-info {
+                padding: 14px;
+            }
+            
+            .ip-value {
+                font-size: 16px;
+            }
+            
+            .privacy-tip {
+                padding: 20px;
+            }
+            
+            .article-content h2 {
+                font-size: 20px;
+            }
+            
+            .navigation-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .comparison-table {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+            }
+            
+            .card-title h1 {
+                font-size: 22px;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .refresh-btn {
+                align-self: flex-start;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .copy-btn {
+                align-self: flex-end;
+            }
+            
+            .search-wrapper {
+                flex-direction: column;
+            }
+            
+            .search-btn {
+                padding: 12px;
+            }
+            
+            .privacy-tip h3 {
+                font-size: 16px;
+            }
+            
+            .privacy-tip p {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 19px;
+            }
+            
+            .related-list {
+                flex-direction: column;
+            }
+            
+            .comparison-table {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-container">
+        <!-- Menu de Navegação (exatamente como fornecido) -->
+        <nav class="nav-menu">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="info.html">IP Guide</a>
+                <a href="ipv6-checker.html">IPv6 Checker</a>
+                <a href="whois-lookup.html">Whois Lookup</a>
+                <a href="Technical_Guide.html">Technical Guide</a>
+            </div>
+        </nav>
+
+        <!-- Conteúdo Principal do Artigo -->
+        <main class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h1>What is IPv6?</h1>
+                    <div class="card-subtitle">The Ultimate Beginner's Guide to the Future of the Internet</div>
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p>Think back to 20 years ago. The average home might have had a single desktop computer plugged into the wall, slowly dialing up to the internet. Today, the landscape is entirely different. We have smartphones, smart TVs, tablets, and even internet-connected refrigerators and lightbulbs.</p>
+
+                <p>In just two decades, the number of devices connected to the internet has exploded from a few hundred million to tens of billions. This massive boom in technology created a hidden problem behind the scenes, one that required a brilliant, future-proof solution: IPv6.</p>
+
+                <p>But what exactly is it, and why does the internet need it so urgently? Let's break it down.</p>
+
+                <div class="privacy-tip">
+                    <h3>🔍 Quick Check</h3>
+                    <p>Want to see if your network is already using IPv6? Visit our <a href="ipv6-checker.html" class="cta-link">IPv6 Connection Checker Tool</a> for instant results.</p>
+                </div>
+
+                <h2>The Basics: What is an IP Address?</h2>
+                <p>To understand the solution, we first need to understand the basics. Think of an IP (Internet Protocol) address exactly like your home's mailing address. If a mail carrier wants to deliver a package to you, they need your specific street number, city, and zip code.</p>
+
+                <p>The internet works the exact same way. When you want to watch a video on YouTube or load a webpage, those servers need to know exactly where to send the data. Your IP address is the unique digital address assigned to your device so that information can find its way directly to you.</p>
+
+                <h2>The Core Problem: Running Out of Space</h2>
+                <p>For decades, the internet relied on a system known as IPv4 (Internet Protocol version 4). This system functioned like a digital telephone directory that could generate roughly 4.3 billion unique addresses. Back in the 1980s, 4.3 billion addresses sounded like an infinite supply!</p>
+
+                <p>However, with the invention of the smartphone and the explosion of the "Internet of Things" (IoT), we quickly assigned all of those addresses. We essentially built a massive digital city but ran out of unique street numbers for all the new houses.</p>
+
+                <p>Network engineers call this dilemma IPv4 exhaustion. We haven't "broken" the internet, but without a new system, adding new devices securely and efficiently becomes incredibly difficult.</p>
+
+                <div class="key-point">
+                    <h4>📊 The Scale Problem</h4>
+                    <p>IPv4: 4.3 billion addresses<br>
+                    World population: ~8 billion people<br>
+                    Connected devices: ~30+ billion and growing</p>
+                </div>
+
+                <h2>The Hero: Enter IPv6</h2>
+                <p>So, exactly what is IPv6? Simply put, it is the next-generation addressing system for the internet. It was designed to replace the old system and provide enough digital addresses to last us, well, forever.</p>
+
+                <p>The main difference between IPv4 and IPv6 lies in their scale. While the old system used a 32-bit format (allowing for 4.3 billion addresses), IPv6 uses a massive 128-bit format.</p>
+
+                <div class="tech-diagram">
+                    <div class="diagram-title">IPv4 vs IPv6 Address Space Comparison</div>
+                    <div class="diagram-flow">
+                        IPv4: 32-bit → 4.3 billion addresses<br>
+                        ↓<br>
+                        IPv6: 128-bit → 340 undecillion addresses<br>
+                        (3.4 × 10³⁸)<br>
+                        ↓<br>
+                        If IPv4 fits in a golf ball,<br>
+                        IPv6 fills the entire Earth
+                    </div>
+                </div>
+
+                <p>To put this upgrade into perspective: if the total number of IPv4 addresses could fit inside a single golf ball, the number of IPv6 addresses would be enough to fill the entire size of the Earth. It provides enough unique IP addresses to assign one to every single atom on the surface of our planet!</p>
+
+                <h2>Why It Matters to You</h2>
+                <p>You might be wondering, "do I need IPv6 if my internet already works fine?" While the internet won't suddenly stop working without it, transitioning to this new system brings massive behind-the-scenes benefits to your daily browsing:</p>
+
+                <div class="key-point">
+                    <h4>🎮 Smoother Gaming and Video Calls</h4>
+                    <p>Because we ran out of old addresses, internet providers started using complicated workarounds called "NAT" (Network Address Translation) to share one address among many homes. IPv6 eliminates NAT, meaning direct connections, less lag for gamers, and fewer dropped video calls.</p>
+                </div>
+
+                <div class="key-point">
+                    <h4>⚡ Faster, Smarter Routing</h4>
+                    <p>IPv6 handles data much more efficiently. It allows data packets to find their way to your device faster, resulting in a slightly quicker and more reliable internet connection overall.</p>
+                </div>
+
+                <div class="key-point">
+                    <h4>🔒 Built-in Security</h4>
+                    <p>Security was an afterthought in the early days of the web. IPv6, however, was built with modern security features baked right into its core, including IPsec (Internet Protocol Security) which helps keep your data safer from interception.</p>
+                </div>
+
+                <div class="key-point">
+                    <h4>🏠 Ready for Smart Homes</h4>
+                    <p>From smart thermostats to internet-connected cars, every new gadget can have its own permanent, unique address without causing traffic jams on your home network.</p>
+                </div>
+
+                <h2>IPv4 vs. IPv6: Key Differences</h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>IPv4</th>
+                            <th>IPv6</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Address Size</td>
+                            <td>32-bit</td>
+                            <td>128-bit</td>
+                        </tr>
+                        <tr>
+                            <td>Format</td>
+                            <td>192.168.1.1 (decimal)</td>
+                            <td>2001:0db8:85a3::8a2e:0370:7334 (hex)</td>
+                        </tr>
+                        <tr>
+                            <td>Total Addresses</td>
+                            <td>4.3 billion</td>
+                            <td>340 undecillion (3.4×10³⁸)</td>
+                        </tr>
+                        <tr>
+                            <td>NAT Required</td>
+                            <td>Yes (due to scarcity)</td>
+                            <td>No (enough addresses for all)</td>
+                        </tr>
+                        <tr>
+                            <td>Security</td>
+                            <td>Optional (added later)</td>
+                            <td>Built-in (IPsec)</td>
+                        </tr>
+                        <tr>
+                            <td>Configuration</td>
+                            <td>Manual or DHCP</td>
+                            <td>Auto-configuration (SLAAC)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">IPv4 Example:</span>
+                    192.168.1.100
+                </div>
+
+                <div class="ip-example">
+                    <span class="ip-example-label">IPv6 Example:</span>
+                    2001:0db8:85a3:0000:0000:8a2e:0370:7334
+                </div>
+
+                <h2>Is Your Network Ready for the Future?</h2>
+                <p>The internet is already quietly upgrading around us. Major websites like Google, Facebook, and Netflix, mobile networks, and internet service providers are making the switch to ensure our digital world keeps growing smoothly.</p>
+
+                <p>However, not all home networks or older routers are fully updated yet. Don't get left behind on the old, crowded digital highway.</p>
+
+                <div class="privacy-tip">
+                    <h3>📡 Check Your IPv6 Status</h3>
+                    <p>It takes less than five seconds to check IPv6 status for your home or office.</p>
+                    <a href="ipv6-checker.html" class="cta-link">→ Use our free IPv6 Connection Checker tool</a>
+                    <p class="disclosure">Find out if your network is ready for the future of the internet!</p>
+                </div>
+
+                <h3>How to Check if You Have IPv6:</h3>
+                <ul>
+                    <li><strong>Visit our tool:</strong> <a href="ipv6-checker.html">IPv6 Checker</a> - shows your IPv4 and IPv6 addresses</li>
+                    <li><strong>On Windows:</strong> Open Command Prompt, type <code>ipconfig</code> and look for "IPv6 Address"</li>
+                    <li><strong>On Mac:</strong> System Settings > Network > Advanced > TCP/IP - look for IPv6 address</li>
+                    <li><strong>On your router:</strong> Log into your router admin panel and check the WAN/Internet status page</li>
+                </ul>
+
+                <h2>The Future is IPv6</h2>
+                <p>As we continue to add more devices to the internet - from cars to watches to home appliances - IPv6 becomes not just beneficial, but essential. The transition is happening gradually, with most modern operating systems and devices supporting both protocols simultaneously (dual-stack).</p>
+
+                <p>Understanding IPv6 helps you make informed decisions about your network equipment and ensures you're prepared as the internet continues to evolve. Whether you're a gamer looking for lower latency, a smart home enthusiast adding dozens of devices, or just someone who wants the fastest, most secure connection, IPv6 is paving the way forward.</p>
+
+                <div class="navigation-links">
+                    <a href="Technical_Guide.html" class="nav-btn">← Back to Technical Guide</a>
+                    <a href="ipv4-vs-ipv6.html" class="nav-btn">Next: IPv4 vs IPv6 Deep Dive →</a>
+                </div>
+
+                <div class="related-links">
+                    <div class="related-title">Related Topics</div>
+                    <div class="related-list">
+                        <a href="ipv4-vs-ipv6.html" class="related-tag">IPv4 vs IPv6</a>
+                        <a href="what-is-my-ip.html" class="related-tag">What is My IP</a>
+                        <a href="ipv6-checker.html" class="related-tag">IPv6 Checker</a>
+                        <a href="public-vs-private-ip.html" class="related-tag">Public vs Private IP</a>
+                        <a href="why-ip-changes.html" class="related-tag">Why IP Changes</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Ativar link ativo no menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPage || 
+                    (currentPage === '' && linkHref === '/') ||
+                    (currentPage.includes('what-is-ipv6') && link.textContent.includes('Technical Guide'))) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
