@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Happens If You Don't Use IPv6? - Technical Guide</title>
+    <meta name="description" content="Discover the hidden costs of sticking with IPv4: CGNAT issues, CAPTCHA loops, gaming NAT problems, smart home headaches, and why you're missing out.">
+    
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-hover: #1f6feb;
+            --success-green: #3fb950;
+            --error-red: #f85149;
+            --font-main: system-ui, -apple-system, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Container principal - MESMO para todas as páginas */
+        .site-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation Menu - MESMO para todas as páginas */
+        .nav-menu {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 5px 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        /* Card base - MESMA estrutura */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+        }
+
+        .card.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Header consistente */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+        }
+
+        .card-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Botões consistentes */
+        .btn {
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        .btn-copied {
+            background: var(--success-green) !important;
+            color: white !important;
+        }
+
+        /* Refresh button */
+        .refresh-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .refresh-btn:hover {
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .refresh-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .refresh-btn.spinning svg {
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Info sections */
+        .info-section {
+            margin-bottom: 24px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            gap: 12px;
+        }
+
+        .ip-value {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            color: #ffffff;
+            word-break: break-all;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: var(--border-color);
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: var(--text-primary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #444c56;
+        }
+
+        .copy-btn.copied {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .geo-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .isp-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .location-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Privacy Tip / CTA boxes */
+        .privacy-tip {
+            background: rgba(88, 166, 255, 0.08);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .privacy-tip h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .privacy-tip p {
+            font-size: 16px;
+            color: #ffffff;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 16px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .cta-link:hover {
+            text-decoration: underline;
+        }
+
+        .disclosure {
+            display: block;
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Search Container */
+        .search-container {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .search-wrapper {
+            display: flex;
+            gap: 12px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .search-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 20px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+            text-align: center;
+        }
+
+        #ipv6-section {
+            display: none;
+        }
+
+        /* Estilos específicos para artigos do Guia */
+        .article-content {
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .article-content h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+            color: #ffffff;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+            color: var(--accent-blue);
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0 16px 20px;
+            color: var(--text-primary);
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content code {
+            font-family: var(--font-mono);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: var(--accent-blue);
+        }
+
+        .tech-diagram {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .diagram-title {
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .diagram-flow {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .key-point {
+            background: rgba(88, 166, 255, 0.05);
+            border-left: 3px solid var(--accent-blue);
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .key-point h4 {
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(88, 166, 255, 0.1);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ip-example {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+
+        .ip-example-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .navigation-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .related-links {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .related-title {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .related-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .related-tag {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .related-tag:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .site-container {
+                max-width: 95%;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .card-title h1 {
+                font-size: 24px;
+            }
+            
+            .nav-menu {
+              flex-direction: column;
+              gap: 15px;
+              align-items: flex-start;
+           }
+    
+            .nav-links {
+               width: 100%;
+               justify-content: space-between;
+            }
+            
+            .info-row, .geo-info {
+                padding: 14px;
+            }
+            
+            .ip-value {
+                font-size: 16px;
+            }
+            
+            .privacy-tip {
+                padding: 20px;
+            }
+            
+            .article-content h2 {
+                font-size: 20px;
+            }
+            
+            .navigation-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .comparison-table {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+            }
+            
+            .card-title h1 {
+                font-size: 22px;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .refresh-btn {
+                align-self: flex-start;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .copy-btn {
+                align-self: flex-end;
+            }
+            
+            .search-wrapper {
+                flex-direction: column;
+            }
+            
+            .search-btn {
+                padding: 12px;
+            }
+            
+            .privacy-tip h3 {
+                font-size: 16px;
+            }
+            
+            .privacy-tip p {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 19px;
+            }
+            
+            .related-list {
+                flex-direction: column;
+            }
+            
+            .comparison-table {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-container">
+        <!-- Menu de Navegação (exatamente como fornecido) -->
+        <nav class="nav-menu">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="info.html">IP Guide</a>
+                <a href="ipv6-checker.html">IPv6 Checker</a>
+                <a href="whois-lookup.html">Whois Lookup</a>
+                <a href="Technical_Guide.html">Technical Guide</a>
+            </div>
+        </nav>
+
+        <!-- Conteúdo Principal do Artigo -->
+        <main class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h1>What Happens If You Don't Use IPv6?</h1>
+                    <div class="card-subtitle">The Hidden Costs of IPv4</div>
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p>You're still browsing the web. Your Netflix loads. Your email works. So why should you care about some technical upgrade called IPv6?</p>
+
+                <p>It's a fair question. On the surface, sticking with the old IPv4 standard seems harmless. But here's the uncomfortable truth: while the internet works without IPv6, you aren't getting the full experience. You're running a modern application on legacy infrastructure, and the cracks are starting to show.</p>
+
+                <p>If you haven't made the switch, you're likely dealing with issues you blame on your ISP or your hardware—when the real culprit is your lack of IPv6 connectivity. Here's what you're actually missing out on.</p>
+
+                <h2>The CGNAT Trap: Why You Live in a Digital Apartment Building</h2>
+                <p>To understand the pain of IPv4, you need to understand one critical problem: we ran out of IPv4 addresses. Since every device needs a unique address to talk to the internet, and there are none left, Internet Service Providers (ISPs) had to get creative.</p>
+
+                <p>Their solution is Carrier-Grade NAT (CGNAT).</p>
+
+                <h3>The Apartment Building Analogy</h3>
+                <p>Imagine the internet is the postal service. With a dedicated IPv4 address, you have a private mailbox at a single-family home. Your mail goes directly to you.</p>
+
+                <p>With CGNAT, your ISP forces you and hundreds of other customers to live in a massive apartment building—but you all share one single mailbox.</p>
+
+                <div class="tech-diagram">
+                    <div class="diagram-title">CGNAT: The Apartment Building</div>
+                    <div class="diagram-flow">
+                        IPv4 Dedicated: Your own house → Direct mail delivery<br>
+                        ↓<br>
+                        CGNAT: 500 customers → 1 shared IP address<br>
+                        ↓<br>
+                        The mailman (data) drops everything into the same box.<br>
+                        A "building manager" (the ISP's router) has to sort through it all and hand-deliver it to the correct apartment.
+                    </div>
+                </div>
+
+                <h3>Why This Ruins Your Day</h3>
+                <p>Living behind CGNAT sounds manageable in theory, but in practice, it causes two massive headaches:</p>
+
+                <div class="key-point">
+                    <h4>1. Endless CAPTCHA Loops</h4>
+                    <p>Have you ever searched for something on Google and been forced to click "I am not a robot" five times in a row? Or had to identify traffic lights in a grid for the third time today?</p>
+                    <p>This happens because websites see hundreds of users (you and your neighbors) all coming from the exact same public IP address. To the website, that traffic looks like a bot attack. So, they throw up roadblocks to slow down "the bad guys," and you—the innocent user—get caught in the net. If you are plagued by constant CAPTCHAs, CGNAT is the likely culprit.</p>
+                </div>
+
+                <div class="key-point">
+                    <h4>2. Getting Banned for Your Neighbor's Mistakes</h4>
+                    <p>Because you share an IP with strangers, you also share their reputation. If someone on your CGNAT block gets flagged for spamming or trying to hack a server, that entire IP address gets blacklisted. Suddenly, you can't access a forum or a streaming service because of something a complete stranger did.</p>
+                </div>
+
+                <h2>Gaming Nightmares: The "Strict NAT" Curse</h2>
+                <p>For gamers, IPv4 isn't just slow—it's actively hostile to your multiplayer experience.</p>
+
+                <p>When your console or PC is behind CGNAT, it doesn't have a door to the outside world. It has to ask the "building manager" (the ISP router) to pass messages for it. This results in what the gaming world calls NAT Types.</p>
+
+                <h3>Why You Can't Play With Friends</h3>
+                
+                <div class="key-point">
+                    <h4>IPv6 = Open NAT:</h4>
+                    <p>You have a direct line to the game server and other players. Connections are instant.</p>
+                </div>
+
+                <div class="key-point">
+                    <h4>IPv4 CGNAT = Strict/Moderate NAT:</h4>
+                    <p>Your console tells the game, "I want to join," but when the game server tries to reach you back, it hits the apartment building's main gate and gets stuck.</p>
+                </div>
+
+                <p>The practical consequences of not using IPv6 for gaming are brutal:</p>
+                <ul>
+                    <li>You get constant lag and high ping because your data is taking a detour through the ISP's overloaded NAT servers.</li>
+                    <li>You can't host multiplayer matches (like in Call of Duty or Halo).</li>
+                    <li>Voice chat cuts out or never connects.</li>
+                    <li>You see the dreaded error message: "Your NAT type is strict, which may affect your chat and gameplay."</li>
+                </ul>
+
+                <p>If you want the lowest possible ping and a direct connection to the server, you need IPv6.</p>
+
+                <h2>Smart Home (IoT) Headaches: Can't Access Your Own House</h2>
+                <p>Smart home enthusiasts face the biggest security and accessibility paradox with IPv4.</p>
+
+                <p>You buy a fancy security camera to watch your dog while you're at work, or a smart thermostat to warm up the house before you get home. But when you leave the house and try to connect via the app... it fails.</p>
+
+                <p>Here's why: You are trying to access a device that doesn't have a public address.</p>
+
+                <p>With IPv4, your camera is hiding behind that same shared mailbox (CGNAT). When you try to view the feed from your office, the internet doesn't know how to find it. Manufacturers try to fix this with "relay servers" or cloud bridges, but these are just band-aids. They introduce lag, require paid subscriptions, and create privacy risks by routing your video through a third party.</p>
+
+                <p>With IPv6, your camera gets its own unique, public-facing address (just like your house has a unique street address). You can connect directly to it, instantly and securely, without going through a slow middleman.</p>
+
+                <div class="tech-diagram">
+                    <div class="diagram-title">IPv4 vs IPv6 Smart Home Access</div>
+                    <div class="diagram-flow">
+                        IPv4: Camera → CGNAT → ISP → Relay Server → You<br>
+                        (Slow, insecure, requires subscription)<br><br>
+                        IPv6: Camera (Direct public address) ←→ You<br>
+                        (Instant, secure, direct connection)
+                    </div>
+                </div>
+
+                <h2>Future-Proofing: You're Driving in the Slow Lane</h2>
+                <p>Even if you don't care about gaming or cameras, the infrastructure is changing around you.</p>
+
+                <p>Major mobile carriers and content delivery networks are moving to IPv6-only networks. When you try to access these networks with an IPv4-only device, your data has to be "translated" back and forth at the border. This is called NAT64/DNS64, and it adds milliseconds of latency to every single request.</p>
+
+                <p>It might not be noticeable when loading a text email, but for streaming 4K video, low-latency cloud gaming (like GeForce Now or Xbox Cloud Gaming), or fast-paced browsing, those milliseconds add up. Staying on IPv4 means your data is always taking the long way home.</p>
+
+                <div class="privacy-tip">
+                    <h3>🔍 Don't Guess. Check Your IPv6 Status.</h3>
+                    <p>The good news is that you don't have to call your ISP and beg for an upgrade. Most modern ISPs already support IPv6. The problem is that it is often disabled by default on your router or device, leaving you stuck in the IPv4 slow lane without even knowing it.</p>
+                    <p>You might be suffering from CGNAT, strict NAT, and unnecessary lag right now without realizing a better connection is just a setting away.</p>
+                    <p>Don't wait until your gaming console kicks you from a match or your security camera goes offline again.</p>
+                    <p><a href="ipv6-checker.html" class="cta-link">→ Click here to Check My IPv6 Status</a></p>
+                    <p class="disclosure">Use our free, instant tool to see if your connection is truly modern, or if you're still trapped behind the IPv4 wall.</p>
+                </div>
+
+                <div class="key-point">
+                    <h4>📊 The Hidden Costs Summary</h4>
+                    <ul>
+                        <li><strong>CGNAT:</strong> You're sharing an IP with strangers</li>
+                        <li><strong>CAPTCHA Hell:</strong> Constant "prove you're human" checks</li>
+                        <li><strong>Gaming:</strong> Strict NAT, can't host games, voice chat issues</li>
+                        <li><strong>Smart Home:</strong> Can't access devices remotely</li>
+                        <li><strong>Speed:</strong> Extra latency from NAT translation</li>
+                        <li><strong>Reputation:</strong> Getting banned for neighbor's actions</li>
+                    </ul>
+                </div>
+
+                <p>The transition to IPv6 isn't just about keeping up with technology—it's about getting the internet experience you're already paying for. Don't let outdated protocols hold your connection back.</p>
+
+                <div class="navigation-links">
+                    <a href="Technical_Guide.html" class="nav-btn">← Back to Technical Guide</a>
+                    <a href="what-is-ipv6.html" class="nav-btn">Next: What is IPv6? →</a>
+                </div>
+
+                <div class="related-links">
+                    <div class="related-title">Related Topics</div>
+                    <div class="related-list">
+                        <a href="what-is-ipv6.html" class="related-tag">What is IPv6?</a>
+                        <a href="ipv4-vs-ipv6.html" class="related-tag">IPv4 vs IPv6</a>
+                        <a href="ipv6-checker.html" class="related-tag">IPv6 Checker</a>
+                        <a href="public-vs-private-ip.html" class="related-tag">Public vs Private IP</a>
+                        <a href="why-ip-changes.html" class="related-tag">Why IP Changes</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Ativar link ativo no menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPage || 
+                    (currentPage === '' && linkHref === '/') ||
+                    (currentPage.includes('dont-use-ipv6') && link.textContent.includes('Technical Guide'))) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
