@@ -878,9 +878,10 @@
             
             navLinks.forEach(link => {
                 const linkHref = link.getAttribute('href');
+                // Alteramos 'Technical Guide' para 'Guide IPv6' na regra abaixo
                 if (linkHref === currentPage || 
                     (currentPage === '' && linkHref === '/') ||
-                    (currentPage.includes('what-is-ipv6') && link.textContent.includes('Technical Guide'))) {
+                    (currentPage.includes('what-is-ipv6') && link.textContent.includes('Guide IPv6'))) {
                     link.classList.add('active');
                 } else {
                     link.classList.remove('active');
