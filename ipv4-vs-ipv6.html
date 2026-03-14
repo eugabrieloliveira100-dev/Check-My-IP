@@ -840,16 +840,22 @@
     </div>
 
     <script>
-        // Ativar link ativo no menu
+        // 1. Defina aqui de qual aba principal este artigo faz parte:
+        // Pode ser 'Guide IPv6', 'Technical Guide', 'IP Guide', etc.
+        const activeMenuName = 'Guide IPv6'; 
+
         document.addEventListener('DOMContentLoaded', function() {
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
             
             navLinks.forEach(link => {
                 const linkHref = link.getAttribute('href');
+                
+                // Verifica se a página atual é a exata do link OU se pertence à categoria definida acima
                 if (linkHref === currentPage || 
-                    (currentPage === '' && linkHref === '/') ||
-                    (currentPage.includes('ipv4-vs-ipv6') && link.textContent.includes('Technical Guide'))) {
+                   (currentPage === '' && linkHref === '/') ||
+                   link.textContent.includes(activeMenuName)) {
+                    
                     link.classList.add('active');
                 } else {
                     link.classList.remove('active');
