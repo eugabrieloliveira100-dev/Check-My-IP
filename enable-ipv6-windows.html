@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enable or Disable IPv6 in Windows 10 & 11 - Step-by-Step Guide</title>
+    <meta name="description" content="Step-by-step tutorial on how to enable or disable IPv6 in Windows 10 and Windows 11. Fix VPN issues, improve gaming, and test your IPv6 connection.">
+    
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-hover: #1f6feb;
+            --success-green: #3fb950;
+            --error-red: #f85149;
+            --font-main: system-ui, -apple-system, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Container principal - MESMO para todas as páginas */
+        .site-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation Menu - MESMO para todas as páginas */
+        .nav-menu {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 5px 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        /* Card base - MESMA estrutura */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+        }
+
+        .card.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Header consistente */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+        }
+
+        .card-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Botões consistentes */
+        .btn {
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        .btn-copied {
+            background: var(--success-green) !important;
+            color: white !important;
+        }
+
+        /* Refresh button */
+        .refresh-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .refresh-btn:hover {
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .refresh-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .refresh-btn.spinning svg {
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Info sections */
+        .info-section {
+            margin-bottom: 24px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            gap: 12px;
+        }
+
+        .ip-value {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            color: #ffffff;
+            word-break: break-all;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: var(--border-color);
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: var(--text-primary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #444c56;
+        }
+
+        .copy-btn.copied {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .geo-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .isp-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .location-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Privacy Tip / NordVPN Affiliate */
+        .privacy-tip {
+            background: rgba(88, 166, 255, 0.08);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .privacy-tip h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .privacy-tip p {
+            font-size: 16px;
+            color: #ffffff;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 16px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .cta-link:hover {
+            text-decoration: underline;
+        }
+
+        .disclosure {
+            display: block;
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Search Container */
+        .search-container {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .search-wrapper {
+            display: flex;
+            gap: 12px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .search-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 20px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+            text-align: center;
+        }
+
+        #ipv6-section {
+            display: none;
+        }
+
+        /* Estilos específicos para artigos do Guia */
+        .article-content {
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .article-content h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+            color: #ffffff;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+            color: var(--accent-blue);
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 16px 0 16px 20px;
+            color: var(--text-primary);
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-content code {
+            font-family: var(--font-mono);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: var(--accent-blue);
+        }
+
+        .tech-diagram {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .diagram-title {
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .diagram-flow {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .key-point {
+            background: rgba(88, 166, 255, 0.05);
+            border-left: 3px solid var(--accent-blue);
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .key-point h4 {
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .warning-box {
+            background: rgba(248, 81, 73, 0.08);
+            border-left: 3px solid var(--error-red);
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box h4 {
+            color: var(--error-red);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(88, 166, 255, 0.1);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ip-example {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-family: var(--font-mono);
+            font-size: 14px;
+        }
+
+        .ip-example-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .navigation-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .related-links {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .related-title {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .related-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .related-tag {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .related-tag:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .site-container {
+                max-width: 95%;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .card-title h1 {
+                font-size: 24px;
+            }
+            
+            .nav-menu {
+              flex-direction: column;
+              gap: 15px;
+              align-items: flex-start;
+           }
+    
+            .nav-links {
+               width: 100%;
+               justify-content: space-between;
+            }
+            
+            .info-row, .geo-info {
+                padding: 14px;
+            }
+            
+            .ip-value {
+                font-size: 16px;
+            }
+            
+            .privacy-tip {
+                padding: 20px;
+            }
+            
+            .article-content h2 {
+                font-size: 20px;
+            }
+            
+            .navigation-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .comparison-table {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+            }
+            
+            .card-title h1 {
+                font-size: 22px;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .refresh-btn {
+                align-self: flex-start;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .copy-btn {
+                align-self: flex-end;
+            }
+            
+            .search-wrapper {
+                flex-direction: column;
+            }
+            
+            .search-btn {
+                padding: 12px;
+            }
+            
+            .privacy-tip h3 {
+                font-size: 16px;
+            }
+            
+            .privacy-tip p {
+                font-size: 15px;
+            }
+            
+            .article-content h2 {
+                font-size: 19px;
+            }
+            
+            .related-list {
+                flex-direction: column;
+            }
+            
+            .comparison-table {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-container">
+        <!-- Menu de Navegação (exatamente como fornecido) -->
+        <nav class="nav-menu">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="info.html">IP Guide</a>
+                <a href="ipv6-checker.html">IPv6 Checker</a>
+                <a href="whois-lookup.html">Whois Lookup</a>
+                <a href="Technical_Guide.html">Technical Guide</a>
+            </div>
+        </nav>
+
+        <!-- Conteúdo Principal do Artigo -->
+        <main class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h1>How to Enable or Disable IPv6 in Windows 10 & 11 (Step-by-Step)</h1>
+                    <div class="card-subtitle">Windows Network Settings</div>
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p>Are you dealing with frustrating lag in your favorite online game? Or maybe your trusty old VPN suddenly stopped working after a Windows update?</p>
+
+                <p>The culprit might be lurking in your network adapter settings. It's called IPv6—your PC's modern "digital address" system.</p>
+
+                <p>Here's the thing: enabling IPv6 can unlock smoother gaming and future-proof your connection. But sometimes, disabling it is a temporary fix for buggy VPNs or network glitches.</p>
+
+                <p>This guide will walk you through exactly how to do both, step by step. No confusing tech jargon—just clear, friendly instructions.</p>
+
+                <h2>Before We Start: The One Thing You MUST Know</h2>
+                <p>Your Windows PC can only use IPv6 if your router and Internet Service Provider (ISP) also support it.</p>
+
+                <div class="key-point">
+                    <h4>🔌 The Electric Car Analogy</h4>
+                    <p>Think of it like this: you can own a state-of-the-art electric car (your PC), but you still need charging stations on your street (your router) and power from the grid (your ISP).</p>
+                </div>
+
+                <p>If you're not sure whether your network supports it, don't worry—we'll show you how to test everything at the end.</p>
+
+                <h2>The Ultimate Step-by-Step Guide</h2>
+                <p>This method works the same way on Windows 10 and Windows 11. Let's do this together.</p>
+
+                <h3>Step 1: Open Your Network Connections</h3>
+                <p>First, we need to open the magical "Network Connections" window. Here are two easy ways:</p>
+
+                <p><strong>Option A: The "Run" Trick (Fastest Method)</strong></p>
+                <ul>
+                    <li>Press the <code>Windows key + R</code> on your keyboard (hold both down at the same time)</li>
+                    <li>A small box called "Run" will pop up</li>
+                    <li>Type <code>ncpa.cpl</code> and hit Enter</li>
+                </ul>
+
+                <p><strong>Option B: The Control Panel Route</strong></p>
+                <ul>
+                    <li>Click the Start button</li>
+                    <li>Type Control Panel and open it</li>
+                    <li>Go to Network and Internet</li>
+                    <li>Click Network and Sharing Center</li>
+                    <li>On the left sidebar, click Change adapter settings</li>
+                </ul>
+
+                <p>Whichever path you choose, you should now see a list of your network connections.</p>
+
+                <h3>Step 2: Find Your Active Connection</h3>
+                <p>Look for the connection you're currently using:</p>
+                <ul>
+                    <li>If you're on Wi-Fi, look for <strong>Wi-Fi</strong> or <strong>Wireless Network Connection</strong></li>
+                    <li>If you're plugged in with a cable, look for <strong>Ethernet</strong> or <strong>Local Area Connection</strong></li>
+                </ul>
+                <p>The active one will usually show signal bars (for Wi-Fi) or a computer icon that doesn't have a red X on it.</p>
+
+                <h3>Step 3: Open the Properties</h3>
+                <ul>
+                    <li>Right-click on your active connection</li>
+                    <li>Select <strong>Properties</strong> from the menu that appears</li>
+                    <li>If Windows asks for permission to continue, just click <strong>Yes</strong>. You're in the right place.</li>
+                </ul>
+
+                <h3>Step 4: Find IPv6 in the List</h3>
+                <p>In the properties window, scroll down through the list of items. You're looking for:</p>
+                <p><strong>Internet Protocol Version 6 (TCP/IPv6)</strong></p>
+                <p>It will be somewhere in the middle of the list, usually right above or below the IPv4 version.</p>
+
+                <h3>Step 5: Enable or Disable IPv6</h3>
+                <p><strong>To ENABLE IPv6:</strong></p>
+                <ul>
+                    <li>Simply <strong>check the box</strong> next to Internet Protocol Version 6 (TCP/IPv6)</li>
+                    <li>Click <strong>OK</strong> at the bottom</li>
+                </ul>
+
+                <p><strong>To DISABLE IPv6:</strong></p>
+                <ul>
+                    <li><strong>Uncheck the box</strong> next to Internet Protocol Version 6 (TCP/IPv6)</li>
+                    <li>A warning might pop up—don't worry, just click <strong>Yes</strong></li>
+                    <li>Click <strong>OK</strong> at the bottom</li>
+                </ul>
+
+                <p>That's it! You've just changed your IPv6 settings.</p>
+
+                <div class="warning-box">
+                    <h4>⚠️ Important Warning: Should You Disable IPv6?</h4>
+                    <p>Microsoft strongly recommends keeping IPv6 enabled.</p>
+                    <p>Why? Because IPv6 isn't some experimental feature—it's a core part of modern Windows. Disabling it can actually cause problems, including:</p>
+                    <ul>
+                        <li>Slower network performance</li>
+                        <li>Some apps failing to connect properly</li>
+                        <li>Issues with Windows features like DirectAccess or BitLocker</li>
+                    </ul>
+                    <p><strong>When is it okay to disable IPv6?</strong> Only as a temporary troubleshooting step. For example:</p>
+                    <ul>
+                        <li>Testing if an old VPN works better with IPv6 off</li>
+                        <li>Diagnosing a specific network bug recommended by tech support</li>
+                        <li>Following instructions from your IT department</li>
+                    </ul>
+                    <p>If you disabled IPv6 to fix something, and it didn't help—or if the problem went away but you want the benefits of IPv6 back—simply follow the steps above and re-enable it.</p>
+                </div>
+
+                <div class="privacy-tip">
+                    <h3>🔍 The Ultimate Test: Did It Actually Work?</h3>
+                    <p>You've made the change. Now let's make sure it worked.</p>
+                    <p>Your computer might need a moment to apply the new settings. Sometimes a quick restart helps, but usually, it's instant.</p>
+                    <p>Here's where our free tool comes in:</p>
+                    <p><strong>👉 <a href="ipv6-checker.html" class="cta-link">Click Here to Use Our IPv6 Connection Checker</a> 👈</strong></p>
+                    <p>It takes just 5 seconds and tells you:</p>
+                    <ul>
+                        <li>✅ Whether your PC is using IPv6 right now</li>
+                        <li>✅ Your actual IPv6 address (if you have one)</li>
+                        <li>✅ If your network is ready for modern gaming and streaming</li>
+                    </ul>
+                    <p>No technical knowledge needed—just click and see the results instantly.</p>
+                </div>
+
+                <h2>Quick Troubleshooting Tips</h2>
+                
+                <div class="key-point">
+                    <h4>"I enabled IPv6, but the checker says I don't have it!"</h4>
+                    <p>Remember that prerequisite check? Your ISP or router might not support IPv6 yet. Try these steps:</p>
+                    <ul>
+                        <li>Restart your router (unplug it for 30 seconds, then plug it back in)</li>
+                        <li>Log into your router's settings and look for IPv6—make sure it's enabled</li>
+                        <li>Contact your ISP and ask if they offer IPv6 in your area</li>
+                    </ul>
+                </div>
+
+                <div class="key-point">
+                    <h4>"I disabled IPv6, but now my internet feels slower!"</h4>
+                    <p>That's possible! IPv6 is designed to be more efficient. Try re-enabling it and see if performance improves.</p>
+                </div>
+
+                <h2>You're in Control Now</h2>
+                <p>Whether you enabled IPv6 for that competitive gaming edge or temporarily disabled it to troubleshoot an old VPN, you now know exactly how to take control of your Windows network settings.</p>
+                <p>No more guessing. No more digging through confusing menus.</p>
+                <p>Ready to see your IPv6 status? Run our free checker and join the millions of users who know exactly where their connection stands.</p>
+
+                <div style="text-align: center; margin: 40px 0 20px;">
+                    <a href="ipv6-checker.html" class="btn btn-primary" style="font-size: 18px; padding: 14px 28px;">Check My IPv6 Connection Now</a>
+                </div>
+
+                <div class="navigation-links">
+                    <a href="Technical_Guide.html" class="nav-btn">← Back to Technical Guide</a>
+                    <a href="what-is-ipv6.html" class="nav-btn">Next: What is IPv6? →</a>
+                </div>
+
+                <div class="related-links">
+                    <div class="related-title">Related Topics</div>
+                    <div class="related-list">
+                        <a href="ipv6-checker.html" class="related-tag">IPv6 Checker Tool</a>
+                        <a href="check-isp-ipv6-support.html" class="related-tag">Check ISP IPv6 Support</a>
+                        <a href="ipv4-vs-ipv6.html" class="related-tag">IPv4 vs IPv6</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Ativar link ativo no menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+                // Marcar como ativo se for a página atual ou se for a página do guia técnico (para consistência)
+                if (linkHref === currentPage || 
+                    (currentPage === '' && linkHref === '/') ||
+                    (link.textContent.includes('Technical Guide') && currentPage.includes('enable-disable-ipv6-windows'))) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
