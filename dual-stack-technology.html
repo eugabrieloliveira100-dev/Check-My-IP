@@ -865,6 +865,9 @@
     </div>
 
     <script>
+        // 1. Define de qual aba principal este artigo faz parte:
+        const activeMenuName = 'Guide IPv6'; 
+
         // Ativar link ativo no menu
         document.addEventListener('DOMContentLoaded', function() {
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
@@ -872,9 +875,12 @@
             
             navLinks.forEach(link => {
                 const linkHref = link.getAttribute('href');
+                
+                // Verifica se a página atual é a exata do link OU se pertence à categoria
                 if (linkHref === currentPage || 
-                    (currentPage === '' && linkHref === '/') ||
-                    (currentPage.includes('dual-stack') && link.textContent.includes('Technical Guide'))) {
+                   (currentPage === '' && linkHref === '/') ||
+                   link.textContent.includes(activeMenuName)) {
+                    
                     link.classList.add('active');
                 } else {
                     link.classList.remove('active');
