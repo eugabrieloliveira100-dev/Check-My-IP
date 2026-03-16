@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VPN Blog & Guides - Security and Privacy</title>
-
-  
     
     <style>
         :root {
@@ -44,6 +42,43 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
+        }
+
+        /* Navigation Menu - MESMO da página de IP */
+        .nav-menu {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 5px 0;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-blue);
         }
 
         /* Cabeçalho da página de Blog */
@@ -195,12 +230,27 @@
             color: var(--accent-blue);
             font-weight: 600;
         }
+
+        /* Responsividade do menu */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="blog-container">
-      <!-- Menu de Navegação -->
+        
+        <!-- Navigation Menu - MESMO da página de IP -->
         <nav class="nav-menu">
             <div class="nav-links">
                 <a href="/">Home</a>
@@ -209,7 +259,7 @@
                 <a href="whois-lookup.html">Whois Lookup</a>
                 <a href="Technical_Guide.html">Technical Guide</a>
                 <a href="guide_ipv6.html">Guide IPv6</a>
-               <a href="guide-vpn.html" class="active">Guide VPN</a>
+                <a href="guide-vpn.html" class="active">Guide VPN</a>
             </div>
         </nav>
         
