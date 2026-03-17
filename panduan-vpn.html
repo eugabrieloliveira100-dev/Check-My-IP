@@ -38,7 +38,7 @@
             align-items: center;
         }
 
-        /* Container principal - EXATAMENTE como o da página de IP (max-width: 800px) */
+        /* Container principal */
         .site-container {
             width: 100%;
             max-width: 800px;
@@ -47,7 +47,7 @@
             align-items: center;
         }
 
-        /* Navigation Menu - EXATAMENTE como o da página de IP */
+        /* Navigation Menu */
         .nav-menu {
             width: 100%;
             max-width: 800px;
@@ -84,7 +84,7 @@
             border-bottom: 2px solid var(--accent-blue);
         }
 
-        /* Card base - MESMA estrutura da página de IP */
+        /* Card base */
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -95,14 +95,14 @@
             margin-top: 10px;
         }
 
-        /* Cabeçalho da página de Blog DENTRO do card */
+        /* Cabeçalho da página de Blog */
         .blog-page-header {
             text-align: center;
             margin-bottom: 32px;
         }
 
         .blog-page-header h1 {
-            font-size: 28px; /* Mesmo tamanho do h1 da página de IP */
+            font-size: 28px;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 12px;
@@ -114,7 +114,7 @@
             line-height: 1.5;
         }
 
-        /* A MÁGICA DO GRID (Responsivo) */
+        /* Grid de cards */
         .blog-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -129,7 +129,7 @@
             }
         }
 
-        /* Estilo Individual de cada Cartão */
+        /* Estilo Individual de cada Cartão - SEM IMAGEM */
         .blog-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -154,23 +154,8 @@
             height: 100%;
         }
 
-        .card-image-wrapper {
-            width: 100%;
-            height: 180px;
-            overflow: hidden;
-            background-color: #21262d;
-        }
-
-        .card-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .blog-card:hover .card-image-wrapper img {
-            transform: scale(1.05);
-        }
+        /* WRAPPER DE IMAGEM REMOVIDO - não há mais espaço para imagem */
+        /* O conteúdo começa direto no card, sem imagem */
 
         .card-content {
             padding: 20px;
@@ -243,7 +228,7 @@
             font-weight: 600;
         }
 
-        /* Responsividade igual à página de IP */
+        /* Responsividade */
         @media (max-width: 768px) {
             .site-container {
                 max-width: 95%;
@@ -282,7 +267,7 @@
 </head>
 <body>
     <div class="site-container">
-        <!-- Navigation Menu - EXATAMENTE como na imagem (mesma posição e estilo) -->
+        <!-- Navigation Menu -->
         <nav class="nav-menu">
             <div class="nav-links">
                 <a href="/">Home</a>
@@ -296,7 +281,7 @@
             </div>
         </nav>
 
-        <!-- Card principal - MESMA ESTRUTURA da página de IP -->
+        <!-- Card principal -->
         <main class="card">
             <!-- Cabeçalho do blog dentro do card -->
             <div class="blog-page-header">
@@ -304,14 +289,11 @@
                 <p>Tips internet cepat, aman, dan tanpa blokir (Guides in Indonesian)</p>
             </div>
 
-            <!-- Grid de cards dentro do card principal -->
+            <!-- Grid de cards dentro do card principal - TODOS SEM IMAGEM -->
             <div class="blog-grid">
-                <!-- PRIMEIRO CARD - LINK ATUALIZADO PARA https://checkmyip.today/vpn-di-Indonesia.html -->
+                <!-- PRIMEIRO CARD - SEM IMAGEM -->
                 <article class="blog-card">
                     <a href="https://checkmyip.today/vpn-di-Indonesia.html" class="blog-card-link">
-                        <div class="card-image-wrapper">
-                            <img src="https://unsplash.com/pt-br/fotografias/macbook-pro-na-mesa-de-madeira-marrom-z-upQITw4fY">
-                        </div>
                         <div class="card-content">
                             <div class="card-tags">
                                 <span class="tag privacy">Privacy & Bypass</span>
@@ -326,12 +308,9 @@
                     </a>
                 </article>
 
-                <!-- DEMAIS CARDS PERMANECEM IGUAIS -->
+                <!-- SEGUNDO CARD - SEM IMAGEM -->
                 <article class="blog-card">
                     <a href="#" class="blog-card-link">
-                        <div class="card-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop" alt="Gaming Ping">
-                        </div>
                         <div class="card-content">
                             <div class="card-tags">
                                 <span class="tag gaming">Gaming</span>
@@ -346,11 +325,9 @@
                     </a>
                 </article>
 
+                <!-- TERCEIRO CARD - SEM IMAGEM -->
                 <article class="blog-card">
                     <a href="#" class="blog-card-link">
-                        <div class="card-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=800&auto=format&fit=crop" alt="Netflix US">
-                        </div>
                         <div class="card-content">
                             <div class="card-tags">
                                 <span class="tag streaming">Streaming</span>
@@ -365,11 +342,9 @@
                     </a>
                 </article>
 
+                <!-- QUARTO CARD - SEM IMAGEM -->
                 <article class="blog-card">
                     <a href="#" class="blog-card-link">
-                        <div class="card-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=800&auto=format&fit=crop" alt="WhatsApp Call">
-                        </div>
                         <div class="card-content">
                             <div class="card-tags">
                                 <span class="tag privacy">Private Chat</span>
@@ -384,11 +359,9 @@
                     </a>
                 </article>
 
+                <!-- QUINTO CARD - SEM IMAGEM -->
                 <article class="blog-card">
                     <a href="#" class="blog-card-link">
-                        <div class="card-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=800&auto=format&fit=crop" alt="Remote Work">
-                        </div>
                         <div class="card-content">
                             <div class="card-tags">
                                 <span class="tag gaming">Remote Access</span>
@@ -403,11 +376,9 @@
                     </a>
                 </article>
 
+                <!-- SEXTO CARD - SEM IMAGEM -->
                 <article class="blog-card">
                     <a href="#" class="blog-card-link">
-                        <div class="card-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?q=80&w=800&auto=format&fit=crop" alt="Public WiFi">
-                        </div>
                         <div class="card-content">
                             <div class="card-tags">
                                 <span class="tag streaming">Security</span>
