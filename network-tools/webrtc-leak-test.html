@@ -52,7 +52,7 @@
             align-items: center;
         }
 
-        /* Navigation Menu - EXATAMENTE IGUAL AO PRIMEIRO SITE */
+        /* Navigation Menu - EXATAMENTE IGUAL AO PRIMEIRO SITE COM OS LINKS CORRETOS */
         .nav-menu {
             width: 100%;
             max-width: 800px;
@@ -162,6 +162,11 @@
         .dropdown-content a:hover {
             background-color: rgba(88, 166, 255, 0.1);
             color: var(--accent-blue);
+        }
+
+        .dropdown-content a.active {
+            color: var(--text-primary);
+            background-color: rgba(88, 166, 255, 0.15);
         }
 
         /* Card base */
@@ -478,12 +483,12 @@
 </head>
 <body>
     <div class="site-container">
-        <!-- Navigation Menu - EXATAMENTE IGUAL AO PRIMEIRO SITE -->
+        <!-- Navigation Menu - COM OS LINKS CORRETOS DO SITE DE REFERÊNCIA -->
         <nav class="nav-menu">
             <div class="nav-links">
                 <a href="/">Home</a>
                 
-                <!-- Dropdown Network Tools - COM OS 3 ITENS -->
+                <!-- Dropdown Network Tools - COM OS 3 ITENS E LINKS CORRETOS -->
                 <div class="dropdown">
                     <span class="dropdown-title">
                         Network Tools
@@ -496,7 +501,7 @@
                     </div>
                 </div>
                 
-                <!-- Demais links mantidos na mesma ordem -->
+                <!-- Demais links mantidos na mesma ordem com os caminhos corretos -->
                 <a href="ipv6-guide/guide-ipv6.html">Guide IPv6</a>
                 <a href="id/panduan-vpn.html">Panduan VPN</a>
             </div>
