@@ -47,7 +47,7 @@
             align-items: center;
         }
 
-        /* Navigation Menu - MESMO para todas as páginas */
+        /* Navigation Menu - MODIFICADO com dropdown corrigido (IGUAL AO PRIMEIRO SITE) */
         .nav-menu {
             width: 100%;
             max-width: 800px;
@@ -57,12 +57,15 @@
             padding: 15px 0;
             margin-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            z-index: 100;
         }
 
         .nav-links {
             display: flex;
             gap: 20px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-menu a {
@@ -81,6 +84,82 @@
         .nav-menu a.active {
             color: var(--text-primary);
             border-bottom: 2px solid var(--accent-blue);
+        }
+
+        /* Dropdown Menu Styles - CORRIGIDO para manter o menu aberto */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-title {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dropdown-title:hover {
+            color: var(--accent-blue);
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            min-width: 180px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            z-index: 1000;
+            padding: 4px 0;
+        }
+
+        /* CORREÇÃO: Criar uma ponte invisível entre o título e o dropdown */
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: transparent;
+        }
+
+        /* Manter o dropdown visível quando o mouse está sobre ele ou sobre o título */
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--text-secondary);
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: var(--accent-blue);
         }
 
         /* Card base - MESMA estrutura */
@@ -582,8 +661,6 @@
             background: rgba(88, 166, 255, 0.1);
         }
 
-        /* REMOVIDO: .related-links e tudo relacionado a ele */
-
         /* Tool Integration */
         .tool-integration {
             background: rgba(88, 166, 255, 0.08);
@@ -617,7 +694,7 @@
             text-decoration: underline;
         }
 
-        /* Responsividade */
+        /* Responsividade - ATUALIZADA com ajustes do dropdown */
         @media (max-width: 768px) {
             .site-container {
                 max-width: 95%;
@@ -639,7 +716,8 @@
             
             .nav-links {
                 width: 100%;
-                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 15px;
             }
             
             .info-row, .geo-info {
@@ -669,6 +747,31 @@
             
             .stats-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            /* Ajuste do dropdown para mobile */
+            .dropdown {
+                width: 100%;
+            }
+            
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                margin-top: 10px;
+                width: 100%;
+                display: none;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .dropdown::after {
+                display: none;
+            }
+            
+            .dropdown-content a {
+                white-space: normal;
             }
         }
 
@@ -729,14 +832,27 @@
 </head>
 <body>
     <div class="site-container">
-        <!-- Menu de Navegação -->
+        <!-- Navigation Menu - MODIFICADO com dropdown corrigido (IGUAL AO PRIMEIRO SITE) -->
         <nav class="nav-menu">
             <div class="nav-links">
                 <a href="/">Home</a>
-                <a href="../network-tools/ipv6-checker.html">IPv6 Checker</a>
-                <a href="../network-tools/whois-lookup.html">Whois Lookup</a>
-                <a href="/ipv6-guide/guide-ipv6.html">Guide IPv6</a>
-                <a href="../id/panduan-vpn.html">Panduan VPN</a>
+                
+                <!-- Dropdown Network Tools - COM OS 3 ITENS -->
+                <div class="dropdown">
+                    <span class="dropdown-title">
+                        Network Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </span>
+                    <div class="dropdown-content">
+                        <a href="/network-tools/ipv6-checker.html">IPv6 Checker</a>
+                        <a href="/network-tools/whois-lookup.html">Whois Lookup</a>
+                        <a href="/network-tools/webrtc-leak-test.html">WebRTC Leak Test</a>
+                    </div>
+                </div>
+                
+                <!-- Demais links mantidos na mesma ordem -->
+                <a href="/ipv6-guide/guide-ipv6.html" class="active">Guide IPv6</a>
+                <a href="/id/panduan-vpn.html">Panduan VPN</a>
             </div>
         </nav>
 
@@ -809,7 +925,7 @@
 
                 <div class="tool-integration">
                     <h3>🔍 Check Your Current IP</h3>
-                    <p>Want to see if you're using IPv4 or IPv6? Use our <a href="info.html" class="tool-link">IP Checker Tool</a> to see your current IP address details.</p>
+                    <p>Want to see if you're using IPv4 or IPv6? Use our <a href="/" class="tool-link">IP Checker Tool</a> to see your current IP address details.</p>
                 </div>
 
                 <h2>IPv6: The Future That's Already Here</h2>
@@ -947,7 +1063,7 @@
 
                 <div class="tool-integration">
                     <h3>📡 Test Your IPv6 Support</h3>
-                    <p>Curious if your network supports IPv6? Use our <a href="ipv6-checker.html" class="tool-link">IPv6 Checker Tool</a> to find out instantly.</p>
+                    <p>Curious if your network supports IPv6? Use our <a href="/network-tools/ipv6-checker.html" class="tool-link">IPv6 Checker Tool</a> to find out instantly.</p>
                 </div>
 
                 <h2>So... Which One Am I Using?</h2>
@@ -993,9 +1109,9 @@
                 <!-- REMOVIDO: Seção Related Links -->
                 
                 <div class="navigation-links">
-                    <a href="ipadress.html" class="nav-btn">← Previous: What is My IP Address?</a>
-                    <a href="Technical_Guide.html" class="nav-btn">↑ Back to Technical Guide</a>
-                    <a href="-no-ipv6-consequences.html class="nav-btn">Next: Consequences of not using IPv6→</a>
+                    <a href="/ipv6-guide/ipadress.html" class="nav-btn">← Previous: What is My IP Address?</a>
+                    <a href="/ipv6-guide/Technical_Guide.html" class="nav-btn">↑ Back to Technical Guide</a>
+                    <a href="/ipv6-guide/-no-ipv6-consequences.html" class="nav-btn">Next: Consequences of not using IPv6 →</a>
                 </div>
 
             </div>
@@ -1007,16 +1123,23 @@
         document.addEventListener('DOMContentLoaded', function() {
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
+            const dropdownLinks = document.querySelectorAll('.dropdown-content a');
             
+            // Handle regular nav links (excluding dropdown)
             navLinks.forEach(link => {
                 const linkHref = link.getAttribute('href');
                 if (linkHref === currentPage || 
                     (currentPage === '' && linkHref === '/') ||
-                    (currentPage.includes('ipv4-vs-ipv6') && link.textContent.includes('Technical Guide'))) {
+                    (currentPage.includes('ipv4-vs-ipv6') && link.textContent.includes('Guide IPv6'))) {
                     link.classList.add('active');
                 } else {
                     link.classList.remove('active');
                 }
+            });
+            
+            // Handle dropdown links (remove active class from all first)
+            dropdownLinks.forEach(link => {
+                link.classList.remove('active');
             });
         });
     </script>
