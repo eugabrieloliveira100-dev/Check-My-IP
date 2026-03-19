@@ -5,81 +5,250 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebRTC Leak Test - CheckMyIP.today</title>
     <meta name="description" content="Test if your browser or free VPN is leaking your real IP address through WebRTC vulnerabilities.">
+    
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-blue: #3b82f6;
-            --accent-hover: #2563eb;
-            --alert-red: #ef4444;
-            --alert-bg: rgba(239, 68, 68, 0.1);
-            --safe-green: #10b981;
-            --safe-bg: rgba(16, 185, 129, 0.1);
-            --border-color: #334155;
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-hover: #1f6feb;
+            --success-green: #3fb950;
+            --error-red: #f85149;
+            --warning-orange: #f0883e;
+            --font-main: system-ui, -apple-system, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            --alert-red: #f85149;
+            --alert-bg: rgba(248, 81, 73, 0.1);
+            --safe-green: #3fb950;
+            --safe-bg: rgba(63, 185, 80, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Nav Bar (Com caminhos absolutos corretos) */
-        nav {
-            background-color: var(--bg-card);
-            padding: 1rem 2rem;
+        /* Container principal */
+        .site-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation Menu - EXATAMENTE IGUAL AO PRIMEIRO SITE */
+        .nav-menu {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            z-index: 100;
+        }
+
+        .nav-links {
             display: flex;
             gap: 20px;
+            align-items: center;
         }
-        nav a {
-            color: var(--text-muted);
+
+        .nav-menu a {
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 14px;
             font-weight: 500;
-        }
-        nav a:hover, nav a.active {
-            color: var(--text-main);
-        }
-
-        /* Container Principal */
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
+            transition: color 0.2s;
+            padding: 5px 0;
         }
 
-        .header {
-            margin-bottom: 30px;
+        .nav-menu a:hover {
+            color: var(--accent-blue);
         }
-        .header h1 {
-            font-size: 2rem;
-            margin-bottom: 5px;
+
+        .nav-menu a.active {
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-blue);
         }
-        .header p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+
+        /* Dropdown Menu Styles - EXATAMENTE IGUAL AO PRIMEIRO SITE */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-title {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dropdown-title:hover {
+            color: var(--accent-blue);
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            min-width: 180px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            z-index: 1000;
+            padding: 4px 0;
+        }
+
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: transparent;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--text-secondary);
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: var(--accent-blue);
+        }
+
+        /* Card base */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+        }
+
+        /* Header */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+        }
+
+        .card-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Botões */
+        .btn {
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 13px;
         }
 
         /* Bloco do Teste */
-        .test-card {
-            background-color: var(--bg-card);
+        .test-section {
+            background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
+            padding: 32px;
+            margin-bottom: 32px;
             text-align: center;
         }
 
         .btn-run {
-            background-color: var(--accent-blue);
+            background: var(--accent-blue);
             color: white;
             border: none;
             padding: 12px 30px;
@@ -88,150 +257,302 @@
             border-radius: 8px;
             cursor: pointer;
             transition: background 0.3s ease;
+            margin-top: 20px;
         }
+        
         .btn-run:hover {
-            background-color: var(--accent-hover);
+            background: var(--accent-hover);
         }
+        
         .btn-run:disabled {
-            background-color: var(--border-color);
+            background: var(--border-color);
             cursor: not-allowed;
         }
 
         /* Resultados */
         .results-area {
-            display: none; /* Escondido até rodar o teste */
+            display: none;
             margin-top: 30px;
             text-align: left;
         }
 
         .ip-box {
-            background-color: var(--bg-dark);
+            background: var(--bg-color);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 15px;
+            padding: 16px;
+            margin-bottom: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .ip-label {
-            color: var(--text-muted);
-            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         .ip-value {
-            font-size: 1.2rem;
-            font-weight: bold;
-            font-family: monospace;
+            font-family: var(--font-mono);
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 600;
         }
 
-        /* Alertas de Vulnerabilidade */
+        /* Alertas */
         .alert-box {
             display: none;
             border-radius: 8px;
             padding: 20px;
-            margin-top: 25px;
+            margin-top: 20px;
             border: 1px solid transparent;
         }
 
         .alert-danger {
-            background-color: var(--alert-bg);
+            background: var(--alert-bg);
             border-color: var(--alert-red);
         }
 
         .alert-danger h3 {
             color: var(--alert-red);
             margin-top: 0;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 18px;
+        }
+
+        .alert-box h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .alert-box p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
         }
 
         .cta-button {
             display: inline-block;
-            background-color: var(--accent-blue);
+            background: var(--accent-blue);
             color: white;
             text-decoration: none;
             padding: 10px 20px;
             border-radius: 6px;
-            font-weight: bold;
-            margin-top: 15px;
-            font-size: 0.9rem;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-hover);
         }
 
         /* Seção Educacional */
         .info-section {
-            margin-top: 40px;
+            margin-top: 32px;
         }
+
         .info-section h2 {
-            font-size: 1.4rem;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
         }
+
         .info-section p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .info-section ul {
+            color: var(--text-secondary);
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .info-section li {
+            margin-bottom: 8px;
+        }
+
+        /* Responsividade - EXATAMENTE IGUAL AO PRIMEIRO SITE */
+        @media (max-width: 768px) {
+            .site-container {
+                max-width: 95%;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+            
+            .card-title h1 {
+                font-size: 24px;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .test-section {
+                padding: 24px;
+            }
+            
+            .ip-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .ip-value {
+                font-size: 16px;
+            }
+            
+            .dropdown {
+                width: 100%;
+            }
+            
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                margin-top: 10px;
+                width: 100%;
+                display: none;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .dropdown::after {
+                display: none;
+            }
+            
+            .dropdown-content a {
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+            }
+            
+            .card-title h1 {
+                font-size: 22px;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .test-section {
+                padding: 20px;
+            }
+            
+            .btn-run {
+                width: 100%;
+                padding: 12px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <nav>
-        <a href="https://checkmyip.today/">Home</a>
-        <a href="https://checkmyip.today/network-tools/ipv6-checker.html">IPv6 Checker</a>
-        <a href="https://checkmyip.today/network-tools/whois-lookup.html">Whois Lookup</a>
-        <a href="https://checkmyip.today/network-tools/webrtc-leak-test.html" class="active">WebRTC Leak Test</a>
-        <a href="https://checkmyip.today/ipv6-guide/guide-ipv6.html">Guide IPv6</a>
-        <a href="https://checkmyip.today/id/panduan-vpn.html">Panduan VPN</a>
-    </nav>
-
-    <div class="container">
-        <div class="header">
-            <h1>WebRTC Leak Test</h1>
-            <p>BROWSER VULNERABILITY DIAGNOSTIC</p>
-        </div>
-
-        <div class="test-card">
-            <p style="color: var(--text-muted); margin-bottom: 25px;">
-                WebRTC is a browser feature that can leak your real IP address, even if you are using a VPN or Proxy. Click below to scan your browser for hidden leaks.
-            </p>
-            <button class="btn-run" id="startBtn" onclick="runWebRTC()">Scan For IP Leaks</button>
-
-            <div class="results-area" id="resultsArea">
-                <div class="ip-box">
-                    <span class="ip-label">Public IP Leaked via WebRTC</span>
-                    <span class="ip-value" id="publicIpResult">Scanning...</span>
-                </div>
-
-                <div class="alert-box alert-danger" id="dangerAlert">
-                    <h3>⚠️ Privacy Vulnerability Detected</h3>
-                    <p>Your browser is actively leaking your IP address through WebRTC. If you are using a free VPN or Proxy, it is completely bypassing it and exposing your real location to websites.</p>
-                    <a href="https://checkmyip.today/id/panduan-vpn.html" class="cta-button">See Recommended VPNs with WebRTC Protection →</a>
+    <div class="site-container">
+        <!-- Navigation Menu - EXATAMENTE IGUAL AO PRIMEIRO SITE -->
+        <nav class="nav-menu">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                
+                <!-- Dropdown Network Tools - COM OS 3 ITENS -->
+                <div class="dropdown">
+                    <span class="dropdown-title">
+                        Network Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </span>
+                    <div class="dropdown-content">
+                        <a href="network-tools/ipv6-checker.html">IPv6 Checker</a>
+                        <a href="network-tools/whois-lookup.html">Whois Lookup</a>
+                        <a href="network-tools/webrtc-leak-test.html" class="active">WebRTC Leak Test</a>
+                    </div>
                 </div>
                 
-                <div class="alert-box" id="safeAlert" style="background-color: var(--safe-bg); border-color: var(--safe-green);">
-                    <h3 style="color: var(--safe-green); margin-top: 0;">✅ No Leaks Detected</h3>
-                    <p style="color: var(--text-muted);">Your browser did not leak any public IPs via WebRTC. If you are using a premium VPN, its built-in leak protection is working correctly.</p>
-                </div>
+                <!-- Demais links mantidos na mesma ordem -->
+                <a href="ipv6-guide/guide-ipv6.html">Guide IPv6</a>
+                <a href="id/panduan-vpn.html">Panduan VPN</a>
             </div>
-        </div>
+        </nav>
 
-        <div class="info-section">
-            <h2>What is a WebRTC Leak?</h2>
-            <p>Web Real-Time Communication (WebRTC) is a technology built into modern browsers like Chrome, Firefox, and Edge that allows voice and video chat without plugins. To create a fast peer-to-peer connection, WebRTC needs to bypass firewalls and discover your true IP address.</p>
-            <p>The flaw is that any website can run a tiny, hidden JavaScript code (like the one running on this page) to request your IP address using WebRTC. Because this happens directly inside the browser, <strong>it bypasses standard proxies and free VPN extensions</strong>.</p>
-            
-            <h2 style="margin-top: 30px;">How to Fix WebRTC Leaks</h2>
-            <p>There are two main ways to protect yourself from WebRTC leaks:</p>
-            <ul style="color: var(--text-muted);">
-                <li><strong>Use a Premium VPN (Recommended):</strong> Top-tier VPNs like ExpressVPN and NordVPN operate at the operating system level, creating a secure network adapter that forces even WebRTC traffic through the encrypted tunnel.</li>
-                <li><strong>Disable WebRTC in your Browser:</strong> You can install browser extensions like "WebRTC Network Limiter" or dive into your browser's advanced settings (like <code>about:config</code> in Firefox) to disable the feature entirely, though this may break some video conferencing websites.</li>
-            </ul>
-        </div>
+        <!-- Card principal -->
+        <main class="card">
+            <!-- Header -->
+            <header class="card-header">
+                <div class="card-title">
+                    <h1>WebRTC Leak Test</h1>
+                    <div class="card-subtitle">BROWSER VULNERABILITY DIAGNOSTIC</div>
+                </div>
+            </header>
+
+            <!-- Test Section -->
+            <section class="test-section">
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                    WebRTC is a browser feature that can leak your real IP address, even if you are using a VPN or Proxy. Click below to scan your browser for hidden leaks.
+                </p>
+                
+                <button class="btn-run" id="startBtn" onclick="runWebRTC()">Scan For IP Leaks</button>
+
+                <div class="results-area" id="resultsArea">
+                    <div class="ip-box">
+                        <span class="ip-label">Public IP Leaked via WebRTC</span>
+                        <span class="ip-value" id="publicIpResult">Scanning...</span>
+                    </div>
+
+                    <div class="alert-box alert-danger" id="dangerAlert">
+                        <h3>⚠️ Privacy Vulnerability Detected</h3>
+                        <p>Your browser is actively leaking your IP address through WebRTC. If you are using a free VPN or Proxy, it is completely bypassing it and exposing your real location to websites.</p>
+                        <a href="https://checkmyip.today/id/panduan-vpn.html" class="cta-button">See Recommended VPNs with WebRTC Protection →</a>
+                    </div>
+                    
+                    <div class="alert-box" id="safeAlert" style="background: var(--safe-bg); border-color: var(--safe-green);">
+                        <h3 style="color: var(--safe-green);">✅ No Leaks Detected</h3>
+                        <p style="color: var(--text-secondary);">Your browser did not leak any public IPs via WebRTC. If you are using a premium VPN, its built-in leak protection is working correctly.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Info Section -->
+            <section class="info-section">
+                <h2>What is a WebRTC Leak?</h2>
+                <p>Web Real-Time Communication (WebRTC) is a technology built into modern browsers like Chrome, Firefox, and Edge that allows voice and video chat without plugins. To create a fast peer-to-peer connection, WebRTC needs to bypass firewalls and discover your true IP address.</p>
+                <p>The flaw is that any website can run a tiny, hidden JavaScript code (like the one running on this page) to request your IP address using WebRTC. Because this happens directly inside the browser, <strong>it bypasses standard proxies and free VPN extensions</strong>.</p>
+                
+                <h2 style="margin-top: 30px;">How to Fix WebRTC Leaks</h2>
+                <p>There are two main ways to protect yourself from WebRTC leaks:</p>
+                <ul style="color: var(--text-secondary);">
+                    <li><strong>Use a Premium VPN (Recommended):</strong> Top-tier VPNs like ExpressVPN and NordVPN operate at the operating system level, creating a secure network adapter that forces even WebRTC traffic through the encrypted tunnel.</li>
+                    <li><strong>Disable WebRTC in your Browser:</strong> You can install browser extensions like "WebRTC Network Limiter" or dive into your browser's advanced settings (like <code>about:config</code> in Firefox) to disable the feature entirely, though this may break some video conferencing websites.</li>
+                </ul>
+            </section>
+        </main>
     </div>
 
     <script>
