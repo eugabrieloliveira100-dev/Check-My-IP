@@ -48,7 +48,7 @@
             align-items: center;
         }
 
-        /* Navigation Menu - MESMO para todas as páginas */
+        /* Navigation Menu - MODIFICADO com dropdown corrigido (IGUAL AO PRIMEIRO SITE) */
         .nav-menu {
             width: 100%;
             max-width: 800px;
@@ -58,12 +58,15 @@
             padding: 15px 0;
             margin-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            z-index: 100;
         }
 
         .nav-links {
             display: flex;
             gap: 20px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-menu a {
@@ -82,6 +85,82 @@
         .nav-menu a.active {
             color: var(--text-primary);
             border-bottom: 2px solid var(--accent-blue);
+        }
+
+        /* Dropdown Menu Styles - CORRIGIDO para manter o menu aberto */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-title {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dropdown-title:hover {
+            color: var(--accent-blue);
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            min-width: 180px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            z-index: 1000;
+            padding: 4px 0;
+        }
+
+        /* CORREÇÃO: Criar uma ponte invisível entre o título e o dropdown */
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: transparent;
+        }
+
+        /* Manter o dropdown visível quando o mouse está sobre ele ou sobre o título */
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--text-secondary);
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: var(--accent-blue);
         }
 
         /* Card base - MESMA estrutura */
@@ -554,7 +633,7 @@
             background-color: rgba(88, 166, 255, 0.05);
         }
 
-        /* Responsividade */
+        /* Responsividade - ATUALIZADA com ajustes do dropdown */
         @media (max-width: 768px) {
             .site-container {
                 max-width: 95%;
@@ -569,14 +648,15 @@
             }
             
             .nav-menu {
-              flex-direction: column;
-              gap: 15px;
-              align-items: flex-start;
-           }
-    
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
             .nav-links {
-               width: 100%;
-               justify-content: space-between;
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 15px;
             }
             
             .info-row, .geo-info {
@@ -625,6 +705,31 @@
             }
             .vpn-table td:last-child {
                 border-bottom: 2px solid var(--accent-blue);
+            }
+            
+            /* Ajuste do dropdown para mobile */
+            .dropdown {
+                width: 100%;
+            }
+            
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                margin-top: 10px;
+                width: 100%;
+                display: none;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .dropdown::after {
+                display: none;
+            }
+            
+            .dropdown-content a {
+                white-space: normal;
             }
         }
 
@@ -685,14 +790,27 @@
 </head>
 <body>
     <div class="site-container">
-        <!-- Menu de Navegação (exatamente como fornecido) -->
+        <!-- Navigation Menu - MODIFICADO com dropdown corrigido (IGUAL AO PRIMEIRO SITE) -->
         <nav class="nav-menu">
             <div class="nav-links">
                 <a href="/">Beranda</a>
-                <a href="../network-tools/ipv6-checker.html">Cek IPv6</a>
-                <a href="../network-tools/whois-lookup.html">Pencarian Whois</a>
-                <a href="../ipv6-guide/guide-ipv6.html">Panduan IPv6</a>
-                <a href="panduan-vpn.html">Panduan VPN</a>
+                
+                <!-- Dropdown Network Tools - COM OS 3 ITENS -->
+                <div class="dropdown">
+                    <span class="dropdown-title">
+                        Network Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </span>
+                    <div class="dropdown-content">
+                        <a href="/network-tools/ipv6-checker.html">Cek IPv6</a>
+                        <a href="/network-tools/whois-lookup.html">Pencarian Whois</a>
+                        <a href="/network-tools/webrtc-leak-test.html">WebRTC Leak Test</a>
+                    </div>
+                </div>
+                
+                <!-- Demais links mantidos na mesma ordem -->
+                <a href="/ipv6-guide/guide-ipv6.html">Panduan IPv6</a>
+                <a href="/id/panduan-vpn.html" class="active">Panduan VPN</a>
             </div>
         </nav>
 
@@ -791,10 +909,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
+            const dropdownLinks = document.querySelectorAll('.dropdown-content a');
             
+            // Handle regular nav links (excluding dropdown)
             navLinks.forEach(link => {
                 const linkHref = link.getAttribute('href');
-                // Marca "Panduan VPN" como ativo se a página atual contiver "panduan-vpn" no nome
                 if (linkHref === currentPage || 
                     (currentPage === '' && linkHref === '/') ||
                     (currentPage.includes('panduan-vpn') && link.textContent.includes('Panduan VPN'))) {
@@ -802,6 +921,11 @@
                 } else {
                     link.classList.remove('active');
                 }
+            });
+            
+            // Handle dropdown links (remove active class from all first)
+            dropdownLinks.forEach(link => {
+                link.classList.remove('active');
             });
         });
     </script>
