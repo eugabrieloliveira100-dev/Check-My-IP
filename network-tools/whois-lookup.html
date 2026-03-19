@@ -63,7 +63,7 @@
             align-items: center;
         }
 
-        /* Navigation Menu - MESMO para todas as páginas */
+        /* Navigation Menu - MODIFICADO com dropdown */
         .nav-menu {
             width: 100%;
             max-width: 800px;
@@ -73,6 +73,8 @@
             padding: 15px 0;
             margin-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            z-index: 100;
         }
 
         .nav-links {
@@ -97,6 +99,88 @@
         .nav-menu a.active {
             color: var(--text-primary);
             border-bottom: 2px solid var(--accent-blue);
+        }
+
+        /* Dropdown Menu Styles - NOVO */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-title {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dropdown-title:hover {
+            color: var(--accent-blue);
+        }
+
+        .dropdown-arrow {
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            min-width: 160px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            z-index: 1000;
+            padding: 4px 0;
+        }
+
+        /* CORREÇÃO: Criar ponte invisível entre título e dropdown */
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: transparent;
+        }
+
+        /* Manter dropdown visível ao passar mouse sobre título ou menu */
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--text-secondary);
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: all 0.2s;
+            white-space: nowrap;
+            border: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: var(--accent-blue);
+        }
+
+        .dropdown-content a.active {
+            color: var(--text-primary);
+            background-color: rgba(88, 166, 255, 0.15);
         }
 
         /* Card base - MESMA estrutura */
@@ -565,7 +649,8 @@
             
             .nav-links {
                 width: 100%;
-                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 15px;
             }
             
             .search-wrapper {
@@ -598,6 +683,31 @@
             
             .domain-section {
                 margin-bottom: 24px;
+            }
+            
+            /* Ajuste do dropdown para mobile */
+            .dropdown {
+                width: 100%;
+            }
+            
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                margin-top: 10px;
+                width: 100%;
+                display: none;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .dropdown::after {
+                display: none;
+            }
+            
+            .dropdown-content a {
+                white-space: normal;
             }
         }
 
@@ -677,14 +787,26 @@
 </head>
 <body>
     <div class="site-container">
-        <!-- Navigation Menu - MESMA ESTRUTURA de todas as páginas -->
+        <!-- Navigation Menu - MODIFICADO com dropdown -->
         <nav class="nav-menu">
             <div class="nav-links">
                 <a href="/">Home</a>
-                <a href="ipv6-checker.html">IPv6 Checker</a>
-                <a href="whois-lookup.html" class="active">Whois Lookup</a>
+                
+                <!-- Dropdown Network Tools - NOVO -->
+                <div class="dropdown">
+                    <span class="dropdown-title">
+                        Network Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </span>
+                    <div class="dropdown-content">
+                        <a href="ipv6-checker.html">IPv6 Checker</a>
+                        <a href="whois-lookup.html" class="active">Whois Lookup</a>
+                    </div>
+                </div>
+                
+                <!-- Demais links mantidos na mesma ordem -->
                 <a href="/ipv6-guide/guide-ipv6.html">Guide IPv6</a>
-                <a href="/id/panduan-vpn.html">Panduan VPN</a></a>
+                <a href="/id/panduan-vpn.html">Panduan VPN</a>
             </div>
         </nav>
 
